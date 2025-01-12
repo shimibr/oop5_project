@@ -3,5 +3,6 @@
 
 int main()
 {
-
+	Controler x;
+	x.run();
 }

@@ -5,7 +5,7 @@
 class Robot : public Object
 {
 public:
-	Robot();
+	Robot(sf::Texture texture, Location loc);
 
 private:
 	int m_lives;
