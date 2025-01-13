@@ -14,9 +14,8 @@ namespace Entity
 
 }
 //=====================================
-struct Location
+struct textureType
 {
-	int row;
-	int col;
+	sf::Texture texture;
+	char type;
 };
-//=====================================

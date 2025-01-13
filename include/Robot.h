@@ -5,7 +5,9 @@
 class Robot : public Object
 {
 public:
-	Robot(sf::Texture texture, Location loc);
+	Robot();
+	Robot(sf::Texture texture, sf::Vector2f position);
+	void handleInput(sf::Keyboard::Key key);
 
 private:
 	int m_lives;
