@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include "Robot.h"
 
 Robot::Robot()
@@ -7,7 +7,7 @@ Robot::Robot()
 {
 }
 //======================================
-Robot::Robot(sf::Texture texture, sf::Vector2f position)
+Robot::Robot(sf::Texture& texture, sf::Vector2f position)
 	: Object(texture, position), m_lives(3), m_score(0)
 {
 }
@@ -29,6 +29,15 @@ void Robot::handleInput(sf::Keyboard::Key key)
 	if (key == sf::Keyboard::Down)
 	{
 		m_sprite.move(0.0f, 5.0f);
+	}
+}
+//======================================
+void Robot::collision(Object& object)
+{
+	if (m_sprite.getGlobalBounds().intersects(object.getSprite().getGlobalBounds()))
+	{
+		m_lives--;
+		std::cout << "Lives: " << m_lives << std::endl;
 	}
 }
 //======================================

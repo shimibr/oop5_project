@@ -7,22 +7,19 @@
 
 Controler::Controler()
 {
+	m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), { 50, 50 });
 }
 //======================================
 void Controler::run()
 {
-	dataTexture d;
-	d.loadTexture();
-
 
 	sf::RenderWindow m_window(sf::VideoMode(800, 600), "SFML works!");
 
-	Robot r(d.getTexture(Entity::ROBOT), { 50, 50 });
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		Guard g(d.getTexture(Entity::GUARD), { (float)i + 70,(float)i + 70 });
-		m_guards.push_back(g);
+		Guard guard(m_dataTexture.getTexture(Entity::GUARD), { (float)i + 300,(float)i + 200 });
+		m_guards.push_back(guard);
 	}
 
 	while (m_window.isOpen())
@@ -34,11 +31,14 @@ void Controler::run()
 			if (event.type == sf::Event::Closed)
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed)
-				r.handleInput(event.key.code);
+				m_robot.handleInput(event.key.code);
 		}
 		
 		for (int i = 0; i < m_guards.size(); i++) {
 			m_guards[i].setDirection();
+
+			m_robot.collision(m_guards[i]);
+			
 		}
 
 		m_window.clear();
@@ -46,8 +46,10 @@ void Controler::run()
 		for (int i = 0; i < m_guards.size(); i++)
 			m_guards[i].update(m_window);
 
-		r.update(m_window);
+		m_robot.update(m_window);
 		m_window.display();
+	
+
 	}
 }
 //======================================

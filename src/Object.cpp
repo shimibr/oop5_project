@@ -6,10 +6,9 @@ Object::Object()
 {
 }
 //===================================
-Object::Object(sf::Texture texture, sf::Vector2f position)
+Object::Object(sf::Texture& texture, sf::Vector2f position)
 {
-	m_texture = texture;
-	m_sprite.setTexture(m_texture);
+	m_sprite.setTexture(texture);
 	m_sprite.setPosition(position);
 }
 //===================================

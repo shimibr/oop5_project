@@ -24,6 +24,7 @@ public:
 private:
 	sf::RenderWindow m_window;
 //	sf::Clock gameClock;
+	dataTexture m_dataTexture;
 	Robot m_robot;
 	std::vector <Guard> m_guards;
 };

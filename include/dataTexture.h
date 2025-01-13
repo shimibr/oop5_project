@@ -9,8 +9,9 @@ class dataTexture
 public:
 	dataTexture();
 	sf::Texture& getTexture(const char ch); 
-	void loadTexture();
 
 private:
+	void poshTexture(std::string fileName,char type);
+	void loadTexture();
 	std::vector <textureType> m_textures;
 };

@@ -4,7 +4,9 @@
 #include "io.h"
 
 dataTexture::dataTexture()
-{ }
+{
+	loadTexture();
+}
 //============================
 
 sf::Texture& dataTexture::getTexture(const char ch)
@@ -15,14 +17,20 @@ sf::Texture& dataTexture::getTexture(const char ch)
 			return m_textures[i].texture;
 	}
 }
+//==============================
+void dataTexture::poshTexture(std::string fileName, char type)
+{
+	sf::Texture texture;
+	texture.loadFromFile(fileName);
+	m_textures.push_back(textureType(texture, type));
+}
 //============================
 void dataTexture::loadTexture()
 {
-	sf::Texture texture;
-		texture.loadFromFile("guard.png");
-		m_textures.push_back(textureType(texture, Entity::GUARD));
-		texture.loadFromFile("robot.png");
-		m_textures.push_back(textureType(texture, Entity::ROBOT));
+	poshTexture("guard.png", Entity::GUARD);
+	poshTexture("robot.png", Entity::ROBOT);
+
+	/*
 		texture.loadFromFile("delete.png");
 		m_textures.push_back(textureType(texture, Entity::FREE_SPASE));
 		texture.loadFromFile("door.png");
@@ -34,5 +42,5 @@ void dataTexture::loadTexture()
 		texture.loadFromFile("save.png");
 		m_textures.push_back(textureType(texture, Entity::SAVE));
 		texture.loadFromFile("reset.png");
-		m_textures.push_back(textureType(texture, Entity::CLEAN_BOARD));
+		m_textures.push_back(textureType(texture, Entity::CLEAN_BOARD));*/
 }
