@@ -2,9 +2,9 @@
 #include <fstream>
 
 
-//LoadFile::LoadFile()
-//    :m_sizeCol(0)
-//{}
+LoadFile::LoadFile()
+    :m_sizeCol(0)
+{}
 //=================================
 void LoadFile::fillData()
 {
@@ -41,7 +41,7 @@ bool LoadFile::getFromFile(Char_Location& chLoc)
 		{
 			if (m_data[row][col] != Entity::FREE_SPASE)
 			{
-                chLoc.position = { (float)row,(float)col };
+                chLoc.position = { (float)col,(float)row };
 				chLoc.type = m_data[row][col];
                 col++;
 				return true;

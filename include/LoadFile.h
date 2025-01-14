@@ -1,12 +1,11 @@
 #pragma once
 
 #include "Object.h"
-#include "Controler.h"
 
 class LoadFile
 {
 public:
-	//LoadFile();
+	LoadFile();
 	bool getFromFile(Char_Location& chLoc);
 	sf::Vector2f getSize()const;
 	void fillData();

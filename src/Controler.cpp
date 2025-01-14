@@ -18,7 +18,7 @@ void Controler::run()
 
 	while (m_window.isOpen())
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
@@ -42,7 +42,7 @@ void Controler::run()
 
 		m_robot.update(m_window);
 		m_window.display();
-	
+		
 
 	}
 }
@@ -53,6 +53,8 @@ void Controler::readLevels()
 	Char_Location chLoc;
 	while (m_loadFile.getFromFile(chLoc))
 	{
+		chLoc.position.x *= Entity::SIZE_PIXEL;
+		chLoc.position.y *= Entity::SIZE_PIXEL;
 		switch (chLoc.type)
 		{
 		case Entity::ROBOT:
