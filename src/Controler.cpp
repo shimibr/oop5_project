@@ -1,26 +1,20 @@
 #pragma once
 
 #include "Controler.h"
-#include <thread>
-#include <chrono>
-#include <iostream>
+
 
 Controler::Controler()
 {
-	m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), { 50, 50 });
+	//m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), { 50, 50 });
 }
 //======================================
 void Controler::run()
 {
+	m_loadFile.fillData();
+	sf::Vector2f size = m_loadFile.getSize();
+	sf::RenderWindow m_window(sf::VideoMode(size.y * Entity::SIZE_PIXEL, size.x * Entity::SIZE_PIXEL), "SFML works!");
 
-	sf::RenderWindow m_window(sf::VideoMode(800, 600), "SFML works!");
-
-
-	for (int i = 0; i < 1; i++)
-	{
-		Guard guard(m_dataTexture.getTexture(Entity::GUARD), { (float)i + 300,(float)i + 200 });
-		m_guards.push_back(guard);
-	}
+	readLevels();
 
 	while (m_window.isOpen())
 	{
@@ -53,6 +47,27 @@ void Controler::run()
 	}
 }
 //======================================
+void Controler::readLevels()
+{
+
+	Char_Location chLoc;
+	while (m_loadFile.getFromFile(chLoc))
+	{
+		switch (chLoc.type)
+		{
+		case Entity::ROBOT:
+			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position);
+			break;
+		case Entity::GUARD:
+			m_guards.push_back(Guard(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
+			break;
+		default:
+			break;
+		}
+	}
+}
+//======================================
+
 void Controler::update()
 {
 }
