@@ -36,7 +36,7 @@ void Controler::run()
 
 	while (m_window.isOpen())
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
@@ -69,6 +69,7 @@ void Controler::readLevels()
 {
 
 	Char_Location chLoc;
+	m_window.setFramerateLimit(60);
 	while (m_loadFile.getFromFile(chLoc))
 	{
 		chLoc.position.x *= Entity::SIZE_PIXEL;
@@ -80,6 +81,9 @@ void Controler::readLevels()
 			break;
 		case Entity::GUARD:
 			m_guards.push_back(Guard(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
+			break;
+		case Entity::WALL_OR_EDGE:
+			//m_guards.push_back(Guard(m_dataTexture.getTexture(Entity::WALL_OR_EDGE), chLoc.position));
 			break;
 		default:
 			break;
