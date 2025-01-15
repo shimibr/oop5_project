@@ -29,6 +29,9 @@ void dataTexture::loadTexture()
 {
 	poshTexture("guard.png", Entity::GUARD);
 	poshTexture("robot.png", Entity::ROBOT);
+	poshTexture("wall.png", Entity::WALL_OR_EDGE);
+	poshTexture("stone.png", Entity::STONE);
+	poshTexture("door.png", Entity::DOOR);
 
 	/*
 		texture.loadFromFile("delete.png");

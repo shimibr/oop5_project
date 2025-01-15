@@ -1,0 +1,12 @@
+#pragma once
+
+#include "Object.h"
+
+class Wall : public Object
+{
+public:
+	Wall(sf::Texture& texture, sf::Vector2f position);
+
+private:
+
+};

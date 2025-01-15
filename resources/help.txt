@@ -1,0 +1,42 @@
+Welcome to Bomberman!
+Your goal is to use bombs to destroy 
+enemies and survive.
+
+Controls:
+
+Up Arrow: Move Up.
+Down Arrow: Move Down.
+Right Arrow: Move Right.
+Left Arrow: Move Left.
+Spacebar: Drop a bomb.
+How to Play:
+
+Use the bombs you place to destroy 
+walls and create new paths.
+Be careful of explosions from 
+your bombs and the enemies' bombs! 
+If you get caught in an explosion, 
+you'll lose a life.
+Collect power-ups to increase 
+your bomb capacity, explosion 
+range, or other abilities.
+Winning and Losing:
+
+The objective is to eliminate all
+enemies and survive through the levels.
+If you lose all your lives or the
+enemies manage to get you, the game ends.
+Important Tips:
+
+Use the environment to your advantage:
+look for walls that can be blown up
+to reveal helpful items.
+Don’t forget to escape the explosions
+in time – good planning can save you
+in tight situations.
+Winning the Game:
+
+The game ends when you eliminate all
+enemies in the level.
+Progress to the next level to improve
+your skills and face stronger enemies.

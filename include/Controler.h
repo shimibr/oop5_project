@@ -12,10 +12,15 @@
 #include "Robot.h"
 #include "LoadFile.h"
 #include "dataTexture.h"
+#include "Wall.h"
+#include "Stone.h"
+#include "Door.h"
+#include "StartMenu.h"
 #include <vector>
 #include <thread>
 #include <chrono>
 #include <iostream>
+
 
 class Controler
 {
@@ -32,6 +37,9 @@ private:
 //	sf::Clock gameClock;
 	dataTexture m_dataTexture;
 	Robot m_robot;
+	Door m_door;
 	std::vector <Guard> m_guards;
+	std::vector <Wall> m_walls;
+	std::vector <Stone> m_stons;
 	LoadFile m_loadFile;
 };

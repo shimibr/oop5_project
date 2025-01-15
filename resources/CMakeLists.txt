@@ -11,4 +11,5 @@ configure_file ("save.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("toolbar.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("font.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Levels.txt" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("help.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 

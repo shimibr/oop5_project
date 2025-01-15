@@ -10,23 +10,8 @@ Controler::Controler()
 //======================================
 void Controler::run()
 {
-	const sf::Vector2f defaultSizeWindow(400, 500);
-	sf::RenderWindow m_window(sf::VideoMode(defaultSizeWindow.x, defaultSizeWindow.y), "SFML works!");
-
-	sf::RectangleShape rectangle(sf::Vector2f(200, 100));
-	rectangle.setFillColor(sf::Color::Blue);
-
-	m_window.clear();
-	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y/2 - 20);
-	m_window.draw(rectangle);
-	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y / 4 - 20);
-	m_window.draw(rectangle);
-	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y - defaultSizeWindow.y / 4 - 20);
-	m_window.draw(rectangle);
-	m_window.display();
-
-	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-	
+	StartMenu start;
+	start.runMenu();
 
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();
@@ -57,7 +42,12 @@ void Controler::run()
 
 		for (int i = 0; i < m_guards.size(); i++)
 			m_guards[i].update(m_window);
+		for (int i = 0; i < m_walls.size(); i++)
+			m_walls[i].update(m_window);
+		for (int i = 0; i < m_stons.size(); i++)
+			m_stons[i].update(m_window);
 
+		m_door.update(m_window);
 		m_robot.update(m_window);
 		m_window.display();
 		
@@ -83,7 +73,13 @@ void Controler::readLevels()
 			m_guards.push_back(Guard(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
 			break;
 		case Entity::WALL_OR_EDGE:
-			//m_guards.push_back(Guard(m_dataTexture.getTexture(Entity::WALL_OR_EDGE), chLoc.position));
+			m_walls.push_back(Wall(m_dataTexture.getTexture(Entity::WALL_OR_EDGE), chLoc.position));
+			break;
+		case Entity::STONE:
+			m_stons.push_back(Stone(m_dataTexture.getTexture(Entity::STONE), chLoc.position));
+			break;
+		case Entity::DOOR:
+			m_door = Door(m_dataTexture.getTexture(Entity::DOOR), chLoc.position);
 			break;
 		default:
 			break;
