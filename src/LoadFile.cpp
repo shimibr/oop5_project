@@ -55,5 +55,5 @@ bool LoadFile::getFromFile(Char_Location& chLoc)
 //================================
 sf::Vector2f LoadFile::getSize() const
 {
-    return { (float)m_data.size(), (float)m_sizeCol };
+    return { (float)m_sizeCol , (float)m_data.size() };
 }

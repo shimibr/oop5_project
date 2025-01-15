@@ -10,9 +10,27 @@ Controler::Controler()
 //======================================
 void Controler::run()
 {
+	const sf::Vector2f defaultSizeWindow(400, 500);
+	sf::RenderWindow m_window(sf::VideoMode(defaultSizeWindow.x, defaultSizeWindow.y), "SFML works!");
+
+	sf::RectangleShape rectangle(sf::Vector2f(200, 100));
+	rectangle.setFillColor(sf::Color::Blue);
+
+	m_window.clear();
+	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y/2 - 20);
+	m_window.draw(rectangle);
+	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y / 4 - 20);
+	m_window.draw(rectangle);
+	rectangle.setPosition(defaultSizeWindow.x / 2 - 100, defaultSizeWindow.y - defaultSizeWindow.y / 4 - 20);
+	m_window.draw(rectangle);
+	m_window.display();
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	
+
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();
-	sf::RenderWindow m_window(sf::VideoMode(size.y * Entity::SIZE_PIXEL, size.x * Entity::SIZE_PIXEL), "SFML works!");
+	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, size.y * Entity::SIZE_PIXEL), "SFML works!");
 
 	readLevels();
 
