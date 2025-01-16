@@ -8,27 +8,29 @@ Robot::Robot()
 }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position), m_lives(3), m_score(0)
+	: ObjectMove(texture, position, Entity::ROBOT_SPEED), m_lives(3), m_score(0)
 {
 }
 //======================================
-void Robot::handleInput(sf::Keyboard::Key key)
+void Robot::moving(sf::Keyboard::Key key)
 {
+	int direction;
 	switch (key)
 	{
-	case sf::Keyboard::Left:
-		move(sf::Vector2f(-Entity::ROBOT_SPEED, 0.0f), 1);
-		break;
-	case sf::Keyboard::Right:
-		move(sf::Vector2f(Entity::ROBOT_SPEED, 0.0f), 1);
-		break;
 	case sf::Keyboard::Up:
-		move(sf::Vector2f(0.0f, -Entity::ROBOT_SPEED), 1);
+		direction = 0;
 		break;
 	case sf::Keyboard::Down:
-		move(sf::Vector2f(0.0f, Entity::ROBOT_SPEED), 1);
+		direction = 1;
+		break;
+	case sf::Keyboard::Left:
+		direction = 2;
+		break;
+	case sf::Keyboard::Right:
+		direction = 3;
 		break;
 	}
+	move(direction, 1);
 }
 //======================================
 void Robot::collision(Object& object)

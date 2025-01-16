@@ -7,9 +7,10 @@ class ObjectMove : public Object
 {
 public:
 	ObjectMove();
-	ObjectMove(sf::Texture& texture, sf::Vector2f position);
-	void move(sf::Vector2f direction, float deltaTime);
+	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
 
 protected:
-
+	void move(const int direction, const float deltaTime);
+	int m_speed;
+	
 };

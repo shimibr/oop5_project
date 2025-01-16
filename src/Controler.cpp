@@ -22,28 +22,35 @@ void Controler::run()
 
 	m_moveClock.restart();
 
+	float second = 0;
+
 	while (m_window.isOpen())
 	{
 		update();
 
 		float deltaTime = m_moveClock.restart().asSeconds();
-
+		second += deltaTime;
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::B)
-				m_robot.handleInput(event.key.code);
+				m_robot.moving(event.key.code);
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
 				m_bombs.push_back(Bomb(m_dataTexture.getTexture(Entity::BOMB), m_robot.getSprite().getPosition()));
 		}
 		
 		for (int i = 0; i < m_guards.size(); i++) 
 		{
-			m_guards[i].setDirection(deltaTime);
-			m_robot.collision(m_guards[i]);	
+			m_guards[i].moving(deltaTime);
+
+			if (second > 1)	
+				m_robot.collision(m_guards[i]);
+		
 		}
+		if (second > 1)
+			second--;
 	}
 }
 //======================================

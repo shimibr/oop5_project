@@ -7,14 +7,29 @@ ObjectMove::ObjectMove()
 {
 }
 //===================================
-ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position)
+ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed)
+	:m_speed(speed)
 {
 	m_sprite.setTexture(texture);
 	m_sprite.setPosition(position);
 }
 //===================================
-void ObjectMove::move(sf::Vector2f direction, float deltaTime)
+void ObjectMove::move(const int direction,const float deltaTime)
 {
-	m_sprite.move(direction * deltaTime);
+	switch (direction)
+	{
+	case 0:
+		m_sprite.move(0.0f, -m_speed * deltaTime);
+		break;
+	case 1:
+		m_sprite.move(0.0f, m_speed * deltaTime);
+		break;
+	case 2:
+		m_sprite.move(-m_speed * deltaTime, 0.0f);
+		break;
+	case 3:
+		m_sprite.move(m_speed * deltaTime, 0.0f);
+		break;
+	}
 }
 //===================================
