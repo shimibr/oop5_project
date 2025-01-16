@@ -10,6 +10,7 @@ class StartMenu
 public:
 	StartMenu();
 	void runMenu();
+	bool getCloseGame() const;
 
 private:
 	void createWindow();
@@ -23,5 +24,6 @@ private:
 	sf::Font m_font;
 	std::vector<sf::RectangleShape> m_rectangles;
 	std::vector<sf::Text> m_texts;
+	bool m_closeGame;
 
 };

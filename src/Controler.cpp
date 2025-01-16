@@ -12,6 +12,8 @@ void Controler::run()
 {
 	StartMenu start;
 	start.runMenu();
+	if (start.getCloseGame())
+		return;
 
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();

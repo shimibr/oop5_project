@@ -3,6 +3,7 @@
 #include "StartMenu.h"
 
 StartMenu::StartMenu()
+	:m_closeGame(false)
 { }
 //======================================
 void StartMenu::runMenu()
@@ -17,7 +18,10 @@ void StartMenu::runMenu()
 		while (m_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				m_window.close();
+				m_closeGame = true;
+			}
 
 			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 			{
@@ -27,6 +31,11 @@ void StartMenu::runMenu()
 		}
 	drawEndDisplay();
 	}
+}
+//======================================
+bool StartMenu::getCloseGame() const
+{
+	return m_closeGame;
 }
 //======================================
 void StartMenu::createWindow()
@@ -64,11 +73,16 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 			{
 			case 0:
 				m_window.close();
+				m_closeGame = false;
 				break;
 			case 1:
 				showHelp();
+				if (m_closeGame)
+					m_window.close();
+				m_closeGame = true;
 				break;
 			case 2:
+				m_closeGame = true;
 				m_window.close();
 				break;
 			default:
@@ -135,55 +149,80 @@ std::string StartMenu::loadHelpText()
 }
 //======================================
 void StartMenu::showHelp()
+{
+	std::string helpText = loadHelpText();
+
+	sf::Text helpDisplay;
+	helpDisplay.setString(helpText);
+	helpDisplay.setFont(m_font);
+	helpDisplay.setFillColor(sf::Color::White);
+	helpDisplay.setCharacterSize(26);
+
+	float textAreaHeight = m_window.getSize().y - 100;
+	sf::FloatRect textBounds = helpDisplay.getLocalBounds();
+	helpDisplay.setPosition(20, 20);
+
+	float scrollOffset = 0.0f;
+	const float scrollSpeed = 10.0f;
+
+	sf::RectangleShape backButton(sf::Vector2f(100, 50));
+	backButton.setFillColor(sf::Color(200, 200, 200));
+	backButton.setOutlineThickness(2);
+	backButton.setOutlineColor(sf::Color::Black);
+	backButton.setPosition(m_window.getSize().x - 100, m_window.getSize().y - 500);
+
+	sf::Text backText;
+	backText.setFont(m_font);
+	backText.setString("Back");
+	backText.setFillColor(sf::Color::Black);
+	backText.setCharacterSize(20);
+	sf::FloatRect backTextBounds = backText.getLocalBounds();
+	backText.setPosition(
+		backButton.getPosition().x + (backButton.getSize().x - backTextBounds.width) / 2,
+		backButton.getPosition().y + (backButton.getSize().y - backTextBounds.height) / 2 - backTextBounds.top
+	);
+
+	while (true)
 	{
-		std::string helpText = loadHelpText();
+		m_window.clear();
 
-		sf::Text helpDisplay;
-		helpDisplay.setString(helpText); 
-		helpDisplay.setFont(m_font);
-		helpDisplay.setFillColor(sf::Color::White);
-		helpDisplay.setCharacterSize(26);
-
-		float textAreaHeight = m_window.getSize().y - 40; 
-		sf::FloatRect textBounds = helpDisplay.getLocalBounds();
-
-		if (textBounds.height > textAreaHeight) {
-			helpDisplay.setScale(1.f, textAreaHeight / textBounds.height);
-		}
-
-		helpDisplay.setPosition(20, 20); 
-
-		float scrollOffset = 0.0f;
-		const float scrollSpeed = 5.0f; 
-
-		while (true)
+		sf::Event event;
+		while (m_window.pollEvent(event))
 		{
-			m_window.clear();
-
-			sf::Event event;
-			while (m_window.pollEvent(event))
+			if (event.type == sf::Event::Closed)
 			{
-				if (event.type == sf::Event::Closed) 
-				{
-					m_window.close();
-					return;
-				}
-				if (event.type == sf::Event::KeyPressed) 
-				{
-					if (event.key.code == sf::Keyboard::Up)
-						scrollOffset += scrollSpeed;
-	
-					if (event.key.code == sf::Keyboard::Down)
-						scrollOffset -= scrollSpeed;
-				}
+				m_closeGame = true;
+				m_window.close();
+				return;
 			}
 
-			if (scrollOffset > 0) scrollOffset = 0; 
-			if (scrollOffset < -(textBounds.height - textAreaHeight)) scrollOffset = -(textBounds.height - textAreaHeight);
-			helpDisplay.setPosition(20, 20 + scrollOffset);
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Up)
+					scrollOffset += scrollSpeed;
+				if (event.key.code == sf::Keyboard::Down)
+					scrollOffset -= scrollSpeed;
+			}
 
-			m_window.draw(helpDisplay);
-			m_window.display();
-
+			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+			{
+				sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
+				if (backButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
+				{
+					drawEndDisplay();
+					return;
+				}
+			}
 		}
+
+		if (scrollOffset > 0) scrollOffset = 0;
+		if (scrollOffset < -(textBounds.height - textAreaHeight)) scrollOffset = -(textBounds.height - textAreaHeight);
+
+		helpDisplay.setPosition(20, 20 + scrollOffset);
+
+		m_window.draw(helpDisplay);
+		m_window.draw(backButton);
+		m_window.draw(backText);
+		m_window.display();
 	}
+}
