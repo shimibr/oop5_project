@@ -12,9 +12,7 @@ namespace Entity
 	constexpr char WALL_OR_EDGE = '#';
 	constexpr char DOOR = 'D';
 	constexpr char FREE_SPASE = ' ';
-	constexpr char SAVE = 'S';
-	constexpr char CLEAN_BOARD = 'C';
-
+	constexpr char BOMB = 'B';
 }
 //=====================================
 struct textureType

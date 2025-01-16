@@ -1,7 +1,5 @@
 #pragma once
 
-
-//#include "Controler.h"
 #include <SFML/Graphics.hpp>
 
 #include "io.h"

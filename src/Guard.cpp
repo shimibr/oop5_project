@@ -3,7 +3,7 @@
 #include "Guard.h"
 
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
-	: Object(texture, position)
+	: ObjectMove(texture, position)
 {
 }
 //======================================

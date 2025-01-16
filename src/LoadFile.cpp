@@ -57,3 +57,4 @@ sf::Vector2f LoadFile::getSize() const
 {
     return { (float)m_sizeCol , (float)m_data.size() };
 }
+//================================

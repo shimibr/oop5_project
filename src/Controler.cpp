@@ -33,16 +33,16 @@ void Controler::run()
 		{
 			if (event.type == sf::Event::Closed)
 				m_window.close();
-			if (event.type == sf::Event::KeyPressed)
+			if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::B)
 				m_robot.handleInput(event.key.code);
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
+				m_bombs.push_back(Bomb(m_dataTexture.getTexture(Entity::BOMB), m_robot.getSprite().getPosition()));
 		}
 		
 		for (int i = 0; i < m_guards.size(); i++) 
 		{
 			m_guards[i].setDirection(deltaTime);
-
-			m_robot.collision(m_guards[i]);
-			
+			m_robot.collision(m_guards[i]);	
 		}
 	}
 }
@@ -89,6 +89,8 @@ void Controler::update()
 		m_walls[i].update(m_window);
 	for (int i = 0; i < m_stons.size(); i++)
 		m_stons[i].update(m_window);
+	for (int i = 0; i < m_bombs.size(); i++)
+		m_bombs[i].update(m_window);
 
 	m_door.update(m_window);
 	m_robot.update(m_window);

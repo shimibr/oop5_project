@@ -32,18 +32,6 @@ void dataTexture::loadTexture()
 	poshTexture("wall.png", Entity::WALL_OR_EDGE);
 	poshTexture("stone.png", Entity::STONE);
 	poshTexture("door.png", Entity::DOOR);
+	poshTexture("bomb.png", Entity::BOMB);
 
-	/*
-		texture.loadFromFile("delete.png");
-		m_textures.push_back(textureType(texture, Entity::FREE_SPASE));
-		texture.loadFromFile("door.png");
-		m_textures.push_back(textureType(texture, Entity::DOOR));
-		texture.loadFromFile("stone.png");
-		m_textures.push_back(textureType(texture, Entity::STONE));
-		texture.loadFromFile("wall.png");
-		m_textures.push_back(textureType(texture, Entity::WALL_OR_EDGE));
-		texture.loadFromFile("save.png");
-		m_textures.push_back(textureType(texture, Entity::SAVE));
-		texture.loadFromFile("reset.png");
-		m_textures.push_back(textureType(texture, Entity::CLEAN_BOARD));*/
 }

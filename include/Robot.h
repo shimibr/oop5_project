@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Object.h"
+#include "ObjectMove.h"
 
-class Robot : public Object
+class Robot : public ObjectMove
 {
 public:
 	Robot();

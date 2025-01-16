@@ -16,6 +16,8 @@
 #include "Stone.h"
 #include "Door.h"
 #include "StartMenu.h"
+#include "ObjectMove.h"
+#include "Bomb.h"
 #include <vector>
 #include <thread>
 #include <chrono>
@@ -34,6 +36,7 @@ private:
 	void readLevels();
 
 	sf::RenderWindow m_window;
+	LoadFile m_loadFile;
 	//sf::Clock gameClock;
 	sf::Clock m_moveClock;
 	dataTexture m_dataTexture;
@@ -42,5 +45,5 @@ private:
 	std::vector <Guard> m_guards;
 	std::vector <Wall> m_walls;
 	std::vector <Stone> m_stons;
-	LoadFile m_loadFile;
+	std::vector <Bomb> m_bombs;
 };
