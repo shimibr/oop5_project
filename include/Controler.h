@@ -27,14 +27,15 @@ class Controler
 public:
 	Controler();
 	void run();
-	void update();
-	void render();
 
 private:
+
+	void update();
 	void readLevels();
 
 	sf::RenderWindow m_window;
-//	sf::Clock gameClock;
+	//sf::Clock gameClock;
+	sf::Clock m_moveClock;
 	dataTexture m_dataTexture;
 	Robot m_robot;
 	Door m_door;

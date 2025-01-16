@@ -16,19 +16,19 @@ void Robot::handleInput(sf::Keyboard::Key key)
 {
 	if (key == sf::Keyboard::Left)
 	{
-		m_sprite.move(-5.0f, 0.0f);
+		m_sprite.move(-Entity::ROBOT_SPEED, 0.0f);
 	}
 	if (key == sf::Keyboard::Right)
 	{
-		m_sprite.move(5.0f, 0.0f);
+		m_sprite.move(Entity::ROBOT_SPEED, 0.0f);
 	}
 	if (key == sf::Keyboard::Up)
 	{
-		m_sprite.move(0.0f, -5.0f);
+		m_sprite.move(0.0f, -Entity::ROBOT_SPEED);
 	}
 	if (key == sf::Keyboard::Down)
 	{
-		m_sprite.move(0.0f, 5.0f);
+		m_sprite.move(0.0f, Entity::ROBOT_SPEED);
 	}
 }
 //======================================

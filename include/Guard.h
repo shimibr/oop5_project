@@ -7,7 +7,7 @@ class Guard : public Object
 {
 public:
 	Guard(sf::Texture& texture, sf::Vector2f position);
-	void setDirection();
+	void setDirection(float deltaTime);
 
 private:
 };

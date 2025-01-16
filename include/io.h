@@ -2,6 +2,9 @@
 
 namespace Entity
 {
+
+	const float GUARD_SPEED = 10;
+	const float ROBOT_SPEED = 1;
 	const int SIZE_PIXEL = 50;
 	constexpr char ROBOT = '/';
 	constexpr char STONE = '@';
