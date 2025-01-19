@@ -12,9 +12,9 @@ Robot::Robot(sf::Texture& texture, sf::Vector2f position)
 {
 }
 //======================================
-void Robot::moving(sf::Keyboard::Key key)
+void Robot::moving(sf::Keyboard::Key key, const float deltaTime)
 {
-	int direction;
+	int direction = 0;
 	switch (key)
 	{
 	case sf::Keyboard::Up:
@@ -30,7 +30,7 @@ void Robot::moving(sf::Keyboard::Key key)
 		direction = 3;
 		break;
 	}
-	move(direction, 1);
+	move(direction, deltaTime);
 }
 //======================================
 void Robot::collision(Object& object)

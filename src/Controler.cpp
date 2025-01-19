@@ -8,10 +8,10 @@ Controler::Controler()
 //======================================
 void Controler::run()
 {
-	/*StartMenu start;
+	StartMenu start;
 	start.runMenu();
 	if (start.getCloseGame())
-		return;*/
+		return;
 
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();
@@ -36,7 +36,7 @@ void Controler::run()
 			if (event.type == sf::Event::Closed)
 				m_window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::B)
-				m_robot.moving(event.key.code);
+				m_robot.moving(event.key.code, deltaTime);
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
 				m_bombs.push_back(Bomb(m_dataTexture.getTexture(Entity::BOMB), m_robot.getSprite().getPosition()));
 		}
@@ -46,9 +46,9 @@ void Controler::run()
 			m_guards[i].moving(deltaTime);
 
 			if (second > 1)	
-				m_robot.collision(m_guards[i]);
-		
+				m_robot.collision(m_guards[i]); //בודק האם יש התנגשות בין השומר לרובוט
 		}
+
 		for (int i = 0; i < m_bombs.size(); i++)
 			if(m_bombs[i].control(deltaTime))
 				m_bombs.erase(m_bombs.begin() + i);

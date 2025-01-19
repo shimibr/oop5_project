@@ -7,7 +7,7 @@ Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 {
 }
 //======================================
-void Guard::moving(float deltaTime)
+void Guard::moving(const float deltaTime)
 {
 
 	int direction = rand() % 6;
