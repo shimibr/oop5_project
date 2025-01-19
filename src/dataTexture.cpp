@@ -32,6 +32,7 @@ void dataTexture::loadTexture()
 	poshTexture("wall.png", Entity::WALL_OR_EDGE);
 	poshTexture("stone.png", Entity::STONE);
 	poshTexture("door.png", Entity::DOOR);
-	poshTexture("bomb.png", Entity::BOMB);
+	poshTexture("bomb.png", Entity::BOMB);	
+	poshTexture("exlosion.png", Entity::EXLOSION);
 
 }

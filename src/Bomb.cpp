@@ -6,10 +6,10 @@ Bomb::Bomb()
 {
 }
 //======================================
-Bomb::Bomb(sf::Texture& texture, sf::Vector2f position)
-	: Object(texture, position)
+Bomb::Bomb(sf::Texture& bombTexture,sf::Texture& exlosionTexture, sf::Vector2f position)
+	: Object(bombTexture, position)
 {
-	explosion(texture);
+	explosion(exlosionTexture);
 }
 //======================================
 bool Bomb::control(const float deltaTime)

@@ -13,6 +13,7 @@ namespace Entity
 	constexpr char DOOR = 'D';
 	constexpr char FREE_SPASE = ' ';
 	constexpr char BOMB = 'B';
+	constexpr char EXLOSION = '*';
 }
 //=====================================
 struct textureType

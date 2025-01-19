@@ -7,7 +7,7 @@ class Bomb : public Object
 {
 public:
 	Bomb();
-	Bomb(sf::Texture& texture, sf::Vector2f position);
+	Bomb(sf::Texture& bombTexture, sf::Texture& exlosionTexture, sf::Vector2f position);
 	bool control(const float deltaTime);
 	void update(sf::RenderWindow& window);
 

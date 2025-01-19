@@ -1,3 +1,5 @@
+#pragma once
+
 #include "LoadFile.h"
 #include <fstream>
 

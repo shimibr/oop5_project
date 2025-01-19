@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Controler.h"
+#include "DataControler.h"
 #include <fstream>
 #include <sstream>
 
