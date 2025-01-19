@@ -10,6 +10,8 @@ Bomb::Bomb(sf::Texture& bombTexture,sf::Texture& exlosionTexture, sf::Vector2f p
 	: Object(bombTexture, position)
 {
 	explosion(exlosionTexture);
+	
+	
 }
 //======================================
 bool Bomb::control(const float deltaTime)
@@ -24,11 +26,21 @@ bool Bomb::control(const float deltaTime)
 //=======================================
 void Bomb::update(sf::RenderWindow& window)
 {
+	//צריך להכניס את זה לפונקציה נפרדת
+	sf::Font font;
+	font.loadFromFile("font.ttf");
+	m_text.setFont(font);
+	m_text.setPosition(m_sprite.getPosition().x + 20, m_sprite.getPosition().y + 10);
+	m_text.setCharacterSize(30);
+	m_text.setFillColor(sf::Color::Red);
+
+	m_text.setString(std::to_string((int)m_timer));
 	for (int i = 0; i < 4 && m_timer <= 0; i++)
 	{
 		m_explosion[i].update(window);
 	}
 	window.draw(m_sprite);
+	window.draw(m_text);
 }
 //======================================
 void Bomb::explosion(sf::Texture& texture)

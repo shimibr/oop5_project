@@ -15,6 +15,7 @@ private:
 	void explosion(sf::Texture& texture);
 	void moving(const float deltaTime);
 
+	sf::Text m_text;
 	float m_timer = 5;
 	std::vector <Explosion> m_explosion;
 };
