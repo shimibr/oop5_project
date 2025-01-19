@@ -14,21 +14,21 @@ Bomb::Bomb(sf::Texture& bombTexture,sf::Texture& exlosionTexture, sf::Vector2f p
 //======================================
 bool Bomb::control(const float deltaTime)
 {
-	timer -= deltaTime;
-	if (timer <= 0)
+	m_timer -= deltaTime;
+	if (m_timer <= 0)
 	{
 		moving(deltaTime);
 	}
-	return timer < -1;
+	return m_timer < -1;
 }
 //=======================================
 void Bomb::update(sf::RenderWindow& window)
 {
-	window.draw(m_sprite);
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 4 && m_timer <= 0; i++)
 	{
 		m_explosion[i].update(window);
 	}
+	window.draw(m_sprite);
 }
 //======================================
 void Bomb::explosion(sf::Texture& texture)
