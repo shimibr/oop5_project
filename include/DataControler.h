@@ -27,12 +27,15 @@ class DataControler
 {
 public:
 	DataControler();
-	void readLevels();
 
 protected:
+	void readLevels();
+	void update();
+
 	dataTexture m_dataTexture;
 	LoadFile m_loadFile;
 
+	sf::RenderWindow m_window;
 	Robot m_robot;
 	Door m_door;
 	std::vector <Guard> m_guards;

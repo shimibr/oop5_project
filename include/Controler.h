@@ -9,10 +9,9 @@ public:
 	void run();
 
 private:
+	void eventManager(sf::Event event, float deltaTime);
 
-	void update();
-
-	sf::RenderWindow m_window;
+	StartMenu m_startMenu;
 	//sf::Clock gameClock;
 	sf::Clock m_moveClock;
 

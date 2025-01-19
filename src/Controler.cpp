@@ -9,9 +9,8 @@ Controler::Controler()
 //======================================
 void Controler::run()
 {
-	StartMenu start;
-	start.runMenu();
-	if (start.getCloseGame())
+	m_startMenu.runMenu();
+	if (m_startMenu.getCloseGame())
 		return;
 
 	m_loadFile.fillData();
@@ -22,7 +21,6 @@ void Controler::run()
 	readLevels();
 
 	m_moveClock.restart();
-
 	float second = 0;
 
 	while (m_window.isOpen())
@@ -31,16 +29,10 @@ void Controler::run()
 
 		float deltaTime = m_moveClock.restart().asSeconds();
 		second += deltaTime;
+
 		sf::Event event;
 		while (m_window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				m_window.close();
-			if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::B)
-				m_robot.moving(event.key.code, deltaTime);
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
-				m_bombs.push_back(Bomb(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getSprite().getPosition()));
-		}
+			eventManager(event, deltaTime);
 		
 		for (int i = 0; i < m_guards.size(); i++) 
 		{
@@ -59,22 +51,13 @@ void Controler::run()
 	}
 }
 //======================================
-void Controler::update()
+void Controler::eventManager(sf::Event event, float deltaTime)
 {
-	m_window.clear();
-
-	for (int i = 0; i < m_guards.size(); i++)
-		m_guards[i].update(m_window);
-	for (int i = 0; i < m_walls.size(); i++)
-		m_walls[i].update(m_window);
-	for (int i = 0; i < m_stons.size(); i++)
-		m_stons[i].update(m_window);
-	for (int i = 0; i < m_bombs.size(); i++)
-		m_bombs[i].update(m_window);
-
-	m_door.update(m_window);
-	m_robot.update(m_window);
-	m_window.display();
-
+	if (event.type == sf::Event::Closed)
+		m_window.close();
+	if (event.type == sf::Event::KeyPressed && event.key.code != sf::Keyboard::B)
+		m_robot.moving(event.key.code, deltaTime);
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
+		m_bombs.push_back(Bomb(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getSprite().getPosition()));
 }
 //======================================
