@@ -4,11 +4,10 @@
 
 
 class Explosion : public ObjectMove
-
 {
 public:
-	Explosion();
-
+	Explosion(sf::Texture& texture, sf::Vector2f position);
+	void moving(const float deltaTime, const int direction);
 private:
 
 };

@@ -49,6 +49,10 @@ void Controler::run()
 				m_robot.collision(m_guards[i]);
 		
 		}
+		for (int i = 0; i < m_bombs.size(); i++)
+			if(m_bombs[i].control(deltaTime))
+				m_bombs.erase(m_bombs.begin() + i);
+
 		if (second > 1)
 			second--;
 	}
