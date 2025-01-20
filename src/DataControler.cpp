@@ -69,8 +69,8 @@ void DataControler::printDataGame()
 	text.setCharacterSize(26);
 	text.setFillColor(sf::Color::Red);
 	text.setFont(font);
-	text.setString("Time Left: " + std::to_string((int)(m_gameClock.getElapsedTime().asSeconds())) + ":"
-					+ std::to_string((m_gameClock.getElapsedTime().asMilliseconds() % 60)));
+	text.setString("Time Left: " + std::to_string((int)(m_gameClock.getElapsedTime().asSeconds() / 60)) + ":"
+					+ std::to_string(((int)m_gameClock.getElapsedTime().asSeconds() % 60)));
 	m_window.draw(text);
 
 	m_robot.printLife(m_window);
