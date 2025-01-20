@@ -42,3 +42,15 @@ void Robot::collision(Object& object)
 	}
 }
 //======================================
+void Robot::printLife(sf::RenderWindow& window)
+{
+	sf::Font font;
+	sf::Text text;
+	font.loadFromFile("font.ttf");
+	text.setPosition(Entity::SIZE_PIXEL /2, window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
+	text.setCharacterSize(26);
+	text.setFillColor(sf::Color::Red);
+	text.setFont(font);
+	text.setString("Life Left: " + std::to_string(m_lives));
+	window.draw(text);
+}

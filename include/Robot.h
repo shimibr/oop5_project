@@ -10,6 +10,8 @@ public:
 	void moving(sf::Keyboard::Key key, const float deltaTime);
 	void collision(Object& object);
 
+	void printLife(sf::RenderWindow& window);
+
 private:
 	int m_lives;
 	int m_score;

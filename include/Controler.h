@@ -12,7 +12,6 @@ private:
 	void eventManager(sf::Event event, float deltaTime);
 
 	StartMenu m_startMenu;
-	//sf::Clock gameClock;
 	sf::Clock m_moveClock;
 
 };

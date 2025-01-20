@@ -15,11 +15,12 @@ void Controler::run()
 
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();
-	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, size.y * Entity::SIZE_PIXEL), "SFML works!");
+	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "SFML works!");
 	m_window.setFramerateLimit(60);
 
 	readLevels();
 
+	m_gameClock.restart();
 	m_moveClock.restart();
 	float second = 0;
 
