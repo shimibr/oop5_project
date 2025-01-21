@@ -41,7 +41,6 @@ bool StartMenu::getCloseGame() const
 void StartMenu::createWindow()
 {
 	sf::Vector2f defaultSizeWindow(400, 500);
-	m_window.setFramerateLimit(60);
 	m_window.create(sf::VideoMode(defaultSizeWindow.x, defaultSizeWindow.y), "Start Menu");
 
 	sf::RectangleShape rectangle(sf::Vector2f(250, 80));
@@ -77,9 +76,6 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 				break;
 			case 1:
 				showHelp();
-				if (m_closeGame)
-					m_window.close();
-				m_closeGame = true;
 				break;
 			case 2:
 				m_closeGame = true;
@@ -88,7 +84,6 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 			default:
 				break;
 			}
-
 		}
 	}
 }
@@ -124,8 +119,7 @@ void StartMenu::fillText()
 
 		m_texts[i].setPosition(
 			rectBounds.left + rectBounds.width / 2 - textBounds.width / 2,
-			rectBounds.top + rectBounds.height / 2 - textBounds.height / 2
-		);
+			rectBounds.top + rectBounds.height / 2 - textBounds.height / 2);
 	}
 }
 //======================================
@@ -166,21 +160,8 @@ void StartMenu::showHelp()
 	const float scrollSpeed = 10.0f;
 
 	sf::RectangleShape backButton(sf::Vector2f(100, 50));
-	backButton.setFillColor(sf::Color(200, 200, 200));
-	backButton.setOutlineThickness(2);
-	backButton.setOutlineColor(sf::Color::Black);
-	backButton.setPosition(m_window.getSize().x - 100, m_window.getSize().y - 500);
-
 	sf::Text backText;
-	backText.setFont(m_font);
-	backText.setString("Back");
-	backText.setFillColor(sf::Color::Black);
-	backText.setCharacterSize(20);
-	sf::FloatRect backTextBounds = backText.getLocalBounds();
-	backText.setPosition(
-		backButton.getPosition().x + (backButton.getSize().x - backTextBounds.width) / 2,
-		backButton.getPosition().y + (backButton.getSize().y - backTextBounds.height) / 2 - backTextBounds.top
-	);
+	createBackBotton(backButton, backText);
 
 	while (true)
 	{
@@ -217,7 +198,6 @@ void StartMenu::showHelp()
 
 		if (scrollOffset > 0) scrollOffset = 0;
 		if (scrollOffset < -(textBounds.height - textAreaHeight)) scrollOffset = -(textBounds.height - textAreaHeight);
-
 		helpDisplay.setPosition(20, 20 + scrollOffset);
 
 		m_window.draw(helpDisplay);
@@ -225,4 +205,21 @@ void StartMenu::showHelp()
 		m_window.draw(backText);
 		m_window.display();
 	}
+}
+//=====================================
+void StartMenu::createBackBotton(sf::RectangleShape &backButton, sf::Text &backText)
+{
+	backButton.setFillColor(sf::Color(200, 200, 200));
+	backButton.setOutlineThickness(2);
+	backButton.setOutlineColor(sf::Color::Black);
+	backButton.setPosition(m_window.getSize().x - 100, m_window.getSize().y - 500);
+
+	backText.setFont(m_font);
+	backText.setString("Back");
+	backText.setFillColor(sf::Color::Black);
+	backText.setCharacterSize(20);
+	sf::FloatRect backTextBounds = backText.getLocalBounds();
+	backText.setPosition(
+		backButton.getPosition().x + (backButton.getSize().x - backTextBounds.width) / 2,
+		backButton.getPosition().y + (backButton.getSize().y - backTextBounds.height) / 2 - backTextBounds.top);
 }

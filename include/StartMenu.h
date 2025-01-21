@@ -14,6 +14,7 @@ public:
 
 private:
 	void createWindow();
+	void createBackBotton(sf::RectangleShape &backButton, sf::Text &backText);
 	void clickManagment(const sf::Event& event, sf::Vector2i mousePosition);
 	void fillText();
 	void drawEndDisplay();
@@ -25,5 +26,4 @@ private:
 	std::vector<sf::RectangleShape> m_rectangles;
 	std::vector<sf::Text> m_texts;
 	bool m_closeGame;
-
 };
