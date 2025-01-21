@@ -61,8 +61,8 @@ void Bomb::explosion(sf::Texture& texture)
 //======================================
 void Bomb::moving(const float deltaTime)
 {
-	for (int i = 0; i < m_explosion.size(); i++)
+	/*for (int i = 0; i < m_explosion.size(); i++)
 	{
 		m_explosion[i].moving(deltaTime, i);
-	}
+	}*/
 }

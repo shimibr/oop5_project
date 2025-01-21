@@ -5,14 +5,15 @@
 class Robot : public ObjectMove
 {
 public:
-	Robot();
+	//Robot();
+	
 	Robot(sf::Texture& texture, sf::Vector2f position);
-	void moving(sf::Keyboard::Key key, const float deltaTime);
-	void collision(Object& object);
+	void move(const float deltaTime);
+	//void collision(Object& object);
 
-	void printLife(sf::RenderWindow& window);
+	//void printLife(sf::RenderWindow& window);
 
 private:
-	int m_lives;
-	int m_score;
+	//int m_lives = 3;
+	//int m_score = 0;
 };

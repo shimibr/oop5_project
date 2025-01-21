@@ -2,11 +2,43 @@
 
 #include "LoadFile.h"
 #include <fstream>
-
+#include "Controler.h"
 
 LoadFile::LoadFile()
     :m_sizeCol(0)
 {}
+//=================================
+//std::unique_ptr<Object> LoadFile::readObject()
+//{
+//    Char_Location chLoc;
+//   if (getFromFile(chLoc))
+//    {
+//        switch (chLoc.type)
+//        {
+//		case Entity::WALL_OR_EDGE:
+//			return std::make_unique <Wall>(m_dataTexture.getTexture(chLoc.type), chLoc.position);
+//			break;
+//		case Entity::STONE:
+//			return std::make_unique <Stone>(m_dataTexture.getTexture(chLoc.type), chLoc.position);
+//			break;
+//		case Entity::DOOR:
+//			return std::make_unique <Door>(m_dataTexture.getTexture(chLoc.type), chLoc.position);
+//			break;
+//		case Entity::BOMB:
+//			return std::make_unique <Bomb>(m_dataTexture.getTexture(chLoc.type), m_dataTexture.getTexture(Entity::EXLOSION), chLoc.position);
+//			break;
+//		case Entity::ROBOT:
+//			return std::make_unique <Robot>(m_dataTexture.getTexture(chLoc.type), chLoc.position);
+//			break;
+//		case Entity::GUARD:
+//			return std::make_unique <Guard>(m_dataTexture.getTexture(chLoc.type), chLoc.position);
+//			break;
+//        default:
+//            break;
+//        }
+//    }
+//	return nullptr;
+//}
 //=================================
 void LoadFile::fillData()
 {
@@ -22,7 +54,7 @@ void LoadFile::fillData()
     }
     m_sizeCol = colSize();
 }
-//======================================
+//=================================
 int LoadFile::colSize() const
 {
     int size = 0;
@@ -43,7 +75,7 @@ bool LoadFile::getFromFile(Char_Location& chLoc)
 		{
 			if (m_data[row][col] != Entity::FREE_SPASE)
 			{
-                chLoc.position = { (float)col,(float)row };
+                chLoc.position = { (float)col * Entity::SIZE_PIXEL,(float)row * Entity::SIZE_PIXEL };
 				chLoc.type = m_data[row][col];
                 col++;
 				return true;

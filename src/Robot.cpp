@@ -2,55 +2,56 @@
 #include <iostream>
 #include "Robot.h"
 
-Robot::Robot()
-	: m_lives(3), m_score(0)
-{
-}
+//Robot::Robot()
+//	: m_lives(3), m_score(0)
+//{
+//}
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position, Entity::ROBOT_SPEED), m_lives(3), m_score(0)
+	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
 {
 }
 //======================================
-void Robot::moving(sf::Keyboard::Key key, const float deltaTime)
+void Robot::move(const float deltaTime)
 {
-	int direction = 0;
-	switch (key)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-	case sf::Keyboard::Up:
-		direction = 0;
-		break;
-	case sf::Keyboard::Down:
-		direction = 1;
-		break;
-	case sf::Keyboard::Left:
-		direction = 2;
-		break;
-	case sf::Keyboard::Right:
-		direction = 3;
-		break;
+		m_sprite.move(0.0f, -m_speed * deltaTime);
 	}
-	move(direction, deltaTime);
-}
-//======================================
-void Robot::collision(Object& object)
-{
-	if (m_sprite.getGlobalBounds().intersects(object.getSprite().getGlobalBounds()))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_lives--;
-		std::cout << "Lives: " << m_lives << std::endl;
+		m_sprite.move(0.0f, m_speed * deltaTime);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		m_sprite.move(-m_speed * deltaTime, 0.0f);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		m_sprite.move(m_speed * deltaTime, 0.0f);
+		
+	}
+
 }
 //======================================
-void Robot::printLife(sf::RenderWindow& window)
-{
-	sf::Font font;
-	sf::Text text;
-	font.loadFromFile("font.ttf");
-	text.setPosition(Entity::SIZE_PIXEL /2, window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
-	text.setCharacterSize(26);
-	text.setFillColor(sf::Color::Red);
-	text.setFont(font);
-	text.setString("Life Left: " + std::to_string(m_lives));
-	window.draw(text);
-}
+//void Robot::collision(Object& object)
+//{
+//	if (m_sprite.getGlobalBounds().intersects(object.getSprite().getGlobalBounds()))
+//	{
+//		m_lives--;
+//		std::cout << "Lives: " << m_lives << std::endl;
+//	}
+//}
+//======================================
+//void Robot::printLife(sf::RenderWindow& window)
+//{
+//	sf::font font;
+//	sf::text text;
+//	font.loadfromfile("font.ttf");
+//	text.setposition(entity::size_pixel /2, window.getsize().y - 1.5 * entity::size_pixel);
+//	text.setcharactersize(26);
+//	text.setfillcolor(sf::color::red);
+//	text.setfont(font);
+//	text.setstring("life left: " + std::to_string(m_lives));
+//	window.draw(text);
+//}

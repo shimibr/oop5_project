@@ -10,7 +10,6 @@ public:
 	Object();
 	Object(sf::Texture& texture, sf::Vector2f position);
 	void update(sf::RenderWindow& window);
-
 	sf::Sprite& getSprite();
 
 protected:

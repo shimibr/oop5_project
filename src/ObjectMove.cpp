@@ -3,6 +3,7 @@
 #include "ObjectMove.h"
 
 ObjectMove::ObjectMove()
+	:m_speed(0)
 {
 }
 //===================================
@@ -13,9 +14,9 @@ ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int sp
 	m_sprite.setPosition(position);
 }
 //===================================
-void ObjectMove::move(const int direction,const float deltaTime)
+void ObjectMove::move(const float deltaTime)
 {
-	switch (direction)
+	/*switch (direction)
 	{
 	case 0:
 		m_sprite.move(0.0f, -m_speed * deltaTime);
@@ -29,6 +30,6 @@ void ObjectMove::move(const int direction,const float deltaTime)
 	case 3:
 		m_sprite.move(m_speed * deltaTime, 0.0f);
 		break;
-	}
+	}*/
 }
 //===================================

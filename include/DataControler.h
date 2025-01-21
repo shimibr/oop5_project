@@ -29,8 +29,8 @@ public:
 	DataControler();
 
 protected:
-	void readLevels();
-	void update();
+	//void readLevels();
+	//void update();
 	void printDataGame();
 
 	dataTexture m_dataTexture;
@@ -38,10 +38,5 @@ protected:
 	sf::Clock m_gameClock;
 
 	sf::RenderWindow m_window;
-	Robot m_robot;
-	Door m_door;
-	std::vector <Guard> m_guards;
-	std::vector <Wall> m_walls;
-	std::vector <Stone> m_stons;
-	std::vector <Bomb> m_bombs;
+	
 };

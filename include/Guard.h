@@ -7,7 +7,7 @@ class Guard : public ObjectMove
 {
 public:
 	Guard(sf::Texture& texture, sf::Vector2f position);
-	void moving(const float deltaTime);
+	void move(const float deltaTime);
 
 private:
 };
