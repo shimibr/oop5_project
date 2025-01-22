@@ -1,8 +1,23 @@
 #pragma once
 
-#include "DataControler.h"
+#include <SFML/Graphics.hpp>
+//#include <SFML/System.hpp>
+//#include <SFML/Window.hpp>
+//#include <SFML/Audio.hpp>
+//#include <SFML/Network.hpp>
 
-class Controler : public DataControler
+#include "Guard.h"
+#include "Robot.h"
+#include "LoadFile.h"
+#include "dataTexture.h"
+#include "Wall.h"
+#include "Stone.h"
+#include "Door.h"
+#include "StartMenu.h"
+#include "Bomb.h"
+
+
+class Controler
 {
 public:
 	Controler();
@@ -19,7 +34,7 @@ private:
 	dataTexture m_dataTexture;
 	LoadFile m_loadFile;
 
-	float m_deltaTime;
+	float m_deltaTime = 0;
 	sf::Clock m_gameClock;
 	sf::Clock m_moveClock;
 

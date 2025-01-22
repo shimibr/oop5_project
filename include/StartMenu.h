@@ -1,9 +1,10 @@
 #pragma once
 
-#include "DataControler.h"
 #include <fstream>
 #include <sstream>
+#include <SFML/Graphics.hpp>
 
+//#include "Controler.h"
 
 class StartMenu
 {

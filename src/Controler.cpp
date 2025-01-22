@@ -2,8 +2,7 @@
 
 #include "Controler.h"
 
-Controler::Controler()
-	:DataControler() { }
+Controler::Controler() { }
 //======================================
 void Controler::run()
 {
