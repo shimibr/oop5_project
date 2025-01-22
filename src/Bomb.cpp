@@ -29,7 +29,7 @@ void Bomb::update(sf::RenderWindow& window)
 {
 	if (m_timer <= 0)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < m_explosion.size(); i++)
 		{
 			m_explosion[i].update(window);
 		}

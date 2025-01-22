@@ -28,6 +28,11 @@ void Robot::move(const float deltaTime)
 	}
 
 }
+//=====================================
+const sf::Vector2f Robot::getPosition()
+{
+	return m_sprite.getPosition();
+}
 //======================================
 //void Robot::collision(Object& object)
 //{

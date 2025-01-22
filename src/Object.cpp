@@ -22,7 +22,7 @@ bool Object::isDead() const
 	return m_isDead;
 }
 //====================================
-sf::Sprite& Object::getSprite()
-{
-	return m_sprite;
-}
+//const sf::Sprite& Object::getSprite()
+//{
+//	return m_sprite;
+//}

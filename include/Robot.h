@@ -10,7 +10,7 @@ public:
 	Robot(sf::Texture& texture, sf::Vector2f position);
 	void move(const float deltaTime);
 	//void collision(Object& object);
-
+	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
 
 private:

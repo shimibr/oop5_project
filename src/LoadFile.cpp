@@ -7,8 +7,8 @@
 LoadFile::LoadFile()
     :m_sizeCol(0)
 {}
-//=================================
-//std::unique_ptr<Object> LoadFile::readObject()
+//================================= 
+//std::unique_ptr<Object> LoadFile::readObject() //  אני עדיין משאיר את זה כי אולי יכלו להשתמש בmove 
 //{
 //    Char_Location chLoc;
 //   if (getFromFile(chLoc))

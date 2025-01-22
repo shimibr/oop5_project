@@ -33,7 +33,7 @@ void Controler::run()
 				m_window.close();
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-			m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getSprite().getPosition()));
+			m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
 
 		eventManager();
 	}
