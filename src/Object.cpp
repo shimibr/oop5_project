@@ -16,6 +16,11 @@ void Object::update(sf::RenderWindow& window)
 {
 	window.draw(m_sprite);
 }
+//===================================
+bool Object::isDead() const
+{
+	return m_isDead;
+}
 //====================================
 sf::Sprite& Object::getSprite()
 {

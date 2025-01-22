@@ -1,20 +1,21 @@
 #pragma once
 
-#include "Object.h"
+#include "ObjectMove.h"
 #include "Explosion.h"
 
-class Bomb : public Object
+class Bomb : public ObjectMove
 {
 public:
 	Bomb();
-	Bomb(sf::Texture& bombTexture, sf::Texture& exlosionTexture, sf::Vector2f position);
-	bool control(const float deltaTime);
+	Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture,  sf::Vector2f position);
+	void move(const float deltaTime);
 	void update(sf::RenderWindow& window);
+	void moving(const float deltaTime);
+
 
 private:
 	void textNumber();
 	void explosion(sf::Texture& texture);
-	void moving(const float deltaTime);
 
 	sf::Font m_font;
 	sf::Text m_text;

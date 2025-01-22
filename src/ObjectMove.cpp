@@ -7,6 +7,10 @@ ObjectMove::ObjectMove()
 {
 }
 //===================================
+ObjectMove::~ObjectMove()
+{
+}
+//===================================
 ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed)
 	:m_speed(speed)
 {

@@ -2,15 +2,10 @@
 #include <iostream>
 #include "Robot.h"
 
-//Robot::Robot()
-//	: m_lives(3), m_score(0)
-//{
-//}
+Robot::Robot() { }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
-{
-}
+	: ObjectMove(texture, position, Entity::ROBOT_SPEED) { }
 //======================================
 void Robot::move(const float deltaTime)
 {
@@ -43,15 +38,15 @@ void Robot::move(const float deltaTime)
 //	}
 //}
 //======================================
-//void Robot::printLife(sf::RenderWindow& window)
-//{
-//	sf::font font;
-//	sf::text text;
-//	font.loadfromfile("font.ttf");
-//	text.setposition(entity::size_pixel /2, window.getsize().y - 1.5 * entity::size_pixel);
-//	text.setcharactersize(26);
-//	text.setfillcolor(sf::color::red);
-//	text.setfont(font);
-//	text.setstring("life left: " + std::to_string(m_lives));
-//	window.draw(text);
-//}
+void Robot::printLife(sf::RenderWindow& window) const
+{
+	sf::Font font;
+	sf::Text text;
+	font.loadFromFile("font.ttf");
+	text.setPosition(Entity::SIZE_PIXEL /2, window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
+	text.setCharacterSize(26);
+	text.setFillColor(sf::Color::Red);
+	text.setFont(font);
+	text.setString("life left: " + std::to_string(m_lives));
+	window.draw(text);
+}

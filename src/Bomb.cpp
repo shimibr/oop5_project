@@ -2,26 +2,27 @@
 
 #include "Bomb.h"
 
+
 Bomb::Bomb()
 {
 }
 //======================================
-Bomb::Bomb(sf::Texture& bombTexture,sf::Texture& exlosionTexture, sf::Vector2f position)
-	: Object(bombTexture, position)
+Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f position)
+	: ObjectMove(bombTexture, position, 0)
 {
-	explosion(exlosionTexture);
+	explosion(explosionTexture);
 
 	textNumber();
 }
 //======================================
-bool Bomb::control(const float deltaTime)
+void Bomb::move(const float deltaTime)
 {
 	m_timer -= deltaTime;
 	if (m_timer <= 0)
 	{
 		moving(deltaTime);
+		m_isDead = m_timer <= -1;
 	}
-	return m_timer < -1;
 }
 //=======================================
 void Bomb::update(sf::RenderWindow& window)
@@ -54,15 +55,13 @@ void Bomb::textNumber()
 void Bomb::explosion(sf::Texture& texture)
 {
 	for (int i = 0; i < 4; i++)
-	{
-	m_explosion.push_back(Explosion(texture, m_sprite.getPosition()));
-	}
+	m_explosion.push_back(Explosion(texture, m_sprite.getPosition(),i));
 }
 //======================================
 void Bomb::moving(const float deltaTime)
 {
-	/*for (int i = 0; i < m_explosion.size(); i++)
+	for (int i = 0; i < m_explosion.size(); i++)
 	{
-		m_explosion[i].moving(deltaTime, i);
-	}*/
+		m_explosion[i].move(deltaTime);
+	}
 }

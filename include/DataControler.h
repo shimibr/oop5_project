@@ -29,14 +29,7 @@ public:
 	DataControler();
 
 protected:
-	//void readLevels();
-	//void update();
-	void printDataGame();
 
-	dataTexture m_dataTexture;
-	LoadFile m_loadFile;
-	sf::Clock m_gameClock;
 
-	sf::RenderWindow m_window;
 	
 };

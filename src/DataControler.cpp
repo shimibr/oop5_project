@@ -56,25 +56,3 @@ DataControler::DataControler()
 //	m_window.display();
 //}
 //==================================
-void DataControler::printDataGame()
-{
-	sf::RectangleShape dataRectangle(sf::Vector2f(m_window.getSize().x * Entity::SIZE_PIXEL, 2 * Entity::SIZE_PIXEL));
-	dataRectangle.setPosition(0, m_window.getSize().y -2 * Entity::SIZE_PIXEL);
-	dataRectangle.setFillColor(sf::Color::Cyan);
-
-	m_window.draw(dataRectangle);
-
-	sf::Font font;
-	sf::Text text;
-	font.loadFromFile("font.ttf");
-	text.setPosition(Entity::SIZE_PIXEL * 3, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
-	text.setCharacterSize(26);
-	text.setFillColor(sf::Color::Red);
-	text.setFont(font);
-	text.setString("Time Left: " + std::to_string((int)(m_gameClock.getElapsedTime().asSeconds() / 60)) + ":"
-					+ std::to_string(((int)m_gameClock.getElapsedTime().asSeconds() % 60)));
-	m_window.draw(text);
-
-//	m_robot.printLife(m_window);
-}
-//===================================
