@@ -1,6 +1,7 @@
 #pragma once
-
+class Wall;
 class Robot;
+class Guard;
 #include <SFML/Graphics.hpp>
 #include "io.h"
 
@@ -12,6 +13,9 @@ public:
 	virtual void update(sf::RenderWindow& window);
 	bool isDead() const;
 	sf::FloatRect getGlobalLoc() const;
+
+	virtual void collided(Guard& guard);
+	//virtual void collided(Wall& wall);
 	virtual void collided(Robot& robot);
 	//const sf::Sprite& getSprite(); // צריך לבדוק אולי אפשר למחוק
 

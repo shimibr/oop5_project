@@ -24,10 +24,12 @@ public:
 	Controler();
 	void run();
 private:
+	
 	void readLevels();
 	void printDataGame();
 	void update();
 	void eventManager();
+	void collisionObjects();
 
 	sf::RenderWindow m_window;
 

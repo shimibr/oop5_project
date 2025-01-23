@@ -8,5 +8,9 @@ public:
 	Guard(sf::Texture& texture, sf::Vector2f position);
 	void move(const float deltaTime);
 
+	void collision(Object& other);
+	void collided(Robot& robot);
+	//void collided(Wall& wall);
+
 private:
 };

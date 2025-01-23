@@ -1,6 +1,7 @@
 #pragma once
 #include "Robot.h"
-
+#include "Door.h"
+#include "Guard.h"
 Robot::Robot() { }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
@@ -33,11 +34,32 @@ const sf::Vector2f Robot::getPosition()
 	return m_sprite.getPosition();
 }
 //======================================
+//======================================
+void Robot::collided(Guard& guard)
+{
+	if (m_sprite.getGlobalBounds().intersects(guard.getGlobalLoc()))
+	{
+		m_lives--;
+		if (m_lives == 0)
+		{
+			m_isDead = true;
+		}
+	}
+}
+//======================================
+void Robot::collided(Door& door)
+{
+	if (m_sprite.getGlobalBounds().intersects(door.getGlobalLoc()))
+	{
+		m_win = true;
+	}
+}
+//======================================
 void Robot::collision(Object& other)
 {
 	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
 	{
-		
+		other.collided(*this);
 	}
 }
 //======================================
@@ -52,4 +74,9 @@ void Robot::printLife(sf::RenderWindow& window) const
 	text.setFont(font);
 	text.setString("life left: " + std::to_string(m_lives));
 	window.draw(text);
+}
+//======================================
+bool Robot::isWin() const
+{
+	return m_win;
 }

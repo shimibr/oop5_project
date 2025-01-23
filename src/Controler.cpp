@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Controler.h"
+#include <iostream>
 
 Controler::Controler() { }
 //======================================
@@ -22,6 +23,18 @@ void Controler::run()
 
 	while (m_window.isOpen())
 	{
+		//================================================
+		if (m_robot.isWin())
+		{
+			m_window.close();
+			std::cout << "You Win!" << std::endl;
+		}
+		if (m_robot.isDead())
+		{
+			m_window.close();
+			std::cout << "You Lose!" << std::endl;
+		}
+		//================================================
 		update();
 
 		m_deltaTime = m_moveClock.restart().asSeconds();
@@ -94,6 +107,20 @@ void Controler::eventManager()
 	for (int i = 0; i < m_objectsMove.size(); i++)
 		m_objectsMove[i]->move(m_deltaTime);
 	m_robot.move(m_deltaTime);
+
+	collisionObjects();
+}
+//======================================
+void Controler::collisionObjects()
+{
+	for (int i = 0; i < m_objectsMove.size(); i++)
+	{
+		m_robot.collision(*m_objectsMove[i]);
+		//for (int j = 0; j < m_objects.size(); j++)
+			//m_objectsMove[i]->collision(*m_objects[j]);
+	}
+	for (int i = 0; i < m_objects.size(); i++)
+		m_robot.collision(*m_objects[i]);
 }
 //======================================
 void Controler::printDataGame()

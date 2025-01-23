@@ -1,5 +1,5 @@
 #pragma once
-
+class Door;
 #include "ObjectMove.h"
 
 class Robot : public ObjectMove
@@ -10,11 +10,15 @@ public:
 
 	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
+	bool isWin() const;
 	
+	void collided(Guard& guard);
+	void collided(Door& door);
 	void collision(Object& other);
-	void move(const float deltaTime);
 
+	void move(const float deltaTime);
 private:
+	bool m_win = false;
 	int m_lives = 3;
 	int m_score = 0;
 };

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Object.h"
 
 Object::Object()
@@ -26,6 +25,15 @@ sf::FloatRect Object::getGlobalLoc() const
 {
 	return m_sprite.getGlobalBounds();
 }
+//===================================
+//================================================
+void Object::collided(Guard& guard)
+{
+}
+//==================================
+//void Object::collided(Wall& wall)
+//{
+//}
 //==================================
 void Object::collided(Robot& robot)
 {
