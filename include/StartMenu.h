@@ -4,8 +4,6 @@
 #include <sstream>
 #include <SFML/Graphics.hpp>
 
-//#include "Controler.h"
-
 class StartMenu
 {
 public:

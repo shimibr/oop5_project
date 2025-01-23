@@ -1,7 +1,6 @@
 #pragma once
 
 #include "dataTexture.h"
-#include "io.h"
 
 dataTexture::dataTexture()
 {

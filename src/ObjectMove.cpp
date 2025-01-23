@@ -17,6 +17,10 @@ ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int sp
 	m_sprite.setTexture(texture);
 	m_sprite.setPosition(position);
 }
+//==================================
+void ObjectMove::collision(Object& other)
+{
+}
 //===================================
 void ObjectMove::move(const float deltaTime)
 {}

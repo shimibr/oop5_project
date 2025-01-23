@@ -28,12 +28,13 @@ void Controler::run()
 
 		sf::Event event;
 		while (m_window.pollEvent(event))
-	
+		{
 			if (event.type == sf::Event::Closed)
 				m_window.close();
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::B))
-			m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
+				m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+		}
 
 		eventManager();
 	}

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-//#include <SFML/System.hpp>
-//#include <SFML/Window.hpp>
-//#include <SFML/Audio.hpp>
-//#include <SFML/Network.hpp>
+#include <SFML/System.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
 
 #include "Guard.h"
 #include "Robot.h"
@@ -15,6 +15,7 @@
 #include "Door.h"
 #include "StartMenu.h"
 #include "Bomb.h"
+
 
 
 class Controler

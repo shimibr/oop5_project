@@ -10,6 +10,7 @@ public:
 	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
 	virtual ~ObjectMove();
 
+	virtual void collision(Object& other);
 	virtual void move(const float deltaTime) = 0;
 protected:
 	int m_speed;

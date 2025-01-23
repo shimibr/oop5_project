@@ -6,7 +6,4 @@ int main()
 {
 	Controler x;
 	x.run();
-
-
-	std::cout << "Hello World!" << std::endl;
 }

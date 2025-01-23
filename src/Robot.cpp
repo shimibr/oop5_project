@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "Robot.h"
 
 Robot::Robot() { }
@@ -34,14 +33,13 @@ const sf::Vector2f Robot::getPosition()
 	return m_sprite.getPosition();
 }
 //======================================
-//void Robot::collision(Object& object)
-//{
-//	if (m_sprite.getGlobalBounds().intersects(object.getSprite().getGlobalBounds()))
-//	{
-//		m_lives--;
-//		std::cout << "Lives: " << m_lives << std::endl;
-//	}
-//}
+void Robot::collision(Object& other)
+{
+	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
+	{
+		
+	}
+}
 //======================================
 void Robot::printLife(sf::RenderWindow& window) const
 {

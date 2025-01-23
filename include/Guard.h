@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ObjectMove.h"
-#include <vector>
 
 class Guard : public ObjectMove
 {

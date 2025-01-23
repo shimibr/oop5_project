@@ -21,6 +21,15 @@ bool Object::isDead() const
 {
 	return m_isDead;
 }
+//===================================
+sf::FloatRect Object::getGlobalLoc() const
+{
+	return m_sprite.getGlobalBounds();
+}
+//==================================
+void Object::collided(Robot& robot)
+{
+}
 //====================================
 //const sf::Sprite& Object::getSprite()
 //{

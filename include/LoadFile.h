@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Object.h"
 #include "dataTexture.h"
+#include <fstream>
+#include "io.h"
 
 
 class LoadFile
@@ -17,7 +18,7 @@ private:
 	int colSize() const;
 
 	int m_sizeCol;
-	dataTexture m_dataTexture;
+	//dataTexture m_dataTexture;
 	std::vector<std::string> m_data;
 
 };

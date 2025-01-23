@@ -1,8 +1,6 @@
 #pragma once
 
 #include "LoadFile.h"
-#include <fstream>
-#include "Controler.h"
 
 LoadFile::LoadFile()
     :m_sizeCol(0)

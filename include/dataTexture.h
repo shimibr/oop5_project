@@ -1,8 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "io.h"
-#include <vector>
+#include "Object.h"
 
 class dataTexture
 {
