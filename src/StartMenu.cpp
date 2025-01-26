@@ -117,6 +117,7 @@ void StartMenu::fillText()
 		sf::FloatRect textBounds = m_texts[i].getLocalBounds();
 		sf::FloatRect rectBounds = m_rectangles[i].getGlobalBounds();
 
+
 		m_texts[i].setPosition(
 			rectBounds.left + rectBounds.width / 2 - textBounds.width / 2,
 			rectBounds.top + rectBounds.height / 2 - textBounds.height / 2);

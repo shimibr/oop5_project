@@ -7,9 +7,9 @@ Controler::Controler() { }
 //======================================
 void Controler::run()
 {
-	/*m_startMenu.runMenu();
-	if (m_startMenu.getCloseGame())   לא למחיקה
-		return;*/
+	m_startMenu.runMenu();
+	if (m_startMenu.getCloseGame())  // לא למחיקה
+		return;
 
 	m_loadFile.fillData();
 	sf::Vector2f size = m_loadFile.getSize();

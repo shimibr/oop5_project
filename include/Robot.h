@@ -18,7 +18,7 @@ public:
 	void collided(Wall& wall);
 	void collided(Stone& stone);
 
-	void move(const float deltaTime);
+	virtual void move(const float deltaTime) override;
 private:
 	bool m_win = false;
 	int m_lives = 3;
