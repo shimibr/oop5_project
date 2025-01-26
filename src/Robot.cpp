@@ -2,6 +2,9 @@
 #include "Robot.h"
 #include "Door.h"
 #include "Guard.h"
+#include "Wall.h"
+#include "Stone.h"
+
 Robot::Robot() { }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
@@ -9,6 +12,7 @@ Robot::Robot(sf::Texture& texture, sf::Vector2f position)
 //======================================
 void Robot::move(const float deltaTime)
 {
+	m_lastPosition = m_sprite.getPosition();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		m_sprite.move(0.0f, -m_speed * deltaTime);
@@ -26,7 +30,6 @@ void Robot::move(const float deltaTime)
 		m_sprite.move(m_speed * deltaTime, 0.0f);
 		
 	}
-
 }
 //=====================================
 const sf::Vector2f Robot::getPosition()
@@ -61,6 +64,16 @@ void Robot::collision(Object& other)
 	{
 		other.collided(*this);
 	}
+}
+//======================================
+void Robot::collided(Wall& wall)
+{
+	setLastPosition(wall);
+}
+//======================================
+void Robot::collided(Stone& stone)
+{
+	setLastPosition(stone);
 }
 //======================================
 void Robot::printLife(sf::RenderWindow& window) const

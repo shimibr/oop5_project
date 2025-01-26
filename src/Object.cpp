@@ -31,9 +31,9 @@ void Object::collided(Guard& guard)
 {
 }
 //==================================
-//void Object::collided(Wall& wall)
-//{
-//}
+void Object::collided(Wall& wall)
+{
+}
 //==================================
 void Object::collided(Robot& robot)
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ObjectMove.h"
+class Stone;
 
 class Guard : public ObjectMove
 {
@@ -10,7 +11,9 @@ public:
 
 	void collision(Object& other);
 	void collided(Robot& robot);
-	//void collided(Wall& wall);
+	void collided(Wall& wall);
+	void collided(Stone& stone);
+	
 
 private:
 };

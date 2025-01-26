@@ -116,11 +116,15 @@ void Controler::collisionObjects()
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
 		m_robot.collision(*m_objectsMove[i]);
-		//for (int j = 0; j < m_objects.size(); j++)
-			//m_objectsMove[i]->collision(*m_objects[j]);
+		for (int j = 0; j < m_objects.size(); j++)
+			m_objectsMove[i]->collision(*m_objects[j]);
+
+		m_objectsMove[i]->inWindow(m_window.getSize());
 	}
 	for (int i = 0; i < m_objects.size(); i++)
 		m_robot.collision(*m_objects[i]);
+
+	m_robot.inWindow(m_window.getSize());
 }
 //======================================
 void Controler::printDataGame()

@@ -15,6 +15,8 @@ public:
 	void collided(Guard& guard);
 	void collided(Door& door);
 	void collision(Object& other);
+	void collided(Wall& wall);
+	void collided(Stone& stone);
 
 	void move(const float deltaTime);
 private:

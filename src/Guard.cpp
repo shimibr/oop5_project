@@ -3,6 +3,10 @@
 #include "Guard.h"
 #include "Robot.h"
 #include "Wall.h"
+#include "Stone.h"
+#include <iostream>
+
+
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 	: ObjectMove(texture, position, Entity::GUARD_SPEED)
 {
@@ -10,8 +14,9 @@ Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 //======================================
 void Guard::move(const float deltaTime)
 {
+	m_lastPosition = m_sprite.getPosition();
 
-	 int direction = rand() % 4;
+	int direction = rand() % 4;
 	switch (direction)
 	{
 	case 0:
@@ -37,13 +42,15 @@ void Guard::collided(Robot& robot)
 	}
 }
 //======================================
-//void Guard::collided(Wall& wall)
-//{
-//	if (m_sprite.getGlobalBounds().intersects(wall.getGlobalLoc()))
-//	{
-//		m_sprite.move(-m_speed, 0.0f);
-//	}
-//}
+void Guard::collided(Wall& wall)
+{
+	setLastPosition(wall);
+}
+//======================================
+void Guard::collided(Stone& stone)
+{
+	setLastPosition(stone);
+}
 //======================================
 void Guard::collision(Object& other)
 {
