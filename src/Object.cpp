@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include <Controler.h>
 
 Object::Object()
 {
@@ -36,6 +37,10 @@ void Object::collided(Wall& wall)
 }
 //==================================
 void Object::collided(Robot& robot)
+{
+}
+//==================================
+void Object::collided(Explosion& explosion)
 {
 }
 //====================================

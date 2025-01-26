@@ -12,11 +12,12 @@ public:
 	void printLife(sf::RenderWindow& window) const;
 	bool isWin() const;
 	
+	void collision(Object& other);
 	void collided(Guard& guard);
 	void collided(Door& door);
-	void collision(Object& other);
 	void collided(Wall& wall);
 	void collided(Stone& stone);
+	void collided(Explosion& explosion);
 
 	virtual void move(const float deltaTime) override;
 private:

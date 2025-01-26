@@ -8,6 +8,7 @@ public:
 	Wall(sf::Texture& texture, sf::Vector2f position);
 	void collided(Guard& guard);
 	void collided(Robot& robot);
+	
 
 private:
 

@@ -18,3 +18,8 @@ void Stone::collided(Robot& robot)
 {
 	robot.collided(*this);
 }
+//=================================
+void Stone::collided(Explosion& explosion)
+{
+	m_isDead = true;
+}

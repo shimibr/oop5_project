@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Explosion.h"
-
+#include "Guard.h"
+#include "Robot.h"
+#include "Wall.h"
+#include "Stone.h"
 Explosion::Explosion(sf::Texture& texture, sf::Vector2f position,const int direction)
 	: ObjectMove(texture, position, 50), m_direction(direction)
 {
@@ -25,4 +28,37 @@ void Explosion::move(const float deltaTime)
 		break;
 	}
 
+}
+//===================================
+void Explosion::collision(Object& other)
+{
+	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
+	{
+		other.collided(*this);
+	}
+}
+//===================================
+void Explosion::collided(Guard& guard)
+{
+	guard.collided(*this);
+}
+//===================================
+void Explosion::collided(Robot& robot)
+{
+	robot.collided(*this);
+}
+//===================================
+void Explosion::collided(Wall& wall)
+{
+	setLastPosition(wall);
+}
+//===================================
+void Explosion::collided(Stone& stone)
+{
+	setLastPosition(stone);
+}
+//===================================
+void Explosion::collided(Explosion& explosion)
+{
+	// Do nothing
 }

@@ -8,11 +8,16 @@ Bomb::Bomb()
 }
 //======================================
 Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f position)
-	: ObjectMove(bombTexture, position, 0)
+	: ObjectMove(bombTexture, position, 0) , m_explosionTexture(explosionTexture)
 {
-	explosion(explosionTexture);
 
 	textNumber();
+}
+//======================================
+void Bomb::collision(Object& other)
+{
+	for (int i = 0; i < m_explosion.size(); i++)
+		m_explosion[i].collision(other);
 }
 //======================================
 void Bomb::move(const float deltaTime)
@@ -29,6 +34,7 @@ void Bomb::update(sf::RenderWindow& window)
 {
 	if (m_timer <= 0)
 	{
+		explosion(m_explosionTexture);
 		for (int i = 0; i < m_explosion.size(); i++)
 		{
 			m_explosion[i].update(window);
@@ -54,6 +60,11 @@ void Bomb::textNumber()
 //======================================
 void Bomb::explosion(sf::Texture& texture)
 {
+	static bool built = false;
+	if (built)
+		return;
+
+	built = true;
 	for (int i = 0; i < 4; i++)
 	m_explosion.push_back(Explosion(texture, m_sprite.getPosition(),i));
 }

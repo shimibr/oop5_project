@@ -37,7 +37,6 @@ const sf::Vector2f Robot::getPosition()
 	return m_sprite.getPosition();
 }
 //======================================
-//======================================
 void Robot::collided(Guard& guard)
 {
 	if (m_sprite.getGlobalBounds().intersects(guard.getGlobalLoc()))
@@ -74,6 +73,15 @@ void Robot::collided(Wall& wall)
 void Robot::collided(Stone& stone)
 {
 	setLastPosition(stone);
+}
+//======================================
+void Robot::collided(Explosion& explosion)
+{
+	m_lives--;
+	if (m_lives == 0)
+	{
+		m_isDead = true;
+	}
 }
 //======================================
 void Robot::printLife(sf::RenderWindow& window) const

@@ -52,6 +52,15 @@ void Guard::collided(Stone& stone)
 	setLastPosition(stone);
 }
 //======================================
+void Guard::collided(Explosion& explosion)
+{
+	m_isDead = true;
+}
+//======================================
+void Guard::collided(Guard& guard)
+{
+}
+//======================================
 void Guard::collision(Object& other)
 {
 	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
