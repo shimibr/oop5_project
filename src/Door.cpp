@@ -1,6 +1,7 @@
 #pragma once
 #include "Robot.h"
 #include "Door.h"
+#include "explosion.h"
 
 Door::Door()
 {
@@ -18,4 +19,9 @@ void Door::collided(Robot& robot)
 		robot.collided(*this);
 	}
 
+}
+//===================================
+void Door::collided(Explosion& explosion)
+{
+	explosion.collided(*this);
 }

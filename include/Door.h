@@ -8,6 +8,7 @@ public:
 	Door();
 	Door(sf::Texture& texture, sf::Vector2f position);
 	void collided(Robot& robot);
+	void collided(Explosion& explosion);
 private:
 
 };

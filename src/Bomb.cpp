@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Bomb.h"
+#include <iostream>
 
 Bomb::Bomb()
 {
@@ -65,7 +66,7 @@ void Bomb::textNumber()
 void Bomb::explosion(sf::Texture& texture)
 {
     if (m_hasExploded) return; 
-
+    std::cout << "!!!!";
     for (int i = 0; i < 4; i++)
         m_explosion.push_back(Explosion(texture, m_sprite.getPosition(), i));
 }

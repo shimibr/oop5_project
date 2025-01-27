@@ -3,6 +3,7 @@ class Wall;
 class Robot;
 class Guard;
 class Explosion;
+class Door;
 #include <SFML/Graphics.hpp>
 #include "io.h"
 
@@ -18,6 +19,7 @@ public:
 	virtual void collided(Guard& guard);
 	virtual void collided(Wall& wall);
 	virtual void collided(Robot& robot);
+	virtual void collided(Door& door);
 	virtual void collided(Explosion& explosion);
 	//const sf::Sprite& getSprite(); // צריך לבדוק אולי אפשר למחוק
 

@@ -13,6 +13,7 @@ public:
 	void collided(Robot& robot);
 	void collided(Wall& wall);
 	void collided(Stone& stone);
+	void collided(Door& door);
 	void collided(Explosion& explosion);
 
 private:

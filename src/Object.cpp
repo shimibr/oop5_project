@@ -14,6 +14,7 @@ Object::Object(sf::Texture& texture, sf::Vector2f position)
 //===================================
 void Object::update(sf::RenderWindow& window)
 {
+	if(!m_isDead)
 	window.draw(m_sprite);
 }
 //===================================
@@ -37,6 +38,10 @@ void Object::collided(Wall& wall)
 }
 //==================================
 void Object::collided(Robot& robot)
+{
+}
+//====================================
+void Object::collided(Door& door)
 {
 }
 //==================================
