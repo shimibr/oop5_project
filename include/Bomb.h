@@ -26,4 +26,5 @@ private:
 	float m_timer = 5;
 	std::vector <Explosion> m_explosion;
 	sf::Texture m_explosionTexture;
+	bool m_hasExploded = false;
 };
