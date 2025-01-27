@@ -20,7 +20,7 @@ public:
 
 
 protected:
-	void setLastPosition(Object& object);
+	void setLastPosition();
 	int m_speed;
 	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_firstPosition;

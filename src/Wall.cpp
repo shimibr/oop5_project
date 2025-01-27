@@ -18,3 +18,7 @@ void Wall::collided(Robot& robot)
 {
 	robot.collided(*this);
 }
+//===================================
+void Wall::collided(Explosion& explosion)
+{
+}

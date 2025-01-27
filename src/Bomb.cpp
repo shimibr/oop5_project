@@ -65,16 +65,6 @@ void Bomb::textNumber()
 //======================================
 void Bomb::explosion(sf::Texture& texture)
 {
-	static bool built = false;
-	if (m_isDead)
-	{
-		built = false;
-		return;
-	}
-	if (built)
-		return;
-
-	built = true;
 	for (int i = 0; i < 4; i++)
 	m_explosion.push_back(Explosion(texture, m_sprite.getPosition(),i));
 }

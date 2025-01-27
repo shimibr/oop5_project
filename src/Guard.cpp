@@ -21,7 +21,7 @@ void Guard::move(const float deltaTime)
 {
 	m_lastPosition = m_sprite.getPosition();
 
-	int direction = rand() % 4;
+	int direction = rand() % 3;
 	switch (direction)
 	{
 	case 0:
@@ -49,12 +49,12 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
-	setLastPosition(wall);
+	setLastPosition();
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
-	setLastPosition(stone);
+	setLastPosition();
 }
 //======================================
 void Guard::collided(Explosion& explosion)

@@ -50,12 +50,12 @@ void Explosion::collided(Robot& robot)
 //===================================
 void Explosion::collided(Wall& wall)
 {
-	setLastPosition(wall);
+	setLastPosition();
 }
 //===================================
 void Explosion::collided(Stone& stone)
 {
-	setLastPosition(stone);
+	
 }
 //===================================
 void Explosion::collided(Explosion& explosion)

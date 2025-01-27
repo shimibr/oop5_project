@@ -49,8 +49,8 @@ void Controler::run()
 			m_window.close();
 			std::cout << "You Lose!" << std::endl;
 		}
-		//if (m_robot.lostLife())
-			//resetObjects();
+		if (m_robot.lostLife())
+			resetObjects();
 
 		//================================================
 	}
@@ -138,8 +138,9 @@ void Controler::resetObjects()
 {
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
-		m_objectsMove[i].reset();
+		m_objectsMove[i]->reset();
 	}
+	m_robot.reset();
 	
 }
 //======================================

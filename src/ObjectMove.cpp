@@ -42,12 +42,10 @@ void ObjectMove::collision(Object& other)
 void ObjectMove::move(const float deltaTime)
 {}
 //===================================
-void ObjectMove::setLastPosition(Object& object)
+void ObjectMove::setLastPosition()
 {
-	if (m_sprite.getGlobalBounds().intersects(object.getGlobalLoc()))
-	{
 		m_sprite.setPosition(m_lastPosition);
 		//std::cout << "collision" << std::endl;
-	}
+	
 }
 //===================================

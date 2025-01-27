@@ -6,4 +6,5 @@ int main()
 {
 	Controler x;
 	x.run();
+	return 0;
 }
