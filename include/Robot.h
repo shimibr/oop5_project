@@ -11,6 +11,10 @@ public:
 	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
 	bool isWin() const;
+	bool lostLife();
+	
+	virtual void reset() override;
+	virtual void move(const float deltaTime) override;
 	
 	void collision(Object& other);
 	void collided(Guard& guard);
@@ -19,9 +23,10 @@ public:
 	void collided(Stone& stone);
 	void collided(Explosion& explosion);
 
-	virtual void move(const float deltaTime) override;
 private:
+	bool m_lostLife = false;
 	bool m_win = false;
 	int m_lives = 3;
 	int m_score = 0;
+
 };

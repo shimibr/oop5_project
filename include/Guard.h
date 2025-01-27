@@ -7,6 +7,8 @@ class Guard : public ObjectMove
 {
 public:
 	Guard(sf::Texture& texture, sf::Vector2f position);
+
+	virtual void reset() override;
 	virtual void move(const float deltaTime) override;
 
 	void collision(Object& other);

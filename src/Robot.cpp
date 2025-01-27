@@ -10,6 +10,11 @@ Robot::Robot() { }
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
 	: ObjectMove(texture, position, Entity::ROBOT_SPEED) { }
 //======================================
+void Robot::reset()
+{
+	m_sprite.setPosition(m_firstPosition);
+}
+//======================================
 void Robot::move(const float deltaTime)
 {
 	m_lastPosition = m_sprite.getPosition();
@@ -41,6 +46,7 @@ void Robot::collided(Guard& guard)
 {
 	if (m_sprite.getGlobalBounds().intersects(guard.getGlobalLoc()))
 	{
+		m_lostLife = true;
 		m_lives--;
 		if (m_lives == 0)
 		{
@@ -78,6 +84,7 @@ void Robot::collided(Stone& stone)
 void Robot::collided(Explosion& explosion)
 {
 	m_lives--;
+	m_lostLife = true;
 	if (m_lives == 0)
 	{
 		m_isDead = true;
@@ -100,4 +107,14 @@ void Robot::printLife(sf::RenderWindow& window) const
 bool Robot::isWin() const
 {
 	return m_win;
+}
+//======================================
+bool Robot::lostLife()
+{
+	if (m_lostLife)
+	{
+		m_lostLife = false;
+		return true;
+	}
+	return false;
 }

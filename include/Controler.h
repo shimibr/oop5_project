@@ -30,6 +30,7 @@ private:
 	void update();
 	void eventManager();
 	void collisionObjects();
+	void resetObjects();
 
 	sf::RenderWindow m_window;
 

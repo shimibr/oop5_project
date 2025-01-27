@@ -20,6 +20,11 @@ void Bomb::collision(Object& other)
 		m_explosion[i].collision(other);
 }
 //======================================
+void Bomb::reset()
+{
+	m_isDead = true;
+}
+//======================================
 void Bomb::move(const float deltaTime)
 {
 	m_timer -= deltaTime;
@@ -61,6 +66,11 @@ void Bomb::textNumber()
 void Bomb::explosion(sf::Texture& texture)
 {
 	static bool built = false;
+	if (m_isDead)
+	{
+		built = false;
+		return;
+	}
 	if (built)
 		return;
 

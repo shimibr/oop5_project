@@ -12,6 +12,11 @@ Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 {
 }
 //======================================
+void Guard::reset()
+{
+	m_sprite.setPosition(m_firstPosition);
+}
+//======================================
 void Guard::move(const float deltaTime)
 {
 	m_lastPosition = m_sprite.getPosition();

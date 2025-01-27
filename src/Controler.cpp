@@ -23,18 +23,6 @@ void Controler::run()
 
 	while (m_window.isOpen())
 	{
-		//================================================
-		if (m_robot.isWin())
-		{
-			m_window.close();
-			std::cout << "You Win!" << std::endl;
-		}
-		if (m_robot.isDead())
-		{
-			m_window.close();
-			std::cout << "You Lose!" << std::endl;
-		}
-		//================================================
 		update();
 
 		m_deltaTime = m_moveClock.restart().asSeconds();
@@ -50,6 +38,21 @@ void Controler::run()
 		}
 
 		eventManager();
+		//================================================
+		if (m_robot.isWin())
+		{
+			m_window.close();
+			std::cout << "You Win!" << std::endl;
+		}
+		if (m_robot.isDead())
+		{
+			m_window.close();
+			std::cout << "You Lose!" << std::endl;
+		}
+		//if (m_robot.lostLife())
+			//resetObjects();
+
+		//================================================
 	}
 }
 //======================================
@@ -91,6 +94,7 @@ void Controler::update()
 	{
 		if (m_objectsMove[i]->isDead())
 		{
+			std::cout << "is dead" << std::endl;
 			m_objectsMove.erase(m_objectsMove.begin() + i);
 			i--;
 		}
@@ -128,6 +132,15 @@ void Controler::collisionObjects()
 		m_robot.collision(*m_objects[i]);
 
 	m_robot.inWindow(m_window.getSize());
+}
+//======================================
+void Controler::resetObjects()
+{
+	for (int i = 0; i < m_objectsMove.size(); i++)
+	{
+		m_objectsMove[i].reset();
+	}
+	
 }
 //======================================
 void Controler::printDataGame()

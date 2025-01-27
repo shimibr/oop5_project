@@ -16,7 +16,7 @@ ObjectMove::~ObjectMove()
 }
 //===================================
 ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed)
-	:m_speed(speed)
+	:m_speed(speed), m_firstPosition(position)
 {
 	m_sprite.setTexture(texture);
 	m_sprite.setPosition(position);
@@ -32,6 +32,10 @@ void ObjectMove::inWindow(sf::Vector2u sizeWindow)
 	}
 }
 //==================================
+void ObjectMove::reset()
+{
+}
+//==================================
 void ObjectMove::collision(Object& other)
 {}
 //===================================
@@ -43,7 +47,7 @@ void ObjectMove::setLastPosition(Object& object)
 	if (m_sprite.getGlobalBounds().intersects(object.getGlobalLoc()))
 	{
 		m_sprite.setPosition(m_lastPosition);
-		std::cout << "collision" << std::endl;
+		//std::cout << "collision" << std::endl;
 	}
 }
 //===================================
