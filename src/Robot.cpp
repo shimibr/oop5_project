@@ -17,7 +17,7 @@ void Robot::reset()
 //======================================
 void Robot::move(const float deltaTime)
 {
-	m_lastPosition = m_sprite.getPosition();
+	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		m_sprite.move(0.0f, -m_speed * deltaTime);
@@ -73,12 +73,12 @@ void Robot::collision(Object& other)
 //======================================
 void Robot::collided(Wall& wall)
 {
-	setLastPosition();
+	setLastPosition(wall);
 }
 //======================================
 void Robot::collided(Stone& stone)
 {
-	setLastPosition();
+	setLastPosition(stone);
 }
 //======================================
 void Robot::collided(Explosion& explosion)

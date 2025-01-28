@@ -16,10 +16,18 @@ ObjectMove::~ObjectMove()
 }
 //===================================
 ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed)
-	:m_speed(speed), m_firstPosition(position)
+	:m_speed(speed), m_firstPosition(position), m_fixPosition(position)
 {
 	m_sprite.setTexture(texture);
 	m_sprite.setPosition(position);
+}
+//===================================
+void ObjectMove::fixPosition()
+{
+	if(m_isCollided)
+		m_sprite.setPosition(m_fixPosition);
+	
+	m_isCollided = false;
 }
 //===================================
 void ObjectMove::inWindow(sf::Vector2u sizeWindow)
@@ -33,8 +41,7 @@ void ObjectMove::inWindow(sf::Vector2u sizeWindow)
 }
 //==================================
 void ObjectMove::reset()
-{
-}
+{}
 //==================================
 void ObjectMove::collision(Object& other)
 {}
@@ -42,9 +49,114 @@ void ObjectMove::collision(Object& other)
 void ObjectMove::move(const float deltaTime)
 {}
 //===================================
-void ObjectMove::setLastPosition()
+void ObjectMove::setLastPosition(Object& object)
 {
-		m_sprite.setPosition(m_lastPosition);
+	m_isCollided = true;
+	sf::Vector2f position = m_sprite.getPosition();
+	sf::Vector2f move = m_lastPosition - position;
+	
+	sf::FloatRect globlObject  = object.getGlobalLoc();
+	if (move.y > 0) //זז למעלה
+	{
+		if (m_lastPosition.y == globlObject.getPosition().y + globlObject.height)
+		{
+			if (globlObject.contains(position))//מזיז ימינה
+			{
+				if (globlObject.getPosition().x + globlObject.width - position.x > move.y)
+					m_fixPosition.x += move.y;
+				else
+					m_fixPosition.x += globlObject.getPosition().x + globlObject.width - position.x;
+			}
+
+			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))//מזיז שמאלה
+			{
+				if (position.x + getGlobalLoc().width - globlObject.getPosition().x > move.y)
+					m_fixPosition.x -= move.y;
+				else
+					m_fixPosition.x -= position.x + getGlobalLoc().width - globlObject.getPosition().x;
+			}
+
+				std::cout << "+" << std::endl;
+		}
+		else	
+		m_fixPosition = {m_lastPosition.x, globlObject.getPosition().y + globlObject.height };
+	}
+
+	else if (move.y < 0) //זז למטה
+		if (m_lastPosition.y + getGlobalLoc().height == globlObject.getPosition().y)
+		{
+			if (globlObject.contains({ position.x, position.y + getGlobalLoc().height-1}))//מזיז ימינה
+			{
+				if (globlObject.getPosition().x + globlObject.width - position.x > -move.y)
+					m_fixPosition.x -= move.y;
+				else 
+					m_fixPosition.x += globlObject.getPosition().x + globlObject.width - position.x;
+			}
+
+			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y + getGlobalLoc().height-1 }))// מזיז שמאלה
+			{
+				if (position.x + getGlobalLoc().width - globlObject.getPosition().x > -move.y)
+					m_fixPosition.x += move.y;
+				else
+					m_fixPosition.x -= position.x + getGlobalLoc().width - globlObject.getPosition().x;
+			}
+
+			std::cout << "-" << std::endl;
+		}
+		else
+			m_fixPosition = { m_lastPosition.x, globlObject.getPosition().y - getGlobalLoc().height};
+	
+
+	else if (move.x > 0) //זז שמאלה
+		if (m_lastPosition.x == globlObject.getPosition().x + globlObject.width)
+		{
+			if (globlObject.contains(position))// מזיז למטה
+			{
+				if (globlObject.getPosition().y + globlObject.height - position.y > move.x)
+					m_fixPosition.y += move.x;
+				else
+					m_fixPosition.y += globlObject.getPosition().y + globlObject.height - position.y;
+			}
+
+			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height-1 }))//מזיז למעלה
+			{
+				if (position.y - globlObject.getPosition().y + globlObject.height > move.x)
+					m_fixPosition.y -= move.x;
+				else
+					m_fixPosition.y -= position.y - globlObject.getPosition().y + globlObject.height;
+			}
+			std::cout << "<" << std::endl;
+		}
+		else
+			m_fixPosition = { globlObject.getPosition().x + getGlobalLoc().width, m_lastPosition.y };
+
+	else if (move.x < 0) // זז ימינה
+		if (m_lastPosition.x + getGlobalLoc().width == globlObject.getPosition().x)
+		{
+			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))// מזיז למטה
+			{
+				if (globlObject.getPosition().y + globlObject.height - position.y > -move.x)
+					m_fixPosition.y -= move.x;
+				else
+					m_fixPosition.y += globlObject.getPosition().y + globlObject.height - position.y;
+			}
+
+			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y + getGlobalLoc().height-1 }))//מזיז למעלה
+			{
+				if (position.y - globlObject.getPosition().y + globlObject.height > -move.x)
+					m_fixPosition.y += move.x;
+				else
+					m_fixPosition.y -= position.y - globlObject.getPosition().y + globlObject.height;
+			}
+
+			std::cout << ">" << std::endl;
+		}
+		else
+			m_fixPosition = { globlObject.getPosition().x - getGlobalLoc().width, m_lastPosition.y };
+	
+
+
+		//m_sprite.setPosition(m_lastPosition);
 		//std::cout << "collision" << std::endl;
 	
 }

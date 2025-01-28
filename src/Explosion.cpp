@@ -56,7 +56,7 @@ void Explosion::collided(Robot& robot)
 void Explosion::collided(Wall& wall)
 {
 	m_isDead = true;
-	setLastPosition();
+	//setLastPosition();
 }
 //===================================
 void Explosion::collided(Stone& stone)
@@ -67,7 +67,7 @@ void Explosion::collided(Stone& stone)
 void Explosion::collided(Door& door)
 {
 	m_isDead = true;
-	setLastPosition();
+	//setLastPosition();
 }
 //===================================
 void Explosion::collided(Explosion& explosion)

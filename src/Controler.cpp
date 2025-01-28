@@ -76,7 +76,7 @@ void Controler::readLevels()
 //======================================
 void Controler::update()
 {
-	m_window.clear();
+	m_window.clear(sf::Color::Red);
 	printDataGame();
 
 	for (int i = 0; i < m_objects.size(); i++)
@@ -132,6 +132,10 @@ void Controler::collisionObjects()
 		m_robot.collision(*m_objects[i]);
 
 	m_robot.inWindow(m_window.getSize());
+
+	for (int i = 0; i < m_objectsMove.size(); i++)
+		m_objectsMove[i]->fixPosition();
+	m_robot.fixPosition();
 }
 //======================================
 void Controler::resetObjects()

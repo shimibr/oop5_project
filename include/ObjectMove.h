@@ -12,18 +12,23 @@ public:
 	ObjectMove();
 	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
 	virtual ~ObjectMove();
-
+	void fixPosition();
 	void inWindow(sf::Vector2u sizeWindow);
 	virtual void reset();
 	virtual void collision(Object& other);
 	virtual void move(const float deltaTime) = 0;
 
 
+
 protected:
-	void setLastPosition();
+	void setLastPosition(Object& object);
+
+	bool m_isCollided = false;
 	int m_speed;
 	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_firstPosition;
+	sf::Vector2f m_fixPosition;
+
 
 	
 };

@@ -19,9 +19,9 @@ void Guard::reset()
 //======================================
 void Guard::move(const float deltaTime)
 {
-	m_lastPosition = m_sprite.getPosition();
+	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
-	int direction = rand() % 3;
+	int direction = rand() % -1;
 	switch (direction)
 	{
 	case 0:
@@ -49,12 +49,12 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
-	setLastPosition();
+	setLastPosition(wall);
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
-	setLastPosition();
+	setLastPosition(stone);
 }
 //======================================
 void Guard::collided(Explosion& explosion)
