@@ -61,20 +61,10 @@ void ObjectMove::setLastPosition(Object& object)
 		if (m_lastPosition.y == globlObject.getPosition().y + globlObject.height)
 		{
 			if (globlObject.contains(position))//מזיז ימינה
-			{
-				if (globlObject.getPosition().x + globlObject.width - position.x > move.y)
-					m_fixPosition.x += move.y;
-				else
-					m_fixPosition.x += globlObject.getPosition().x + globlObject.width - position.x;
-			}
+				moveBySmall(globlObject.getPosition().x + globlObject.width - position.x, move.y, m_fixPosition.x);
 
 			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))//מזיז שמאלה
-			{
-				if (position.x + getGlobalLoc().width - globlObject.getPosition().x > move.y)
-					m_fixPosition.x -= move.y;
-				else
-					m_fixPosition.x -= position.x + getGlobalLoc().width - globlObject.getPosition().x;
-			}
+				moveBySmall(-(position.x + getGlobalLoc().width - globlObject.getPosition().x), -move.y, m_fixPosition.x);
 
 				std::cout << "+" << std::endl;
 		}
@@ -86,20 +76,10 @@ void ObjectMove::setLastPosition(Object& object)
 		if (m_lastPosition.y + getGlobalLoc().height == globlObject.getPosition().y)
 		{
 			if (globlObject.contains({ position.x, position.y + getGlobalLoc().height-1}))//מזיז ימינה
-			{
-				if (globlObject.getPosition().x + globlObject.width - position.x > -move.y)
-					m_fixPosition.x -= move.y;
-				else 
-					m_fixPosition.x += globlObject.getPosition().x + globlObject.width - position.x;
-			}
+				moveBySmall(globlObject.getPosition().x + globlObject.width - position.x, -move.y, m_fixPosition.x);
 
 			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y + getGlobalLoc().height-1 }))// מזיז שמאלה
-			{
-				if (position.x + getGlobalLoc().width - globlObject.getPosition().x > -move.y)
-					m_fixPosition.x += move.y;
-				else
-					m_fixPosition.x -= position.x + getGlobalLoc().width - globlObject.getPosition().x;
-			}
+				moveBySmall(-(position.x + getGlobalLoc().width - globlObject.getPosition().x), move.y, m_fixPosition.x);
 
 			std::cout << "-" << std::endl;
 		}
@@ -111,20 +91,11 @@ void ObjectMove::setLastPosition(Object& object)
 		if (m_lastPosition.x == globlObject.getPosition().x + globlObject.width)
 		{
 			if (globlObject.contains(position))// מזיז למטה
-			{
-				if (globlObject.getPosition().y + globlObject.height - position.y > move.x)
-					m_fixPosition.y += move.x;
-				else
-					m_fixPosition.y += globlObject.getPosition().y + globlObject.height - position.y;
-			}
-
-			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height-1 }))//מזיז למעלה
-			{
-				if (position.y - globlObject.getPosition().y + globlObject.height > move.x)
-					m_fixPosition.y -= move.x;
-				else
-					m_fixPosition.y -= position.y - globlObject.getPosition().y + globlObject.height;
-			}
+				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, move.x, m_fixPosition.y);
+			
+			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height }))//מזיז למעלה
+				moveBySmall(-(position.y - globlObject.getPosition().y + globlObject.height), -move.x, m_fixPosition.y);
+			
 			std::cout << "<" << std::endl;
 		}
 		else
@@ -134,30 +105,23 @@ void ObjectMove::setLastPosition(Object& object)
 		if (m_lastPosition.x + getGlobalLoc().width == globlObject.getPosition().x)
 		{
 			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))// מזיז למטה
-			{
-				if (globlObject.getPosition().y + globlObject.height - position.y > -move.x)
-					m_fixPosition.y -= move.x;
-				else
-					m_fixPosition.y += globlObject.getPosition().y + globlObject.height - position.y;
-			}
-
-			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y + getGlobalLoc().height-1 }))//מזיז למעלה
-			{
-				if (position.y - globlObject.getPosition().y + globlObject.height > -move.x)
-					m_fixPosition.y += move.x;
-				else
-					m_fixPosition.y -= position.y - globlObject.getPosition().y + globlObject.height;
-			}
-
+				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, -move.x, m_fixPosition.y);
+			
+			if (globlObject.contains({ position.x + getGlobalLoc().width, position.y + getGlobalLoc().height}))//מזיז למעלה
+				moveBySmall(-(position.y - globlObject.getPosition().y + globlObject.height), move.x, m_fixPosition.y);
+			
 			std::cout << ">" << std::endl;
 		}
 		else
 			m_fixPosition = { globlObject.getPosition().x - getGlobalLoc().width, m_lastPosition.y };
 	
-
-
-		//m_sprite.setPosition(m_lastPosition);
-		//std::cout << "collision" << std::endl;
-	
+}
+//===================================
+void ObjectMove::moveBySmall(float move1, float move2, float& XorY)
+{
+	if (std::abs(move1) < std::abs(move2))
+		XorY += move1;
+	else
+		XorY += move2;
 }
 //===================================

@@ -14,6 +14,7 @@ public:
 	virtual ~ObjectMove();
 	void fixPosition();
 	void inWindow(sf::Vector2u sizeWindow);
+
 	virtual void reset();
 	virtual void collision(Object& other);
 	virtual void move(const float deltaTime) = 0;
@@ -22,6 +23,7 @@ public:
 
 protected:
 	void setLastPosition(Object& object);
+	void moveBySmall(float move1, float move2,float& XorY);
 
 	bool m_isCollided = false;
 	int m_speed;
