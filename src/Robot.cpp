@@ -4,6 +4,8 @@
 #include "Guard.h"
 #include "Wall.h"
 #include "Stone.h"
+#include "Gift.h"
+#include "GiftStopGuards.h"
 
 Robot::Robot() { }
 //======================================

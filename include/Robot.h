@@ -20,8 +20,9 @@ public:
 	void collided(Guard& guard);
 	void collided(Door& door);
 	void collided(Wall& wall);
-	void collided(Stone& stone);
+	void collided(Stone& stone); 
 	void collided(Explosion& explosion);
+	//void collided(Gifts& Gifts);
 
 private:
 	bool m_lostLife = false;

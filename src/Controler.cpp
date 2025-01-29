@@ -71,6 +71,9 @@ void Controler::readLevels()
 			m_objects.push_back(std::make_unique<Stone>(m_dataTexture.getTexture(Entity::STONE), chLoc.position));
 		else if (chLoc.type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
+		else if (chLoc.type == Entity::GIFT)
+			m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
+
 	}	
 }
 //======================================

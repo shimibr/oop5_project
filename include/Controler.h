@@ -15,7 +15,8 @@
 #include "Door.h"
 #include "StartMenu.h"
 #include "Bomb.h"
-
+#include "GiftStopGuards.h"
+//#include "Gift.h"
 
 
 class Controler

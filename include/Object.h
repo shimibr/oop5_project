@@ -4,6 +4,8 @@ class Robot;
 class Guard;
 class Explosion;
 class Door;
+class Gift;
+class GiftStopGuards;
 #include <SFML/Graphics.hpp>
 #include "io.h"
 

@@ -10,6 +10,7 @@
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 	: ObjectMove(texture, position, Entity::GUARD_SPEED)
 {
+	m_sleep = false;
 }
 //======================================
 void Guard::reset()
@@ -19,6 +20,13 @@ void Guard::reset()
 //======================================
 void Guard::move(const float deltaTime)
 {
+	if (m_sleep > 0) 
+	{
+		m_sleep -= deltaTime;
+		return;
+	}
+
+
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
 	int direction = rand() % -1;
@@ -74,3 +82,4 @@ void Guard::collision(Object& other)
 	}
 }
 //======================================
+float Guard::m_sleep = 0;
