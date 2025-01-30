@@ -58,8 +58,8 @@ void Bomb::update(sf::RenderWindow& window)
 void Bomb::textNumber()
 {
     m_font.loadFromFile("font.ttf");
-    m_text.setPosition(m_sprite.getPosition().x + 25, m_sprite.getPosition().y + 15);
-    m_text.setCharacterSize(20);
+    m_text.setPosition(m_sprite.getPosition().x + Entity::SIZE_PIXEL/2, m_sprite.getPosition().y + Entity::SIZE_PIXEL/3);
+    m_text.setCharacterSize(Entity::SIZE_PIXEL/3);
     m_text.setFillColor(sf::Color::Red);
 }
 //======================================

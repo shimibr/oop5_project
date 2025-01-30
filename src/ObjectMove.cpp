@@ -93,22 +93,22 @@ void ObjectMove::setLastPosition(Object& object)
 			if (globlObject.contains(position))// מזיז למטה
 				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, move.x, m_fixPosition.y);
 			
-			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height }))//מזיז למעלה
-				moveBySmall(-(position.y - globlObject.getPosition().y + globlObject.height), -move.x, m_fixPosition.y);
+			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height-1 }))//מזיז למעלה
+				moveBySmall(-(position.y +getGlobalLoc().height - globlObject.getPosition().y), -move.x, m_fixPosition.y);
 			
 			std::cout << "<" << std::endl;
 		}
 		else
-			m_fixPosition = { globlObject.getPosition().x + getGlobalLoc().width, m_lastPosition.y };
+			m_fixPosition = { globlObject.getPosition().x + globlObject.width, m_lastPosition.y };
 
 	else if (move.x < 0) // זז ימינה
 		if (m_lastPosition.x + getGlobalLoc().width == globlObject.getPosition().x)
 		{
-			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))// מזיז למטה
+			if (globlObject.contains({ position.x + getGlobalLoc().width, position.y }))// מזיז למטה
 				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, -move.x, m_fixPosition.y);
 			
 			if (globlObject.contains({ position.x + getGlobalLoc().width, position.y + getGlobalLoc().height}))//מזיז למעלה
-				moveBySmall(-(position.y - globlObject.getPosition().y + globlObject.height), move.x, m_fixPosition.y);
+				moveBySmall(-(position.y + getGlobalLoc().height - globlObject.getPosition().y), move.x, m_fixPosition.y);
 			
 			std::cout << ">" << std::endl;
 		}
@@ -119,7 +119,8 @@ void ObjectMove::setLastPosition(Object& object)
 //===================================
 void ObjectMove::moveBySmall(float move1, float move2, float& XorY)
 {
-	if (std::abs(move1) < std::abs(move2))
+	std::cout << move1 << "   " << move2 << std::endl;
+	if (std::abs(move1) < std::abs(move2) || std::abs(move1)- std::abs(move2) < 1)
 		XorY += move1;
 	else
 		XorY += move2;

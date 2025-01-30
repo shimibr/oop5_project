@@ -5,7 +5,7 @@ namespace Entity
 
 	const float GUARD_SPEED = 10;
 	const float ROBOT_SPEED = 100;
-	const int SIZE_PIXEL = 50;
+	const int SIZE_PIXEL = 70;
 	constexpr char ROBOT = '/';
 	constexpr char STONE = '@';
 	constexpr char GUARD = '!';
