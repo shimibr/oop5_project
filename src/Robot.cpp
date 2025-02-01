@@ -103,6 +103,11 @@ void Robot::collided(Explosion& explosion)
 		}
 	}
 }
+//=========================================
+void Robot::collided(GiftAddLife& giftAddLife)
+{
+	m_lives++;
+}
 //======================================
 void Robot::printLife(sf::RenderWindow& window) const
 {

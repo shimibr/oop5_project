@@ -72,8 +72,19 @@ void Controler::readLevels()
 		else if (chLoc.type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
 		else if (chLoc.type == Entity::GIFT)
-			m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
+		{
+			int type = rand() % 2;
 
+			switch (type)
+			{
+			case 0:
+				m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
+				break;
+			case 1:
+				m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
+				break;
+			}
+		}
 	}	
 }
 //======================================

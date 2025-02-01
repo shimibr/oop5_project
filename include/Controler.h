@@ -16,6 +16,7 @@
 #include "StartMenu.h"
 #include "Bomb.h"
 #include "GiftStopGuards.h"
+#include"GiftAddLife.h"
 //#include "Gift.h"
 
 

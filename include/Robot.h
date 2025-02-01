@@ -1,6 +1,7 @@
 #pragma once
-class Door;
 #include "ObjectMove.h"
+class Door;
+class GiftAddLife;
 
 class Robot : public ObjectMove
 {
@@ -22,7 +23,7 @@ public:
 	void collided(Wall& wall);
 	void collided(Stone& stone); 
 	void collided(Explosion& explosion);
-	//void collided(Gifts& Gifts);
+	void collided(GiftAddLife& giftAddLife);
 
 private:
 	bool m_lostLife = false;
