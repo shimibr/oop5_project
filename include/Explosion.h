@@ -17,5 +17,5 @@ public:
 	void collided(Explosion& explosion);
 
 private:
-	int m_direction;
+	
 };

@@ -20,23 +20,31 @@ void Robot::reset()
 void Robot::move(const float deltaTime)
 {
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		m_sprite.move(0.0f, -m_speed * deltaTime);
+		m_direction = 0;
+		ObjectMove::move(deltaTime);
+
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_sprite.move(0.0f, m_speed * deltaTime);
+		m_direction = 1;
+		ObjectMove::move(deltaTime);
 	}
+
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_sprite.move(-m_speed * deltaTime, 0.0f);
+		m_direction = 2;
+		ObjectMove::move(deltaTime);
 	}
+
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_sprite.move(m_speed * deltaTime, 0.0f);
-		
+		m_direction = 3;
+		ObjectMove::move(deltaTime);
 	}
+
 }
 //=====================================
 const sf::Vector2f Robot::getPosition()

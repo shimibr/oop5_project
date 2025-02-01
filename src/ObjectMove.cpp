@@ -47,7 +47,26 @@ void ObjectMove::collision(Object& other)
 {}
 //===================================
 void ObjectMove::move(const float deltaTime)
-{}
+{
+	if (m_isDead)
+		return;
+
+	switch (m_direction)
+	{
+	case 0:
+		m_sprite.move(0.0f, -m_speed * deltaTime);
+		break;
+	case 1:
+		m_sprite.move(0.0f, m_speed * deltaTime);
+		break;
+	case 2:
+		m_sprite.move(-m_speed * deltaTime, 0.0f);
+		break;
+	case 3:
+		m_sprite.move(m_speed * deltaTime, 0.0f);
+		break;
+	}
+}
 //===================================
 void ObjectMove::setLastPosition(Object& object)
 {
