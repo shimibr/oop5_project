@@ -26,7 +26,6 @@ void Guard::move(const float deltaTime)
 		return;
 	}
 
-
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
 	m_direction = rand() % 3;

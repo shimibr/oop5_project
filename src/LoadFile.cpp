@@ -3,8 +3,9 @@
 #include "LoadFile.h"
 
 LoadFile::LoadFile()
-    :m_sizeCol(0)
-{}
+:m_sizeCol(0), m_file("Levels.txt")
+{
+}
 //================================= 
 //std::unique_ptr<Object> LoadFile::readObject() //  אני עדיין משאיר את זה כי אולי יכלו להשתמש בmove 
 //{
@@ -38,19 +39,21 @@ LoadFile::LoadFile()
 //	return nullptr;
 //}
 //=================================
-void LoadFile::fillData()
+std::string LoadFile::fillData()
 {
-    std::ifstream file("Levels.txt");
 
-    if (!file) 
-        return;
-   
+    if (!m_file)
+        return "0";
+    m_data.clear();
+
     std::string line;
-    while (std::getline(file, line))
+    while (std::getline(m_file, line) && !isdigit(line[0]))
     {
         m_data.push_back(line);
     }
     m_sizeCol = colSize();
+
+    return line;
 }
 //=================================
 int LoadFile::colSize() const

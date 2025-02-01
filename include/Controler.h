@@ -40,6 +40,7 @@ private:
 	dataTexture m_dataTexture;
 	LoadFile m_loadFile;
 
+	char m_level = '0';
 	float m_deltaTime = 0;
 	sf::Clock m_gameClock;
 	sf::Clock m_moveClock;

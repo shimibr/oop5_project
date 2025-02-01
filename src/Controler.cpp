@@ -11,7 +11,8 @@ void Controler::run()
 	if (m_startMenu.getCloseGame())  // לא למחיקה
 		return;
 
-	m_loadFile.fillData();
+	std::string dataGame = m_loadFile.fillData();
+	m_level = dataGame[0];
 	sf::Vector2f size = m_loadFile.getSize();
 	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "SFML works!");
 	m_window.setFramerateLimit(60);
@@ -178,7 +179,7 @@ void Controler::printDataGame()
 	text.setFillColor(sf::Color::Red);
 	text.setFont(font);
 	text.setString("Time Left: " + std::to_string((int)(m_gameClock.getElapsedTime().asSeconds() / 60)) + ":"
-		+ std::to_string(((int)m_gameClock.getElapsedTime().asSeconds() % 60)));
+		+ std::to_string(((int)m_gameClock.getElapsedTime().asSeconds() % 60)) + "	Level: " + m_level);
 	m_window.draw(text);
 
 	m_robot.printLife(m_window);
