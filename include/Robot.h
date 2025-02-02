@@ -2,6 +2,7 @@
 #include "ObjectMove.h"
 class Door;
 class GiftAddLife;
+//class TextMaker;
 
 class Robot : public ObjectMove
 {
@@ -11,6 +12,7 @@ public:
 
 	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
+	bool printRobotClock(sf::RenderWindow& window) const;
 	bool isWin() const;
 	bool lostLife();
 	
@@ -25,7 +27,9 @@ public:
 	void collided(Explosion& explosion);
 	void collided(GiftAddLife& giftAddLife);
 
-private:
+private:	
+	
+	sf::Time m_robotClock;
 	bool m_lostLife = false;
 	bool m_win = false;
 	int m_lives = 3;

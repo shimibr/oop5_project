@@ -6,11 +6,17 @@
 #include "Stone.h"
 #include "Gift.h"
 #include "GiftStopGuards.h"
+#include "TextMaker.h"
+
+
 
 Robot::Robot() { }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position, Entity::ROBOT_SPEED) { }
+	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
+{
+	m_robotClock = sf::seconds(180);
+}
 //======================================
 void Robot::reset()
 {
@@ -19,6 +25,7 @@ void Robot::reset()
 //======================================
 void Robot::move(const float deltaTime)
 {
+	m_robotClock -= sf::seconds(deltaTime);
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -111,7 +118,7 @@ void Robot::collided(GiftAddLife& giftAddLife)
 //======================================
 void Robot::printLife(sf::RenderWindow& window) const
 {
-	sf::Font font;
+/*	sf::Font font;
 	sf::Text text;
 	font.loadFromFile("font.ttf");
 	text.setPosition(Entity::SIZE_PIXEL /2, window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
@@ -119,7 +126,22 @@ void Robot::printLife(sf::RenderWindow& window) const
 	text.setFillColor(sf::Color::Red);
 	text.setFont(font);
 	text.setString("life left: " + std::to_string(m_lives));
-	window.draw(text);
+	window.draw(text);*/
+	TextMaker m_textMaker;
+	window.draw(m_textMaker.makeText(m_lives,  sf::Vector2f(window.getSize().x / 3 ,window.getSize().y - Entity::SIZE_PIXEL) ));
+}
+//=====================================
+bool Robot::printRobotClock(sf::RenderWindow& window) const
+{
+	if(m_robotClock.asSeconds() == 99999)
+	return false;
+
+	else
+	{
+		TextMaker m_textMaker;
+		window.draw(m_textMaker.makeText(m_robotClock , sf::Vector2f(window.getSize().x * 2 / 3, window.getSize().y - Entity::SIZE_PIXEL)));
+		return true;
+	}
 }
 //======================================
 bool Robot::isWin() const

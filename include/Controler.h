@@ -16,9 +16,7 @@
 #include "StartMenu.h"
 #include "Bomb.h"
 #include "GiftStopGuards.h"
-#include"GiftAddLife.h"
-//#include "Gift.h"
-
+#include "GiftAddLife.h"
 
 class Controler
 {
@@ -33,6 +31,7 @@ private:
 	void eventManager();
 	void collisionObjects();
 	void resetObjects();
+	void printDataClock();
 
 	sf::RenderWindow m_window;
 
@@ -40,7 +39,7 @@ private:
 	dataTexture m_dataTexture;
 	LoadFile m_loadFile;
 
-	char m_level = '0';
+	int m_level = 0;
 	float m_deltaTime = 0;
 	sf::Clock m_gameClock;
 	sf::Clock m_moveClock;

@@ -2,6 +2,8 @@
 
 #include "Controler.h"
 #include <iostream>
+#include "TextMaker.h"
+
 
 Controler::Controler() { }
 //======================================
@@ -12,7 +14,8 @@ void Controler::run()
 		return;
 
 	std::string dataGame = m_loadFile.fillData();
-	m_level = dataGame[0];
+	m_level = dataGame[0] - '0';
+
 	sf::Vector2f size = m_loadFile.getSize();
 	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "SFML works!");
 	m_window.setFramerateLimit(60);
@@ -168,20 +171,30 @@ void Controler::printDataGame()
 	sf::RectangleShape dataRectangle(sf::Vector2f(m_window.getSize().x * Entity::SIZE_PIXEL, 2 * Entity::SIZE_PIXEL));
 	dataRectangle.setPosition(0, m_window.getSize().y - 2 * Entity::SIZE_PIXEL);
 	dataRectangle.setFillColor(sf::Color::Cyan);
-
+	TextMaker m_textMaker;
 	m_window.draw(dataRectangle);
+	m_window.draw(m_textMaker.makeText("Life left:"
+		, sf::Vector2f(m_window.getSize().x / 3 , m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText("Time passed:"
+		, sf::Vector2f(m_window.getSize().x * 3/5, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText("Time Left:"
+		, sf::Vector2f(m_window.getSize().x * 4/5, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText("Level number:"
+		, sf::Vector2f(m_window.getSize().x /8, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL)));
 
-	sf::Font font;
-	sf::Text text;
-	font.loadFromFile("font.ttf");
-	text.setPosition(Entity::SIZE_PIXEL * 3, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL);
-	text.setCharacterSize(26);
-	text.setFillColor(sf::Color::Red);
-	text.setFont(font);
-	text.setString("Time Left: " + std::to_string((int)(m_gameClock.getElapsedTime().asSeconds() / 60)) + ":"
-		+ std::to_string(((int)m_gameClock.getElapsedTime().asSeconds() % 60)) + "	Level: " + m_level);
-	m_window.draw(text);
+	m_window.draw(m_textMaker.makeText(m_level
+		, sf::Vector2f(m_window.getSize().x / 8, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
+	printDataClock();
 	m_robot.printLife(m_window);
 }
 //===================================
+void Controler::printDataClock()
+{
+	TextMaker m_textMaker;
+	if (m_robot.printRobotClock(m_window))
+	{
+		m_window.draw(m_textMaker.makeText(m_gameClock, sf::Vector2f(m_window.getSize().x * 4/5, m_window.getSize().y - Entity::SIZE_PIXEL)));
+	}
+
+}

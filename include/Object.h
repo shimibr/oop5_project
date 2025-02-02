@@ -1,4 +1,8 @@
 #pragma once
+
+#include <SFML/Graphics.hpp>
+#include "io.h"
+
 class Wall;
 class Robot;
 class Guard;
@@ -6,9 +10,6 @@ class Explosion;
 class Door;
 class Gift;
 class GiftStopGuards;
-#include <SFML/Graphics.hpp>
-#include "io.h"
-
 class Object
 {
 public:
