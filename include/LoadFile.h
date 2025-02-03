@@ -12,7 +12,7 @@ public:
     LoadFile();
     bool getFromFile(Char_Location& chLoc);
     sf::Vector2f getSize() const;
-    std::string fillData();
+    bool fillData();
     std::vector<int>& getLevelInfo()  { return m_levelInfo; }
 
 private:

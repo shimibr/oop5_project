@@ -13,63 +13,62 @@ void Controler::run()
 	if (m_startMenu.getCloseGame())  // לא למחיקה
 		return;
 
-	m_loadFile.fillData();
-	m_dataLevel = m_loadFile.getLevelInfo();
-	for (int i = 0; i < m_dataLevel.size(); i++)
-		std::cout << m_dataLevel[i] + ' ';
-
-	sf::Vector2f size = m_loadFile.getSize();
-	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "Window Game");
-	m_window.setFramerateLimit(60);
-
-	readLevels();
-
-	m_gameClock.restart();
-	m_moveClock.restart();
-
-	while (m_window.isOpen())
+	while(m_loadFile.fillData())
 	{
-		update();
+		m_dataLevel = m_loadFile.getLevelInfo();
+		for (int i = 0; i < m_dataLevel.size(); i++)
+			std::cout << m_dataLevel[i] + ' ';
 
-		m_deltaTime = m_moveClock.restart().asSeconds();
+		sf::Vector2f size = m_loadFile.getSize();
+		m_window.create(sf::VideoMode(size.x* Entity::SIZE_PIXEL, (size.y + 2)* Entity::SIZE_PIXEL), "Window Game");
+		m_window.setFramerateLimit(60);
 
-		sf::Event event;
-		while (m_window.pollEvent(event))
+		readLevels();
+
+		m_gameClock.restart();
+		m_moveClock.restart();
+
+		while (m_window.isOpen())
 		{
-			if (event.type == sf::Event::Closed)
+			update();
+
+			m_deltaTime = m_moveClock.restart().asSeconds();
+
+			sf::Event event;
+			while (m_window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					m_window.close();
+
+				if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
+					m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+			}
+
+			eventManager();
+			//================================================
+			if (m_robot.isWin())
+			{
 				m_window.close();
+				m_dataLevel.clear();
+				m_objects.clear();
+				m_objectsMove.clear();
+			}
+			if (m_robot.isDead())
+			{
+				m_window.close();
+				std::cout << "You Lose!" << std::endl;
+			}
+			if (m_robot.lostLife())
+				resetObjects();
 
-			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
-				m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+			//================================================
 		}
-
-		eventManager();
-		//================================================
-		if (m_robot.isWin())
-		{
-			m_dataLevel.clear();
-			m_objects.clear();
-			m_objectsMove.clear();
-			m_loadFile.fillData();
-			m_dataLevel = m_loadFile.getLevelInfo();
-			readLevels();
-			m_robot.setNotWin();
-		}
-		if (m_robot.isDead())
-		{
-			m_window.close();
-			std::cout << "You Lose!" << std::endl;
-		}
-		if (m_robot.lostLife())
-			resetObjects();
-
-		//================================================
 	}
 }
 //======================================
 void Controler::readLevels()
 {
-	m_window.clear();
+	//m_window.clear();
 	Char_Location chLoc;
 	while (m_loadFile.getFromFile(chLoc))
 	{

@@ -3,13 +3,10 @@
 LoadFile::LoadFile()
     : m_sizeCol(0), m_file("Levels.txt") {}
 //====================================
-std::string LoadFile::fillData()
+bool LoadFile::fillData()
 {
     if (!m_file)
-        return "0";
-
-    static std::streampos lastPosition = 0; 
-    m_file.seekg(lastPosition);
+        return false;
 
     m_data.clear();
     m_levelInfo.clear();
@@ -17,6 +14,9 @@ std::string LoadFile::fillData()
     std::string line;
     while (std::getline(m_file, line) && !isdigit(line[0]))
         m_data.push_back(line);
+
+    if(line == "/n")
+        return false;
 
     m_sizeCol = colSize();
 
@@ -28,9 +28,7 @@ std::string LoadFile::fillData()
         if (ss.peek() == '-') ss.ignore();
     }
 
-    lastPosition = m_file.tellg();
-
-    return line;
+    return true;
 }
 //====================================
 int LoadFile::colSize() const
