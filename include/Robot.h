@@ -30,7 +30,7 @@ public:
 	virtual void collided(GiftAddLife& giftAddLife);
 	virtual void collided(GiftAddTime& giftAddTime);
 
-private:	
+private:
 	
 	sf::Time m_robotClock;
 	bool m_lostLife = false;

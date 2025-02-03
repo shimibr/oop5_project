@@ -57,7 +57,7 @@ void Controler::run()
 			if (m_robot.isDead())
 			{
 				m_window.close();
-				std::cout << "You Lose!" << std::endl;
+				return;
 			}
 			if (m_robot.lostLife())
 				resetObjects();
@@ -73,7 +73,7 @@ void Controler::readLevels()
 	while (m_loadFile.getFromFile(chLoc))
 	{
 		if (chLoc.type == Entity::ROBOT)
-			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[3]);
+			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[2]);
 		else if (chLoc.type == Entity::GUARD)
 			m_objectsMove.push_back(std::make_unique<Guard>(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
 		else if (chLoc.type == Entity::WALL_OR_EDGE)

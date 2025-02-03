@@ -15,7 +15,7 @@ bool LoadFile::fillData()
     while (std::getline(m_file, line) && !isdigit(line[0]))
         m_data.push_back(line);
 
-    if(line == "/n")
+    if(line.size() == 0)
         return false;
 
     m_sizeCol = colSize();
