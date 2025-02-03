@@ -53,6 +53,7 @@ void Controler::run()
 				m_dataLevel.clear();
 				m_objects.clear();
 				m_objectsMove.clear();
+				Guard::dontMove(0);
 			}
 			if (m_robot.isDead())
 			{

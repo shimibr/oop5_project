@@ -18,6 +18,7 @@ public:
 	bool lostLife();
 	
 	static void addScore(const int score) { m_score += score; }
+	static void addTempScore(const int tempScore) { m_tempScore += tempScore; }
 
 	virtual void reset() override;
 	virtual void move(const float deltaTime) override;
@@ -38,6 +39,8 @@ private:
 	bool m_win = false;
 	static int m_lives;
 	static int m_score;
+	static int m_tempScore;
+	;
 
 
 };

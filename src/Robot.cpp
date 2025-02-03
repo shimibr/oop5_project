@@ -78,7 +78,8 @@ void Robot::collided(Door& door)
 	if (m_sprite.getGlobalBounds().contains({ globalDoor.getPosition().x + globalDoor.width/2, globalDoor.getPosition().y + globalDoor.height/2}))
 	{
 		m_win = true;
-		m_score += 25;
+		m_score += m_tempScore;
+		m_tempScore = 25;
 	}
 }
 //======================================
@@ -149,3 +150,4 @@ bool Robot::lostLife()
 
 int Robot::m_lives = 3;
 int Robot::m_score = 0;
+int Robot::m_tempScore = 25;
