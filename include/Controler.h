@@ -1,15 +1,12 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 
 #include "Guard.h"
 #include "Robot.h"
 #include "LoadFile.h"
-#include "dataTexture.h"
 #include "Wall.h"
 #include "Stone.h"
 #include "Door.h"
@@ -19,6 +16,7 @@
 #include "GiftAddLife.h"
 #include "GiftAddTime.h"
 #include "GiftKillOneGuard.h"
+#include "SoundManager.h"
 
 class Controler
 {

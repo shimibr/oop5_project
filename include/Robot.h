@@ -4,13 +4,12 @@ class Door;
 class GiftAddLife;
 class GiftAddTime;
 class GiftKillOneGuard;
-//class TextMaker;
 
 class Robot : public ObjectMove
 {
 public:
 	Robot();
-	Robot(sf::Texture& texture, sf::Vector2f position, int robotClock, int lives);
+	Robot(sf::Texture& texture, sf::Vector2f position, int robotClock);
 
 	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
@@ -26,10 +25,10 @@ public:
 	void collided(Guard& guard);
 	void collided(Door& door);
 	void collided(Wall& wall);
-	void collided(Stone& stone); 
+	virtual void collided(Stone& stone);
 	void collided(Explosion& explosion);
-	void collided(GiftAddLife& giftAddLife);
-	void collided(GiftAddTime& giftAddTime);
+	virtual void collided(GiftAddLife& giftAddLife);
+	virtual void collided(GiftAddTime& giftAddTime);
 
 private:	
 	

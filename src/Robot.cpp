@@ -12,10 +12,10 @@ TextMaker m_textMaker;
 
 Robot::Robot() { }
 //======================================
-Robot::Robot(sf::Texture& texture, sf::Vector2f position, int robotClock, int lives)
+Robot::Robot(sf::Texture& texture, sf::Vector2f position, int robotClock)
 	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
 {
-	m_lives = lives;
+	m_lives = 3;
 	m_robotClock = sf::seconds(robotClock);
 }
 //======================================

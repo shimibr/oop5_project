@@ -8,7 +8,7 @@
 
 
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position, Entity::GUARD_SPEED)
+	: ObjectMove(texture, position, (int)Entity::GUARD_SPEED)
 {
 	m_sleep = false;
 }

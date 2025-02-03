@@ -14,6 +14,7 @@ class Object
 {
 public:
 	Object();
+	virtual ~Object() { ;}
 	Object(sf::Texture& texture, sf::Vector2f position);
 	virtual void update(sf::RenderWindow& window);
 	bool isDead() const;

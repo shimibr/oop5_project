@@ -9,5 +9,6 @@ configure_file ("font.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Levels.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("help.txt" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("exlosion.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("exlosion.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gift.png" ${CMAKE_BINARY_DIR} COPYONLY)
 

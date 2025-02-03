@@ -17,7 +17,7 @@ public:
 	void collision(Object& other);
 	void collided(Robot& robot);
 	void collided(Wall& wall);
-	void collided(Stone& stone);
+	virtual	void collided(Stone& stone);
 	void collided(Explosion& explosion);
 	void collided(Guard& guard);
 	static void collided(GiftKillOneGuard& giftKillOneGuard);

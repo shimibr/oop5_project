@@ -29,6 +29,7 @@ void Bomb::move(const float deltaTime)
     m_timer -= deltaTime;
     if (m_timer <= 0 && !m_hasExploded)
     {
+        SoundManager::getInstance().playExlosionSound();
         explosion(m_explosionTexture); 
         m_hasExploded = true;     
     }

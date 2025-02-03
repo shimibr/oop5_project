@@ -8,7 +8,7 @@ public:
 	Stone(sf::Texture& texture, sf::Vector2f position);
 	void collided(Guard& guard);
 	void collided(Robot& robot);
-	void collided(Explosion& explosion);
+	void collided(Explosion& explosion)override;
 
 
 private:
