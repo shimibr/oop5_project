@@ -82,15 +82,14 @@ void Controler::readLevels()
 			m_objects.push_back(std::make_unique<Stone>(m_dataTexture.getTexture(Entity::STONE), chLoc.position));
 		else if (chLoc.type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
-		else if (chLoc.type == Entity::GIFT)
-		{
-
-			for (int i = 0; i < m_dataLevel[1]; i++)
+	}
+		for (int i = 0; i < m_dataLevel[1]; i++)
 			{
 				float row = (float)(rand() % (int)m_loadFile.getSize().y * Entity::SIZE_PIXEL);
 				float col = (float)(rand() % (int)m_loadFile.getSize().x * Entity::SIZE_PIXEL);
+				int type = rand() % 4;
 
-				switch (i)
+				switch (type)
 				{
 				case 0:
 					m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{col, row}));
@@ -101,10 +100,11 @@ void Controler::readLevels()
 				case 2:
 					m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
+				case 3:
+					m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
+					break;
 				}
-			}
-		}
-	}	
+			}	
 }
 //======================================
 void Controler::update()
@@ -186,28 +186,24 @@ void Controler::printDataGame()
 	dataRectangle.setFillColor(sf::Color::Cyan);
 	TextMaker m_textMaker;
 	m_window.draw(dataRectangle);
-	m_window.draw(m_textMaker.makeText("Life left:"
-		, sf::Vector2f(m_window.getSize().x / (float)3 , m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText("Time passed:"
-		, sf::Vector2f(m_window.getSize().x * (float)3/5, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText("Time Left:"
-		, sf::Vector2f(m_window.getSize().x * (float)4/5, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+
 	m_window.draw(m_textMaker.makeText("Level number:"
-		, sf::Vector2f(m_window.getSize().x / (float)8, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-
+		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
 	m_window.draw(m_textMaker.makeText(m_dataLevel[0]
-		, sf::Vector2f(m_window.getSize().x / (float)8, m_window.getSize().y - Entity::SIZE_PIXEL)));
+		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
-	printDataClock();
-	m_robot.printLife(m_window);
+	m_window.draw(m_textMaker.makeText("Life left:"
+		, sf::Vector2f(m_window.getSize().x * (float) 6 / 26  , m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText("Time passed:"
+		, sf::Vector2f(m_window.getSize().x * (float) 11 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText("Time Left:"
+		, sf::Vector2f(m_window.getSize().x * (float) 16 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+	m_window.draw(m_textMaker.makeText(m_gameClock, { (float)m_window.getSize().x * (float)16 / 26, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
+
+	m_window.draw(m_textMaker.makeText("Your Score:"
+		, sf::Vector2f(m_window.getSize().x * (float) 21 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+
+	m_robot.printRobotData(m_window);
 }
 //===================================
-void Controler::printDataClock()
-{
-	TextMaker m_textMaker;
-	if (m_robot.printRobotClock(m_window))
-	{
-		m_window.draw(m_textMaker.makeText(m_gameClock, { (float)m_window.getSize().x * (float)4 / 5, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
-	}
 
-}

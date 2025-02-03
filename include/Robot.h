@@ -12,12 +12,13 @@ public:
 	Robot(sf::Texture& texture, sf::Vector2f position, int robotClock);
 
 	const sf::Vector2f getPosition();
-	void printLife(sf::RenderWindow& window) const;
-	bool printRobotClock(sf::RenderWindow& window) const;
+	void printRobotData(sf::RenderWindow& window) const;
 	bool isWin() const;
 	void setNotWin() { m_win = false; }
 	bool lostLife();
 	
+	static void addScore(const int score) { m_score += score; }
+
 	virtual void reset() override;
 	virtual void move(const float deltaTime) override;
 	
@@ -35,8 +36,8 @@ private:
 	sf::Time m_robotClock;
 	bool m_lostLife = false;
 	bool m_win = false;
-	int m_lives = 3;
-	int m_score = 0;
+	static int m_lives;
+	static int m_score;
 
 
 };

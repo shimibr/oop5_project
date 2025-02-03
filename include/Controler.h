@@ -31,7 +31,6 @@ private:
 	void eventManager();
 	void collisionObjects();
 	void resetObjects();
-	void printDataClock();
 
 	sf::RenderWindow m_window;
 

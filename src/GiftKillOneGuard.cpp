@@ -9,6 +9,6 @@ GiftKillOneGuard::GiftKillOneGuard(sf::Texture& texture, sf::Vector2f position)
 void GiftKillOneGuard::collided(Robot& robot)
 {
 	m_isDead = true;
-	Guard::collided(*this);
+	Guard::killOneGuard();
 }
 //=====================================

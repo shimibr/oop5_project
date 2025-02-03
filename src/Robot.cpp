@@ -15,7 +15,6 @@ Robot::Robot() { }
 Robot::Robot(sf::Texture& texture, sf::Vector2f position, int robotClock)
 	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
 {
-	m_lives = 3;
 	m_robotClock = sf::seconds(robotClock);
 }
 //======================================
@@ -75,9 +74,11 @@ void Robot::collided(Guard& guard)
 //======================================
 void Robot::collided(Door& door)
 {
-	if (m_sprite.getGlobalBounds().intersects(door.getGlobalLoc()))
+	sf::FloatRect globalDoor = door.getGlobalLoc();
+	if (m_sprite.getGlobalBounds().contains({ globalDoor.getPosition().x + globalDoor.width/2, globalDoor.getPosition().y + globalDoor.height/2}))
 	{
 		m_win = true;
+		m_score += 25;
 	}
 }
 //======================================
@@ -122,21 +123,13 @@ void Robot::collided(GiftAddTime& giftAddTime)
 	m_robotClock += sf::seconds(60);
 }
 //=======================================
-void Robot::printLife(sf::RenderWindow& window) const
+void Robot::printRobotData(sf::RenderWindow& window) const
 {
-	window.draw(m_textMaker.makeText(m_lives,  sf::Vector2f(window.getSize().x / 3 ,window.getSize().y - Entity::SIZE_PIXEL) ));
-}
-//=====================================
-bool Robot::printRobotClock(sf::RenderWindow& window) const
-{
-	if(m_robotClock.asSeconds() == 99999)
-	return false;
+	window.draw(m_textMaker.makeText(m_lives, sf::Vector2f(window.getSize().x * 6 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(m_textMaker.makeText(m_robotClock , sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(m_textMaker.makeText(m_score, sf::Vector2f(window.getSize().x * 21 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 
-	else
-	{
-		window.draw(m_textMaker.makeText(m_robotClock , sf::Vector2f(window.getSize().x * 2 / 3, window.getSize().y - Entity::SIZE_PIXEL)));
-		return true;
-	}
+
 }
 //======================================
 bool Robot::isWin() const
@@ -153,3 +146,6 @@ bool Robot::lostLife()
 	}
 	return false;
 }
+
+int Robot::m_lives = 3;
+int Robot::m_score = 0;

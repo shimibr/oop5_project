@@ -10,7 +10,7 @@
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 	: ObjectMove(texture, position, (int)Entity::GUARD_SPEED)
 {
-	m_sleep = false;
+	m_sleep = 0;
 }
 //======================================
 void Guard::reset()
@@ -20,6 +20,12 @@ void Guard::reset()
 //======================================
 void Guard::move(const float deltaTime)
 {
+	if (m_killOneGuard)
+	{
+		m_isDead = true;
+		m_killOneGuard = false;
+	}
+
 	if (m_sleep > 0) 
 	{
 		m_sleep -= deltaTime;
@@ -53,15 +59,16 @@ void Guard::collided(Stone& stone)
 void Guard::collided(Explosion& explosion)
 {
 	m_isDead = true;
+	Robot::addScore(5);
 }
 //======================================
 void Guard::collided(Guard& guard)
 {
 }
 //======================================
-void Guard::collided(GiftKillOneGuard& giftKillOneGuard)
+void Guard::killOneGuard()
 {
-	//m_isDead = true;
+	m_killOneGuard = true;
 }
 //======================================
 void Guard::collision(Object& other)
@@ -73,3 +80,4 @@ void Guard::collision(Object& other)
 }
 //======================================
 float Guard::m_sleep = 0;
+bool Guard::m_killOneGuard = false;

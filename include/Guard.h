@@ -20,8 +20,10 @@ public:
 	virtual	void collided(Stone& stone);
 	void collided(Explosion& explosion);
 	void collided(Guard& guard);
-	static void collided(GiftKillOneGuard& giftKillOneGuard);
+
+	static void killOneGuard();
 
 private:
 	static float m_sleep;
+	static bool  m_killOneGuard;
 };
