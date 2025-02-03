@@ -2,11 +2,14 @@
 
 LoadFile::LoadFile()
     : m_sizeCol(0), m_file("Levels.txt") {}
-
+//====================================
 std::string LoadFile::fillData()
 {
     if (!m_file)
         return "0";
+
+    static std::streampos lastPosition = 0; 
+    m_file.seekg(lastPosition);
 
     m_data.clear();
     m_levelInfo.clear();
@@ -25,9 +28,11 @@ std::string LoadFile::fillData()
         if (ss.peek() == '-') ss.ignore();
     }
 
+    lastPosition = m_file.tellg();
+
     return line;
 }
-
+//====================================
 int LoadFile::colSize() const
 {
     int size = 0;
@@ -36,7 +41,7 @@ int LoadFile::colSize() const
             size = row.size();
     return size;
 }
-
+//====================================
 bool LoadFile::getFromFile(Char_Location& chLoc)
 {
     static int col = 0, row = 0;
@@ -57,8 +62,9 @@ bool LoadFile::getFromFile(Char_Location& chLoc)
     col = row = 0;
     return false;
 }
-
+//====================================
 sf::Vector2f LoadFile::getSize() const
 {
     return { (float)m_sizeCol, (float)m_data.size() };
 }
+//====================================

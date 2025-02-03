@@ -13,13 +13,13 @@ void Controler::run()
 	if (m_startMenu.getCloseGame())  // לא למחיקה
 		return;
 
-	std::string dataGame = m_loadFile.fillData();
+	m_loadFile.fillData();
 	m_dataLevel = m_loadFile.getLevelInfo();
 	for (int i = 0; i < m_dataLevel.size(); i++)
 		std::cout << m_dataLevel[i] + ' ';
 
 	sf::Vector2f size = m_loadFile.getSize();
-	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "SFML works!");
+	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "Window Game");
 	m_window.setFramerateLimit(60);
 
 	readLevels();
@@ -47,8 +47,13 @@ void Controler::run()
 		//================================================
 		if (m_robot.isWin())
 		{
-			m_window.close();
-			std::cout << "You Win!" << std::endl;
+			m_dataLevel.clear();
+			m_objects.clear();
+			m_objectsMove.clear();
+			m_loadFile.fillData();
+			m_dataLevel = m_loadFile.getLevelInfo();
+			readLevels();
+			m_robot.setNotWin();
 		}
 		if (m_robot.isDead())
 		{
@@ -64,6 +69,7 @@ void Controler::run()
 //======================================
 void Controler::readLevels()
 {
+	m_window.clear();
 	Char_Location chLoc;
 	while (m_loadFile.getFromFile(chLoc))
 	{
@@ -101,7 +107,6 @@ void Controler::update()
 {
 	m_window.clear(sf::Color::Red);
 	printDataGame();
-
 	for (int i = 0; i < m_objects.size(); i++)
 	{
 		if(m_objects[i]->isDead())

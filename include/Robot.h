@@ -16,6 +16,7 @@ public:
 	void printLife(sf::RenderWindow& window) const;
 	bool printRobotClock(sf::RenderWindow& window) const;
 	bool isWin() const;
+	void setNotWin() { m_win = false; }
 	bool lostLife();
 	
 	virtual void reset() override;
