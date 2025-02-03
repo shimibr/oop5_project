@@ -14,7 +14,9 @@ void Controler::run()
 		return;
 
 	std::string dataGame = m_loadFile.fillData();
-	m_level = dataGame[0] - '0';
+	m_dataLevel = m_loadFile.getLevelInfo();
+	for (int i = 0; i < m_dataLevel.size(); i++)
+		std::cout << m_dataLevel[i] + ' ';
 
 	sf::Vector2f size = m_loadFile.getSize();
 	m_window.create(sf::VideoMode(size.x * Entity::SIZE_PIXEL, (size.y + 2) * Entity::SIZE_PIXEL), "SFML works!");
@@ -66,7 +68,7 @@ void Controler::readLevels()
 	while (m_loadFile.getFromFile(chLoc))
 	{
 		if (chLoc.type == Entity::ROBOT)
-			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position);
+			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[1], m_dataLevel[2]);
 		else if (chLoc.type == Entity::GUARD)
 			m_objectsMove.push_back(std::make_unique<Guard>(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
 		else if (chLoc.type == Entity::WALL_OR_EDGE)
@@ -77,7 +79,7 @@ void Controler::readLevels()
 			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
 		else if (chLoc.type == Entity::GIFT)
 		{
-			int type = rand() % 2;
+			int type = rand() % 3;
 
 			switch (type)
 			{
@@ -86,6 +88,9 @@ void Controler::readLevels()
 				break;
 			case 1:
 				m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
+				break;
+			case 2:
+				m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), chLoc.position));
 				break;
 			}
 		}
@@ -182,7 +187,7 @@ void Controler::printDataGame()
 	m_window.draw(m_textMaker.makeText("Level number:"
 		, sf::Vector2f(m_window.getSize().x /8, m_window.getSize().y - 1.5 * Entity::SIZE_PIXEL)));
 
-	m_window.draw(m_textMaker.makeText(m_level
+	m_window.draw(m_textMaker.makeText(m_dataLevel[0]
 		, sf::Vector2f(m_window.getSize().x / 8, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
 	printDataClock();

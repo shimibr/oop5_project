@@ -17,6 +17,8 @@
 #include "Bomb.h"
 #include "GiftStopGuards.h"
 #include "GiftAddLife.h"
+#include "GiftAddTime.h"
+#include "GiftKillOneGuard.h"
 
 class Controler
 {
@@ -39,7 +41,6 @@ private:
 	dataTexture m_dataTexture;
 	LoadFile m_loadFile;
 
-	int m_level = 0;
 	float m_deltaTime = 0;
 	sf::Clock m_gameClock;
 	sf::Clock m_moveClock;
@@ -47,4 +48,5 @@ private:
 	Robot m_robot;
 	std::vector<std::unique_ptr<Object>> m_objects;
 	std::vector<std::unique_ptr<ObjectMove>> m_objectsMove;
+	std::vector<int> m_dataLevel;
 };

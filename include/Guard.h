@@ -2,6 +2,7 @@
 
 #include "ObjectMove.h"
 class Stone;
+class GiftKillOneGuard;
 
 class Guard : public ObjectMove
 {
@@ -19,6 +20,7 @@ public:
 	void collided(Stone& stone);
 	void collided(Explosion& explosion);
 	void collided(Guard& guard);
+	static void collided(GiftKillOneGuard& giftKillOneGuard);
 
 private:
 	static float m_sleep;

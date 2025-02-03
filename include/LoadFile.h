@@ -2,24 +2,24 @@
 
 #include "dataTexture.h"
 #include <fstream>
+#include <sstream>
+#include <vector>
 #include "io.h"
-
 
 class LoadFile
 {
 public:
-	LoadFile();
-	//std::unique_ptr<Object> readObject();
-	bool getFromFile(Char_Location& chLoc);
-	sf::Vector2f getSize()const;
-	std::string fillData();
-	
+    LoadFile();
+    bool getFromFile(Char_Location& chLoc);
+    sf::Vector2f getSize() const;
+    std::string fillData();
+    std::vector<int>& getLevelInfo()  { return m_levelInfo; }
+
 private:
-	int colSize() const;
+    int colSize() const;
 
-	int m_sizeCol;
-	std::ifstream m_file;
-	//dataTexture m_dataTexture;
-	std::vector<std::string> m_data;
-
+    int m_sizeCol;
+    std::ifstream m_file;
+    std::vector<std::string> m_data;
+    std::vector<int> m_levelInfo;
 };

@@ -2,13 +2,15 @@
 #include "ObjectMove.h"
 class Door;
 class GiftAddLife;
+class GiftAddTime;
+class GiftKillOneGuard;
 //class TextMaker;
 
 class Robot : public ObjectMove
 {
 public:
 	Robot();
-	Robot(sf::Texture& texture, sf::Vector2f position);
+	Robot(sf::Texture& texture, sf::Vector2f position, int robotClock, int lives);
 
 	const sf::Vector2f getPosition();
 	void printLife(sf::RenderWindow& window) const;
@@ -26,6 +28,7 @@ public:
 	void collided(Stone& stone); 
 	void collided(Explosion& explosion);
 	void collided(GiftAddLife& giftAddLife);
+	void collided(GiftAddTime& giftAddTime);
 
 private:	
 	

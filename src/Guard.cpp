@@ -59,6 +59,11 @@ void Guard::collided(Guard& guard)
 {
 }
 //======================================
+void Guard::collided(GiftKillOneGuard& giftKillOneGuard)
+{
+	//m_isDead = true;
+}
+//======================================
 void Guard::collision(Object& other)
 {
 	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
