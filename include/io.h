@@ -2,7 +2,8 @@
 
 namespace Entity
 {
-
+	const int MENU_BUTTONS = 3;
+	const int CHAR_SIZE = 26;
 	const float GUARD_SPEED = 10;
 	const float ROBOT_SPEED = 100;
 	const int SIZE_PIXEL = 70;

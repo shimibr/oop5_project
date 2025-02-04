@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include "TextMaker.h"
+#include "io.h"
 
 class StartMenu
 {
@@ -19,6 +21,7 @@ private:
 	void drawEndDisplay();
 	std::string loadHelpText();
 	void showHelp();
+	TextMaker m_textMaker;
 
 	sf::RenderWindow m_window;
 	sf::Font m_font;

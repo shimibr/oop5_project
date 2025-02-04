@@ -40,25 +40,21 @@ bool StartMenu::getCloseGame() const
 //======================================
 void StartMenu::createWindow()
 {
-	sf::Vector2f defaultSizeWindow(400, 500);
-	m_window.create(sf::VideoMode(defaultSizeWindow.x, defaultSizeWindow.y), "Start Menu");
+	sf::VideoMode defaultSizeWindow(400, 500);
+	m_window.create(defaultSizeWindow, "Start Menu");
 
 	sf::RectangleShape rectangle(sf::Vector2f(250, 80));
 	rectangle.setFillColor(sf::Color::White);
 	rectangle.setOutlineThickness(4);
 	rectangle.setOutlineColor(sf::Color(0, 255, 128));
 
-	const float margin = 20.0f;
-	const float startY = (defaultSizeWindow.y - (3 * rectangle.getSize().y + 2 * margin)) / 2;
+	sf::Vector2f recPosition((defaultSizeWindow.width - rectangle.getSize().x) / 2, rectangle.getSize().y * 1.5);
 
-	rectangle.setPosition(defaultSizeWindow.x / 2 - rectangle.getSize().x / 2, startY);
-	m_rectangles.push_back(rectangle);
-
-	rectangle.setPosition(defaultSizeWindow.x / 2 - rectangle.getSize().x / 2, startY + rectangle.getSize().y + margin);
-	m_rectangles.push_back(rectangle);
-
-	rectangle.setPosition(defaultSizeWindow.x / 2 - rectangle.getSize().x / 2, startY + 2 * (rectangle.getSize().y + margin));
-	m_rectangles.push_back(rectangle);
+	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
+	{
+		rectangle.setPosition(recPosition.x, recPosition.y * i + rectangle.getSize().y);
+		m_rectangles.push_back(rectangle);
+	}
 
 }
 //======================================
@@ -90,44 +86,22 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 //======================================
 void StartMenu::fillText()
 {
-	m_font.loadFromFile("font.ttf");
-	m_texts.resize(m_rectangles.size());
 
-	for(int i = 0; i < m_rectangles.size(); ++i) 
+	std::vector<std::string> tempTexsts = {"Start Game" ,"Help" ,"Exit" };
+
+	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
 	{
-		m_texts[i].setFont(m_font);
-		m_texts[i].setFillColor(sf::Color::Black);
-		m_texts[i].setCharacterSize(24);
-
-		switch (i)
-		{
-		case 0:
-			m_texts[i].setString("Start Game");
-			break;
-		case 1:
-			m_texts[i].setString("Help");
-			break;
-		case 2:
-			m_texts[i].setString("Exit");
-			break;
-		default:
-			break;
-		}
-
-		sf::FloatRect textBounds = m_texts[i].getLocalBounds();
 		sf::FloatRect rectBounds = m_rectangles[i].getGlobalBounds();
-
-
-		m_texts[i].setPosition(
-			rectBounds.left + rectBounds.width / 2 - textBounds.width / 2,
-			rectBounds.top + rectBounds.height / 2 - textBounds.height / 2);
+		m_texts.push_back(m_textMaker.makeText(tempTexsts[i], { rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE/ 5 ,
+																rectBounds.getPosition().y + rectBounds.getSize().y / 2 - Entity::CHAR_SIZE / 2 }));
 	}
 }
+
 //======================================
 void StartMenu::drawEndDisplay()
 {
 	m_window.clear();
-	for (int i = 0; i < m_rectangles.size(); ++i)
+	for (int i = 0; i < Entity::MENU_BUTTONS; ++i)
 	{
 		m_window.draw(m_rectangles[i]);
 		m_window.draw(m_texts[i]);
@@ -147,11 +121,11 @@ void StartMenu::showHelp()
 {
 	std::string helpText = loadHelpText();
 
-	sf::Text helpDisplay;
-	helpDisplay.setString(helpText);
-	helpDisplay.setFont(m_font);
-	helpDisplay.setFillColor(sf::Color::White);
-	helpDisplay.setCharacterSize(26);
+	sf::Text helpDisplay = m_textMaker.makeText(helpText, {20,20});
+	//helpDisplay.setString(helpText);
+	//helpDisplay.setFont(m_font);
+	//helpDisplay.setFillColor(sf::Color::White);
+	//helpDisplay.setCharacterSize(26);
 
 	float textAreaHeight = m_window.getSize().y - 100;
 	sf::FloatRect textBounds = helpDisplay.getLocalBounds();

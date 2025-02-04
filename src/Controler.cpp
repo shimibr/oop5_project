@@ -9,12 +9,14 @@ Controler::Controler() { }
 //======================================
 void Controler::run()
 {
-	m_startMenu.runMenu();
-	if (m_startMenu.getCloseGame())
-		return;
+	
 
 	while(m_loadFile.fillData())
 	{
+		m_startMenu.runMenu();
+		if (m_startMenu.getCloseGame())
+			return;
+
 		m_dataLevel = m_loadFile.getLevelInfo();
 
 		sf::Vector2f size = m_loadFile.getSize();

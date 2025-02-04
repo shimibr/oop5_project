@@ -5,7 +5,7 @@ TextMaker::TextMaker()
 {
 	m_font.loadFromFile("font.ttf");
 	m_text.setFont(m_font);
-	m_text.setCharacterSize(26);
+	m_text.setCharacterSize(Entity::CHAR_SIZE);
 	m_text.setFillColor(sf::Color::Red);
 }
 //==============================================
