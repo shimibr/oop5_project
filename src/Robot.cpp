@@ -59,19 +59,6 @@ const sf::Vector2f Robot::getPosition()
 	return m_sprite.getPosition();
 }
 //======================================
-void Robot::collided(Guard& guard)
-{
-	if (m_sprite.getGlobalBounds().intersects(guard.getGlobalLoc()) && !m_lostLife)
-	{
-		m_lostLife = true;
-		m_lives--;
-		if (m_lives == 0)
-		{
-			m_isDead = true;
-		}
-	}
-}
-//======================================
 void Robot::collided(Door& door)
 {
 	sf::FloatRect globalDoor = door.getGlobalLoc();
@@ -114,6 +101,19 @@ void Robot::collided(Explosion& explosion)
 	}
 }
 //=========================================
+void Robot::collided(Guard& guard)
+{
+	if (m_sprite.getGlobalBounds().intersects(guard.getGlobalLoc()) && !m_lostLife)
+	{
+		m_lives--;
+		m_lostLife = true;
+		if (m_lives == 0)
+		{
+			m_isDead = true;
+		}
+	}
+}
+//======================================
 void Robot::collided(GiftAddLife& giftAddLife)
 {
 	m_lives++;
