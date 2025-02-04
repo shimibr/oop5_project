@@ -1,6 +1,7 @@
 #pragma once
 
 #include "StartMenu.h"
+#include <iostream>
 
 StartMenu::StartMenu()
 	:m_closeGame(false)
@@ -40,10 +41,10 @@ bool StartMenu::getCloseGame() const
 //======================================
 void StartMenu::createWindow()
 {
-	sf::VideoMode defaultSizeWindow(400, 500);
+	sf::VideoMode defaultSizeWindow(Entity::SIZE_PIXEL * 7, Entity::SIZE_PIXEL * 10);
 	m_window.create(defaultSizeWindow, "Start Menu");
 
-	sf::RectangleShape rectangle(sf::Vector2f(250, 80));
+	sf::RectangleShape rectangle(sf::Vector2f(Entity::SIZE_PIXEL * 5, Entity::SIZE_PIXEL * 1.5));
 	rectangle.setFillColor(sf::Color::White);
 	rectangle.setOutlineThickness(4);
 	rectangle.setOutlineColor(sf::Color(0, 255, 128));
@@ -119,22 +120,12 @@ std::string StartMenu::loadHelpText()
 //======================================
 void StartMenu::showHelp()
 {
-	std::string helpText = loadHelpText();
+	sf::Text helpText = m_textMaker.makeText(loadHelpText(), {20,20});
 
-	sf::Text helpDisplay = m_textMaker.makeText(helpText, {20,20});
-	//helpDisplay.setString(helpText);
-	//helpDisplay.setFont(m_font);
-	//helpDisplay.setFillColor(sf::Color::White);
-	//helpDisplay.setCharacterSize(26);
+	float moveSize = 0.0f;
+	const float moveSpeed = 10.0f;
 
-	float textAreaHeight = m_window.getSize().y - 100;
-	sf::FloatRect textBounds = helpDisplay.getLocalBounds();
-	helpDisplay.setPosition(20, 20);
-
-	float scrollOffset = 0.0f;
-	const float scrollSpeed = 10.0f;
-
-	sf::RectangleShape backButton(sf::Vector2f(100, 50));
+	sf::RectangleShape backButton(sf::Vector2f(Entity::SIZE_PIXEL, Entity::SIZE_PIXEL / 2));
 	sf::Text backText;
 	createBackBotton(backButton, backText);
 
@@ -155,9 +146,16 @@ void StartMenu::showHelp()
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Up)
-					scrollOffset += scrollSpeed;
+				{
+					if (moveSize <= 0)
+						moveSize += moveSpeed;
+				}
+
 				if (event.key.code == sf::Keyboard::Down)
-					scrollOffset -= scrollSpeed;
+				{
+					if (moveSize >= -(helpText.getLocalBounds().height - m_window.getSize().y - Entity::SIZE_PIXEL))
+						moveSize -= moveSpeed;
+				}
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -171,11 +169,9 @@ void StartMenu::showHelp()
 			}
 		}
 
-		if (scrollOffset > 0) scrollOffset = 0;
-		if (scrollOffset < -(textBounds.height - textAreaHeight)) scrollOffset = -(textBounds.height - textAreaHeight);
-		helpDisplay.setPosition(20, 20 + scrollOffset);
+		helpText.setPosition(Entity::SIZE_PIXEL / 2, Entity::SIZE_PIXEL / 2 + moveSize);
 
-		m_window.draw(helpDisplay);
+		m_window.draw(helpText);
 		m_window.draw(backButton);
 		m_window.draw(backText);
 		m_window.display();
@@ -185,16 +181,7 @@ void StartMenu::showHelp()
 void StartMenu::createBackBotton(sf::RectangleShape &backButton, sf::Text &backText)
 {
 	backButton.setFillColor(sf::Color(200, 200, 200));
-	backButton.setOutlineThickness(2);
-	backButton.setOutlineColor(sf::Color::Black);
-	backButton.setPosition(m_window.getSize().x - 100, m_window.getSize().y - 500);
+	backButton.setPosition(m_window.getSize().x - Entity::SIZE_PIXEL, 0);
 
-	backText.setFont(m_font);
-	backText.setString("Back");
-	backText.setFillColor(sf::Color::Black);
-	backText.setCharacterSize(20);
-	sf::FloatRect backTextBounds = backText.getLocalBounds();
-	backText.setPosition(
-		backButton.getPosition().x + (backButton.getSize().x - backTextBounds.width) / 2,
-		backButton.getPosition().y + (backButton.getSize().y - backTextBounds.height) / 2 - backTextBounds.top);
+	backText = m_textMaker.makeText("Back", backButton.getPosition());
 }

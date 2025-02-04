@@ -25,8 +25,8 @@ Winning and Losing:
 The objective is to eliminate all
 enemies and survive through the levels.
 If you lose all your lives or the
-enemies manage to get you, the game ends.
-Important Tips:
+enemies manage to get you, 
+the game ends. Important Tips:
 
 Use the environment to your advantage:
 look for walls that can be blown up
