@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Robot.h"
 #include "Door.h"
 #include "Guard.h"
@@ -12,10 +12,10 @@ TextMaker m_textMaker;
 
 Robot::Robot() { }
 //======================================
-Robot::Robot(sf::Texture& texture, sf::Vector2f position, int robotClock)
+Robot::Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock)
 	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
 {
-	m_robotClock = sf::seconds(robotClock);
+	isLimitedTime(robotClock);
 }
 //======================================
 void Robot::reset()
@@ -123,14 +123,23 @@ void Robot::collided(GiftAddTime& giftAddTime)
 {
 	m_robotClock += sf::seconds(60);
 }
+//=========================================
+void Robot::isLimitedTime(const int robotClock)
+{
+	if (robotClock == 0)
+		m_unlimitedTime = true;
+	else
+	m_robotClock = sf::seconds(robotClock);
+}
 //=======================================
 void Robot::printRobotData(sf::RenderWindow& window) const
 {
 	window.draw(m_textMaker.makeText(m_lives, sf::Vector2f(window.getSize().x * 6 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
-	window.draw(m_textMaker.makeText(m_robotClock , sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 	window.draw(m_textMaker.makeText(m_score, sf::Vector2f(window.getSize().x * 21 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
-
-
+	if(!m_unlimitedTime)
+	window.draw(m_textMaker.makeText(m_robotClock , sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	else
+		window.draw(m_textMaker.makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 }
 //======================================
 bool Robot::isWin() const
@@ -147,6 +156,17 @@ bool Robot::lostLife()
 	}
 	return false;
 }
+//======================================
+bool Robot::timeLeft()
+{
+	if (m_robotClock <= sf::seconds(0) && !m_unlimitedTime)
+	{
+		m_lives--;
+		return true;
+	}
+	return false;
+}
+//======================================
 
 int Robot::m_lives = 3;
 int Robot::m_score = 0;

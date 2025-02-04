@@ -11,61 +11,65 @@ void Controler::run()
 {
 	
 
-	while(m_loadFile.fillData())
+	while (m_loadFile.fillData())
 	{
 		m_startMenu.runMenu();
 		if (m_startMenu.getCloseGame())
 			return;
 
+		
 		m_dataLevel = m_loadFile.getLevelInfo();
+		
 
 		sf::Vector2f size = m_loadFile.getSize();
 		m_window.create(sf::VideoMode((int)size.x* Entity::SIZE_PIXEL, ((int)size.y + 2)* Entity::SIZE_PIXEL), "Window Game");
 		m_window.setFramerateLimit(60);
 
-		readLevels();
-
-		m_gameClock.restart();
-		m_moveClock.restart();
-
+		
 		while (m_window.isOpen())
 		{
-			update();
+			clearObjectsGame();
+			readLevels();
 
-			m_deltaTime = m_moveClock.restart().asSeconds();
+			m_gameClock.restart();
+			m_moveClock.restart();
 
-			sf::Event event;
-			while (m_window.pollEvent(event))
+			while (!m_robot.timeLeft() && m_window.isOpen())
 			{
-				if (event.type == sf::Event::Closed)
+				update();
+
+				m_deltaTime = m_moveClock.restart().asSeconds();
+
+				sf::Event event;
+				while (m_window.pollEvent(event))
+				{
+					if (event.type == sf::Event::Closed)
+					{
+						m_window.close();
+						return;
+					}
+
+					if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
+						m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+				}
+
+				eventManager();
+				//================================================
+				if (m_robot.isWin())
+				{
+					m_window.close();	
+					m_dataLevel.clear();
+				}
+				if (m_robot.isDead())
 				{
 					m_window.close();
 					return;
 				}
+				if (m_robot.lostLife())
+					resetObjects();
 
-				if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
-					m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+				//================================================
 			}
-
-			eventManager();
-			//================================================
-			if (m_robot.isWin())
-			{
-				m_window.close();
-				m_dataLevel.clear();
-				m_objects.clear();
-				m_objectsMove.clear();
-				Guard::dontMove(0);
-			}
-			if (m_robot.isDead())
-			{
-				m_window.close();
-				return;
-			}
-			if (m_robot.lostLife())
-				resetObjects();
-
-			//================================================
 		}
 	}
 }
@@ -90,6 +94,7 @@ void Controler::readLevels()
 			{
 				float row = (float)(rand() % (int)m_loadFile.getSize().y * Entity::SIZE_PIXEL);
 				float col = (float)(rand() % (int)m_loadFile.getSize().x * Entity::SIZE_PIXEL);
+
 				int type = rand() % 4;
 
 				switch (type)
@@ -101,10 +106,10 @@ void Controler::readLevels()
 					m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
 				case 2:
-					m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
+					m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
 				case 3:
-					m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
+					m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
 				}
 			}	
@@ -180,6 +185,13 @@ void Controler::resetObjects()
 	}
 	m_robot.reset();
 	
+}
+//======================================
+void Controler::clearObjectsGame()
+{
+	m_objects.clear();
+	m_objectsMove.clear();
+	Guard::dontMove(0);
 }
 //======================================
 void Controler::printDataGame()

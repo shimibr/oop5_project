@@ -31,6 +31,7 @@ private:
 	void eventManager();
 	void collisionObjects();
 	void resetObjects();
+	void clearObjectsGame();
 
 	sf::RenderWindow m_window;
 
