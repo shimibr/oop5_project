@@ -2,13 +2,12 @@
 #include "Robot.h"
 #include "Door.h"
 #include "explosion.h"
+#include "dataTexture.h"
+#include "LoadFile.h"
 
-Door::Door()
-{
-}
 //======================================
-Door::Door(sf::Texture& texture, sf::Vector2f position)
-	: Object(texture, position)
+Door::Door()
+	: Object(dataTexture::getInstance().getTexture(Entity::DOOR), LoadFile::getInstance().getPosition())
 {
 }
 //=================================

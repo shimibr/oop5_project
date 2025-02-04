@@ -3,9 +3,11 @@
 #include "Stone.h"
 #include "Guard.h"
 #include "Robot.h"
+#include "dataTexture.h"
+#include "LoadFile.h"
 
-Stone::Stone(sf::Texture& texture, sf::Vector2f position)
-	: Object(texture, position)
+Stone::Stone()
+	: Object(dataTexture::getInstance().getTexture(Entity::STONE), LoadFile::getInstance().getPosition())
 {
 }
 //=================================

@@ -37,8 +37,6 @@ private:
 	sf::RenderWindow m_window;
 
 	StartMenu m_startMenu;
-	dataTexture m_dataTexture;
-	LoadFile m_loadFile;
 
 	float m_deltaTime = 0;
 	sf::Clock m_gameClock;

@@ -9,19 +9,19 @@ Controler::Controler() { }
 //======================================
 void Controler::run()
 {
-	
+	LoadFile::getInstance();
 
-	while (m_loadFile.fillData())
+	while (LoadFile::getInstance().fillData())
 	{
 		m_startMenu.runMenu();
 		if (m_startMenu.getCloseGame())
 			return;
 
 		
-		m_dataLevel = m_loadFile.getLevelInfo();
+		m_dataLevel = LoadFile::getInstance().getLevelInfo();
 		
 
-		sf::Vector2f size = m_loadFile.getSize();
+		sf::Vector2f size = LoadFile::getInstance().getSize();
 		m_window.create(sf::VideoMode((int)size.x* Entity::SIZE_PIXEL, ((int)size.y + 2)* Entity::SIZE_PIXEL), "Window Game");
 		m_window.setFramerateLimit(60);
 
@@ -35,7 +35,7 @@ void Controler::run()
 			m_moveClock.restart();
 
 			
-			while (!Robot::timeLef lostLife() timeLeft() && m_window.isOpen())
+			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
 				update();
 
@@ -51,22 +51,22 @@ void Controler::run()
 					}
 
 					if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
-						m_objectsMove.push_back(std::make_unique<Bomb>(m_dataTexture.getTexture(Entity::BOMB), m_dataTexture.getTexture(Entity::EXLOSION), m_robot.getPosition()));
+						m_objectsMove.push_back(std::make_unique<Bomb>(dataTexture::getInstance().getTexture(Entity::BOMB), dataTexture::getInstance().getTexture(Entity::EXLOSION), Robot::getInstance().getPosition()));
 				}
 
 				eventManager();
 				//================================================
-				if (m_robot.isWin())
+				if (Robot::getInstance().isWin())
 				{
 					m_window.close();	
 					m_dataLevel.clear();
 				}
-				if (m_robot.isDead())
+				if (Robot::getInstance().isDead())
 				{
 					m_window.close();
 					return;
 				}
-				if (m_robot.lostLife())
+				if (Robot::getInstance().lostLife())
 					resetObjects();
 
 				//================================================
@@ -77,19 +77,21 @@ void Controler::run()
 //======================================
 void Controler::readLevels()
 {
-	Char_Location chLoc;
-	while (m_loadFile.getFromFile(chLoc))
+	char type = LoadFile::getInstance().getFromFile();
+	while (type != ' ')
 	{
-		if (chLoc.type == Entity::ROBOT)
-			m_objectsMove.push_back(std::make_unique<Robot>(Robot::getInstance(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[2])));
-		else if (chLoc.type == Entity::GUARD)
-			m_objectsMove.push_back(std::make_unique<Guard>(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
-		else if (chLoc.type == Entity::WALL_OR_EDGE)
-			m_objects.push_back(std::make_unique<Wall>(m_dataTexture.getTexture(Entity::WALL_OR_EDGE), chLoc.position));
-		else if (chLoc.type == Entity::STONE)
-			m_objects.push_back(std::make_unique<Stone>(m_dataTexture.getTexture(Entity::STONE), chLoc.position));
-		else if (chLoc.type == Entity::DOOR)
-			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
+		if (type == Entity::ROBOT)
+			Robot::getInstance();
+		else if (type == Entity::GUARD)
+			m_objectsMove.push_back(std::make_unique<Guard>());
+		else if (type == Entity::WALL_OR_EDGE)
+			m_objects.push_back(std::make_unique<Wall>());
+		else if (type == Entity::STONE)
+			m_objects.push_back(std::make_unique<Stone>());
+		else if (type == Entity::DOOR)
+			m_objects.push_back(std::make_unique<Door>());
+
+		type = LoadFile::getInstance().getFromFile();
 	}
 	readLevelsGift();
 }
@@ -98,23 +100,23 @@ void Controler::readLevelsGift()
 {
 	for (int i = 0; i < m_dataLevel[1]; i++)
 	{
-		sf::Vector2f giftLoc = m_loadFile.getLegalGiftLoc();
+		sf::Vector2f giftLoc = LoadFile::getInstance().getLegalGiftLoc();
 
 		int type = rand() % (m_dataLevel[2] == 0 ? 3 : 4); //לא מוסיף מתנה של הוספת זמן במידה ואין מגבלת זמן
 
 		switch (type)
 		{
 		case 0:
-			m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftStopGuards>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
 			break;
 		case 1:
-			m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftAddLife>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
 			break;
 		case 2:
-			m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftKillOneGuard>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
 			break;
 		case 3:
-			m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftAddTime>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
 			break;
 		}
 	}
@@ -145,7 +147,6 @@ void Controler::update()
 		else
 			m_objectsMove[i]->update(m_window);
 	}
-	m_robot.update(m_window);
 	m_window.display();
 
 }
@@ -154,7 +155,6 @@ void Controler::eventManager()
 {
 	for (int i = 0; i < m_objectsMove.size(); i++)
 		m_objectsMove[i]->move(m_deltaTime);
-	m_robot.move(m_deltaTime);
 
 	collisionObjects();
 }
@@ -163,7 +163,6 @@ void Controler::collisionObjects()
 {
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
-		m_objectsMove[i]->collision(m_robot);
 		for (int j = 0; j < m_objects.size(); j++)
 			m_objectsMove[i]->collision(*m_objects[j]);
 
@@ -173,13 +172,10 @@ void Controler::collisionObjects()
 			m_objectsMove[i]->collision(*m_objectsMove[j]);
 	}
 	for (int i = 0; i < m_objects.size(); i++)
-		m_robot.collision(*m_objects[i]);
 
-	m_robot.inWindow(m_window.getSize());
 
 	for (int i = 0; i < m_objectsMove.size(); i++)
 		m_objectsMove[i]->fixPosition();
-	m_robot.fixPosition();
 }
 //======================================
 void Controler::resetObjects()
@@ -188,7 +184,6 @@ void Controler::resetObjects()
 	{
 		m_objectsMove[i]->reset();
 	}
-	m_robot.reset();
 	
 }
 //======================================
@@ -224,7 +219,7 @@ void Controler::printDataGame()
 	m_window.draw(m_textMaker.makeText("Your Score:"
 		, sf::Vector2f(m_window.getSize().x * (float) 21 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
 
-	m_robot.printRobotData(m_window);
+	Robot::getInstance().printRobotData(m_window);
 }
 //===================================
 

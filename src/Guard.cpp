@@ -5,14 +5,16 @@
 #include "Wall.h"
 #include "Stone.h"
 #include <iostream>
+#include "dataTexture.h"
+#include "LoadFile.h"
 
 
-Guard::Guard(sf::Texture& texture, sf::Vector2f position)
-	: ObjectMove(texture, position, (int)Entity::GUARD_SPEED)
+Guard::Guard()
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::GUARD), LoadFile::getInstance().getPosition(), (int)Entity::GUARD_SPEED)
 {
 	m_direction = rand() % 4;
 	m_countGuards++;
-	Robot::addTempScore(3);
+	//Robot::addTempScore(3);
 }
 //======================================
 void Guard::reset()
@@ -68,7 +70,7 @@ void Guard::collided(Stone& stone)
 void Guard::collided(Explosion& explosion)
 {
 	m_isDead = true;
-	Robot::addScore(5);
+	//Robot::addScore(5);
 }
 //======================================
 void Guard::collided(Guard& guard)
@@ -87,7 +89,7 @@ void Guard::killOneGuard()
 {
 	if (m_countGuards > 0)
 	{
-		Robot::addScore(5);
+		//Robot::addScore(5);
 		m_killOneGuard = true;
 	}
 }

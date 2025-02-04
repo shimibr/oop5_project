@@ -17,7 +17,8 @@ bool LoadFile::fillData()
     m_levelInfo.clear();
 
     std::string line;
-    while (std::getline(m_file, line) && !isdigit(line[0]))
+    std::getline(m_file, line);
+    while ( !isdigit(line[0]))
         m_data.push_back(line);
 
     if(line.size() == 0)

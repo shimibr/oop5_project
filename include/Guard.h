@@ -7,7 +7,7 @@ class GiftKillOneGuard;
 class Guard : public ObjectMove
 {
 public:
-	Guard(sf::Texture& texture, sf::Vector2f position);
+	Guard();
 	~Guard() { m_countGuards--; }
 	virtual void reset() override;
 	virtual void move(const float deltaTime) override;

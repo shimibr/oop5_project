@@ -2,12 +2,13 @@
 
 #include "dataTexture.h"
 
-dataTexture::dataTexture()
-{
-	loadTexture();
+dataTexture& dataTexture::getInstance() {
+	static dataTexture instance;
+	return instance;
 }
 //============================
-
+dataTexture::dataTexture() { }
+//=============================
 sf::Texture& dataTexture::getTexture(const char ch)
 { 
 	for (int i = 0; i < m_textures.size(); i++)

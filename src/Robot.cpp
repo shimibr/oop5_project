@@ -7,28 +7,23 @@
 #include "Gift.h"
 #include "GiftStopGuards.h"
 #include "TextMaker.h"
+#include "LoadFile.h"
+#include "dataTexture.h"
 
 TextMaker m_textMaker;
 
 //==================================
-Robot& Robot::getInstance()
-{
-	static Robot instance();
+Robot& Robot::getInstance() {
+	static Robot instance;
 	return instance;
 }
 //=====================================
-Robot& Robot::getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock)
-{
-	static Robot instance(texture, position, robotClock);
-	return instance;
-}
-//=====================================
-Robot::Robot() { }
+// 
 //======================================
-Robot::Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock)
-	: ObjectMove(texture, position, Entity::ROBOT_SPEED)
+Robot::Robot()
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Entity::ROBOT_SPEED)
 {
-	isLimitedTime(robotClock);
+	isLimitedTime(LoadFile::getInstance().getLevelInfo()[2]);
 }
 //======================================
 void Robot::reset()

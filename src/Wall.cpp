@@ -4,9 +4,11 @@
 #include "Guard.h"
 #include "Robot.h"
 #include "Explosion.h"
+#include "dataTexture.h"
+#include "LoadFile.h"
 
-Wall::Wall(sf::Texture& texture, sf::Vector2f position)
-	: Object(texture, position)
+Wall::Wall()
+	: Object(dataTexture::getInstance().getTexture(Entity::WALL_OR_EDGE), LoadFile::getInstance().getPosition())
 {
 }
 //===================================

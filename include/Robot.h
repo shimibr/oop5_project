@@ -9,7 +9,7 @@ class Robot : public ObjectMove
 {
 public:
 	static Robot& getInstance();
-	static Robot & getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock);
+	//static Robot & getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock);
 
 	Robot& operator=(Robot& other) = delete;
 	Robot(Robot & other) = delete;
@@ -39,7 +39,6 @@ public:
 
 private:
 	Robot();
-	Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock);
 
 	void isLimitedTime(const int robotClock);
 

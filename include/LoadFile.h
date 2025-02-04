@@ -9,8 +9,11 @@
 class LoadFile
 {
 public:
-    LoadFile();
-    bool getFromFile(Char_Location& chLoc);
+    static LoadFile& getInstance();
+    LoadFile& operator=(LoadFile& other) = delete;
+    LoadFile(LoadFile& other) = delete;
+    char getFromFile();
+    sf::Vector2f getPosition();
     bool fillData();
 
     std::vector<int>& getLevelInfo()  { return m_levelInfo; }
@@ -18,9 +21,11 @@ public:
     sf::Vector2f getLegalGiftLoc();
 
 private:
+    LoadFile();
     int colSize() const;
     bool checkGiftsLoc(sf::Vector2f loc)const;
-
+    int m_col = 0;
+    int m_row = 0;
     int m_sizeCol;
     std::ifstream m_file;
     std::vector <std::string> m_data;
