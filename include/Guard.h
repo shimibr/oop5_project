@@ -24,6 +24,7 @@ public:
 	static void killOneGuard();
 
 private:
+	bool firstCheck(const float deltaTime);
 	static float m_sleep;
 	static bool  m_killOneGuard;
 	static int  m_countGuards;

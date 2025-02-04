@@ -21,22 +21,29 @@ void Guard::reset()
 //======================================
 void Guard::move(const float deltaTime)
 {
-	if (m_killOneGuard)
-	{
-		m_isDead = true;
-		m_killOneGuard = false;
-	}
-
-	if (m_sleep > 0) 
-	{
-		m_sleep -= deltaTime/m_countGuards;
+	if (firstCheck(deltaTime))
 		return;
-	}
 
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
 	m_direction = rand() % 3;
 	ObjectMove::move(deltaTime);
+}
+//======================================
+bool Guard::firstCheck(const float deltaTime)
+{
+	if (m_killOneGuard)
+	{
+		m_isDead = true;
+		m_killOneGuard = false;
+		return true;
+	}
+
+	else if (m_sleep > 0)
+	{
+		m_sleep -= deltaTime / m_countGuards;
+		return true;
+	}
 }
 //======================================
 void Guard::collided(Robot& robot)
@@ -67,20 +74,20 @@ void Guard::collided(Guard& guard)
 {
 }
 //======================================
+void Guard::collision(Object& other)
+{
+	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
+	{
+		other.collided(*this);
+	}
+}
+//======================================
 void Guard::killOneGuard()
 {
 	if (m_countGuards > 0)
 	{
 		Robot::addScore(5);
 		m_killOneGuard = true;
-	}
-}
-//======================================
-void Guard::collision(Object& other)
-{
-	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
-	{
-		other.collided(*this);
 	}
 }
 //======================================
