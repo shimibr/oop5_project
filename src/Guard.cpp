@@ -10,6 +10,7 @@
 Guard::Guard(sf::Texture& texture, sf::Vector2f position)
 	: ObjectMove(texture, position, (int)Entity::GUARD_SPEED)
 {
+	m_direction = rand() % 4;
 	m_countGuards++;
 	Robot::addTempScore(3);
 }
@@ -25,8 +26,6 @@ void Guard::move(const float deltaTime)
 		return;
 
 	m_fixPosition = m_lastPosition = m_sprite.getPosition();
-
-	m_direction = rand() % 3;
 	ObjectMove::move(deltaTime);
 }
 //======================================
@@ -56,11 +55,13 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
+	m_direction = rand() % 4;
 	setLastPosition(wall);
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
+	m_direction = rand() % 4;
 	setLastPosition(stone);
 }
 //======================================

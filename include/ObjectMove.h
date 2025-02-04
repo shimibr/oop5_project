@@ -13,6 +13,7 @@ public:
 	ObjectMove();
 	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
 	virtual ~ObjectMove();
+
 	void fixPosition();
 	void inWindow(sf::Vector2u sizeWindow);
 
@@ -27,7 +28,7 @@ protected:
 	void moveBySmall(float move1, float move2,float& XorY);
 
 	bool m_isCollided = false;
-	int m_direction = 0;
+	int m_direction;
 	int m_speed;
 	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_firstPosition;

@@ -37,6 +37,7 @@ void ObjectMove::inWindow(sf::Vector2u sizeWindow)
 		|| m_sprite.getPosition().y + m_sprite.getGlobalBounds().height > sizeWindow.y - Entity::SIZE_PIXEL * 2)
 	{
 		m_sprite.setPosition(m_lastPosition);
+		m_direction = rand() % 4;
 	}
 }
 //==================================
