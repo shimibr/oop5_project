@@ -121,7 +121,7 @@ void Robot::collided(GiftAddLife& giftAddLife)
 //=======================================
 void Robot::collided(GiftAddTime& giftAddTime)
 {
-	m_robotClock += sf::seconds(60);
+	m_robotClock += sf::seconds(20);
 }
 //=========================================
 void Robot::isLimitedTime(const int robotClock)

@@ -95,7 +95,8 @@ void Controler::readLevels()
 				float row = (float)(rand() % (int)m_loadFile.getSize().y * Entity::SIZE_PIXEL);
 				float col = (float)(rand() % (int)m_loadFile.getSize().x * Entity::SIZE_PIXEL);
 
-				int type = rand() % 4;
+				
+				int type = rand() % (m_dataLevel[2] == 0? 3 : 4);
 
 				switch (type)
 				{
@@ -109,6 +110,7 @@ void Controler::readLevels()
 					m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
 				case 3:
+					std::cout << "bnm";
 					m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
 					break;
 				}
