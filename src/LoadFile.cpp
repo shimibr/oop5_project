@@ -1,4 +1,5 @@
 #include "LoadFile.h"
+#include <iostream>
 
 LoadFile::LoadFile()
     : m_sizeCol(0), m_file("Levels.txt") {}
@@ -40,6 +41,33 @@ int LoadFile::colSize() const
     return size;
 }
 //====================================
+sf::Vector2f LoadFile::getLegalGiftLoc()
+{
+    sf::Vector2f loc;
+    do
+    {
+        loc.x = (float)(rand() % (int)getSize().x);
+        loc.y = (float)(rand() % (int)getSize().y);
+
+    } while (!checkGiftsLoc(loc));
+
+    m_giftsLoc.push_back(loc);
+    return loc * (float)Entity::SIZE_PIXEL;
+}
+//=====================================
+bool LoadFile::checkGiftsLoc(sf::Vector2f loc) const
+{
+    if (m_data[loc.y][loc.x] == Entity::WALL_OR_EDGE || m_data[loc.y][loc.x] == Entity::DOOR || m_data[loc.y][loc.x] == Entity::ROBOT)
+        return false;
+
+    for (int i = 0; i < m_giftsLoc.size(); i++)
+    {
+        if (m_giftsLoc[i] == loc)
+            return false;
+    }
+    return true;
+}
+//====================================
 bool LoadFile::getFromFile(Char_Location& chLoc)
 {
     static int col = 0, row = 0;
@@ -58,6 +86,7 @@ bool LoadFile::getFromFile(Char_Location& chLoc)
         col = 0;
     }
     col = row = 0;
+    m_giftsLoc.clear();
     return false;
 }
 //====================================

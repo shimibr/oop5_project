@@ -32,6 +32,7 @@ private:
 	void collisionObjects();
 	void resetObjects();
 	void clearObjectsGame();
+	void readLevelsGift();
 
 	sf::RenderWindow m_window;
 

@@ -90,33 +90,35 @@ void Controler::readLevels()
 		else if (chLoc.type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>(m_dataTexture.getTexture(Entity::DOOR), chLoc.position));
 	}
-		for (int i = 0; i < m_dataLevel[1]; i++)
-			{
-				float row = (float)(rand() % (int)m_loadFile.getSize().y * Entity::SIZE_PIXEL);
-				float col = (float)(rand() % (int)m_loadFile.getSize().x * Entity::SIZE_PIXEL);
-
-				
-				int type = rand() % (m_dataLevel[2] == 0? 3 : 4);
-
-				switch (type)
-				{
-				case 0:
-					m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{col, row}));
-					break;
-				case 1:
-					m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
-					break;
-				case 2:
-					m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
-					break;
-				case 3:
-					std::cout << "bnm";
-					m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), sf::Vector2f{ col, row }));
-					break;
-				}
-			}	
+	readLevelsGift();
 }
 //======================================
+void Controler::readLevelsGift()
+{
+	for (int i = 0; i < m_dataLevel[1]; i++)
+	{
+		sf::Vector2f giftLoc = m_loadFile.getLegalGiftLoc();
+
+		int type = rand() % (m_dataLevel[2] == 0 ? 3 : 4); //לא מוסיף מתנה של הוספת זמן במידה ואין מגבלת זמן
+
+		switch (type)
+		{
+		case 0:
+			m_objects.push_back(std::make_unique<GiftStopGuards>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			break;
+		case 1:
+			m_objects.push_back(std::make_unique<GiftAddLife>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			break;
+		case 2:
+			m_objects.push_back(std::make_unique<GiftKillOneGuard>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			break;
+		case 3:
+			m_objects.push_back(std::make_unique<GiftAddTime>(m_dataTexture.getTexture(Entity::GIFT), giftLoc));
+			break;
+		}
+	}
+}
+//====================================
 void Controler::update()
 {
 	m_window.clear(sf::Color::Red);
@@ -195,6 +197,7 @@ void Controler::clearObjectsGame()
 	m_objectsMove.clear();
 	Guard::dontMove(0);
 }
+//========================================
 //======================================
 void Controler::printDataGame()
 {
