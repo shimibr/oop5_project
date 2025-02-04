@@ -10,6 +10,19 @@
 
 TextMaker m_textMaker;
 
+//==================================
+Robot& Robot::getInstance()
+{
+	static Robot instance();
+	return instance;
+}
+//=====================================
+Robot& Robot::getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock)
+{
+	static Robot instance(texture, position, robotClock);
+	return instance;
+}
+//=====================================
 Robot::Robot() { }
 //======================================
 Robot::Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock)
@@ -168,6 +181,3 @@ bool Robot::timeLeft()
 }
 //======================================
 
-int Robot::m_lives = 3;
-int Robot::m_score = 0;
-int Robot::m_tempScore = 25;

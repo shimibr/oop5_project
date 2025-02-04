@@ -7,6 +7,9 @@ class SoundManager {
 public:
     static SoundManager& getInstance();
 
+    SoundManager& operator=(SoundManager& other) = delete;
+    SoundManager(SoundManager& other) = delete;
+
     void playWinSound();
     void playLoseSound();
     void playExlosionSound();

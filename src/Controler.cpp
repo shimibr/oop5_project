@@ -34,7 +34,8 @@ void Controler::run()
 			m_gameClock.restart();
 			m_moveClock.restart();
 
-			while (!m_robot.timeLeft() && m_window.isOpen())
+			
+			while (!Robot::timeLef lostLife() timeLeft() && m_window.isOpen())
 			{
 				update();
 
@@ -80,7 +81,7 @@ void Controler::readLevels()
 	while (m_loadFile.getFromFile(chLoc))
 	{
 		if (chLoc.type == Entity::ROBOT)
-			m_robot = Robot(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[2]);
+			m_objectsMove.push_back(std::make_unique<Robot>(Robot::getInstance(m_dataTexture.getTexture(Entity::ROBOT), chLoc.position, m_dataLevel[2])));
 		else if (chLoc.type == Entity::GUARD)
 			m_objectsMove.push_back(std::make_unique<Guard>(m_dataTexture.getTexture(Entity::GUARD), chLoc.position));
 		else if (chLoc.type == Entity::WALL_OR_EDGE)

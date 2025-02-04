@@ -44,7 +44,6 @@ private:
 	sf::Clock m_gameClock;
 	sf::Clock m_moveClock;
 
-	Robot m_robot;
 	std::vector<std::unique_ptr<Object>> m_objects;
 	std::vector<std::unique_ptr<ObjectMove>> m_objectsMove;
 	std::vector<int> m_dataLevel;

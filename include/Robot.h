@@ -8,8 +8,12 @@ class GiftKillOneGuard;
 class Robot : public ObjectMove
 {
 public:
-	Robot();
-	Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock);
+	static Robot& getInstance();
+	static Robot & getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock);
+
+	Robot& operator=(Robot& other) = delete;
+	Robot(Robot & other) = delete;
+
 
 	const sf::Vector2f getPosition();
 	void printRobotData(sf::RenderWindow& window) const;
@@ -18,8 +22,8 @@ public:
 	bool lostLife();
 	bool timeLeft();
 	
-	static void addScore(const int score) { m_score += score; }
-	static void addTempScore(const int tempScore) { m_tempScore += tempScore; }
+	void addScore(const int score) { m_score += score; }
+	void addTempScore(const int tempScore) { m_tempScore += tempScore; }
 
 	virtual void reset() override;
 	virtual void move(const float deltaTime) override;
@@ -34,15 +38,19 @@ public:
 	virtual void collided(GiftAddTime& giftAddTime);
 
 private:
+	Robot();
+	Robot(sf::Texture& texture, sf::Vector2f position, const int robotClock);
+
 	void isLimitedTime(const int robotClock);
 
 	sf::Time m_robotClock;
 	bool m_unlimitedTime = false;
 	bool m_lostLife = false;
 	bool m_win = false;
-	static int m_lives;
-	static int m_score;
-	static int m_tempScore;
+	int m_lives = 3;
+	int m_score = 0;
+	int m_tempScore = 25;
+
 	
 
 
