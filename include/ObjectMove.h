@@ -31,7 +31,6 @@ protected:
 	bool m_isCollided = false;
 	int m_direction;
 	int m_speed;
-	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_firstPosition;
 	sf::Vector2f m_fixPosition;
 

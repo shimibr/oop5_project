@@ -39,11 +39,11 @@ void ObjectMove::fixPosition()
 //===================================
 void ObjectMove::inWindow(sf::Vector2u sizeWindow)
 {
-	if (m_sprite.getPosition().x < 0 || m_sprite.getPosition().y < 0
-		|| m_sprite.getPosition().x + m_sprite.getGlobalBounds().width > sizeWindow.x
-		|| m_sprite.getPosition().y + m_sprite.getGlobalBounds().height > sizeWindow.y - Entity::SIZE_PIXEL * 2)
+	if (getGlobalLoc().left < 0 || getGlobalLoc().top < 0
+		|| getGlobalLoc().left + getGlobalLoc().width > sizeWindow.x
+		|| getGlobalLoc().top + getGlobalLoc().height > sizeWindow.y - Entity::SIZE_PIXEL * 2)
 	{
-		m_sprite.setPosition(m_lastPosition);
+		m_sprite.setPosition(m_fixPosition);
 		m_direction = rand() % 4;
 	}
 }
@@ -58,7 +58,7 @@ void ObjectMove::move(const float deltaTime)
 {
 	if (m_isDead)
 		return;
-
+	m_fixPosition = m_sprite.getPosition();
 	switch (m_direction)
 	{
 	case 0:
@@ -81,7 +81,7 @@ void ObjectMove::setLastPosition(Object& object)
 	sf::FloatRect globlObject = object.getGlobalLoc();//את זה הפונקציה צריכה לקבל
 	m_isCollided = true;
 
-	sf::Vector2f move = m_lastPosition - getGlobalLoc().getPosition(); // כמה האוביקט זז
+	sf::Vector2f move = m_fixPosition - getGlobalLoc().getPosition(); // כמה האוביקט זז
 
 	switch (m_direction)
 	{
@@ -118,10 +118,10 @@ void ObjectMove::setLastPosition(Object& object)
 	case 3:
 		if (AttachObject(m_fixPosition.x, globlObject.left - getGlobalLoc().width))
 		{
-			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width-1, getGlobalLoc().top }))// מזיז למטה
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top }))// מזיז למטה
 				moveBySmall(globlObject.top + globlObject.height - getGlobalLoc().top, -move.x, m_fixPosition.y);
 
-			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width-1, getGlobalLoc().top + getGlobalLoc().height -1 }))//מזיז למעלה
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top + getGlobalLoc().height - 1 }))//מזיז למעלה
 				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.top), move.x, m_fixPosition.y);
 		}
 		break;

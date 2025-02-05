@@ -37,7 +37,6 @@ void Robot::reset()
 void Robot::move(const float deltaTime)
 {
 	m_robotClock -= sf::seconds(deltaTime);
-	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{

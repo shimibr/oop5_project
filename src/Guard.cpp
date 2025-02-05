@@ -27,7 +27,6 @@ void Guard::move(const float deltaTime)
 	if (firstCheck(deltaTime))
 		return;
 
-	m_fixPosition = m_lastPosition = m_sprite.getPosition();
 	ObjectMove::move(deltaTime);
 }
 //======================================
