@@ -57,8 +57,9 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 			switch (i)
 			{
 			case 0:
+				m_window.close();
 				m_controler.run();
-				m_window.display();
+				createWindow();
 				break;
 			case 1:
 				showHelp();

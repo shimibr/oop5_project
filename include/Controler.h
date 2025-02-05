@@ -24,11 +24,11 @@ public:
 	Controler();
 	void run();
 private:
-	
 	void readLevels();
+	void exceptionManager();
 	void printDataGame();
-	void update();
-	void eventManager();
+	void updateWindow();
+	bool eventManager();
 	void collisionObjects();
 	void resetObjects();
 	void clearObjectsGame();

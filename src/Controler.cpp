@@ -16,56 +16,19 @@ void Controler::run()
 		m_dataLevel = LoadFile::getInstance().getLevelInfo();	
 
 		sf::Vector2f size = LoadFile::getInstance().getSize();
-		m_window.create(sf::VideoMode((int)size.x* Entity::SIZE_PIXEL, ((int)size.y + 2)* Entity::SIZE_PIXEL), "Window Game");
+		m_window.create(sf::VideoMode((int)size.x * Entity::SIZE_PIXEL, ((int)size.y + 2) * Entity::SIZE_PIXEL), "Window Game");
 		m_window.setFramerateLimit(60);
 	
 		while (m_window.isOpen())
 		{
 			clearObjectsGame();
 			readLevels();
-
-			m_gameClock.restart();
-			m_moveClock.restart();
 	
 			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
-				update();
-
-				m_deltaTime = m_moveClock.restart().asSeconds();
-
-				sf::Event event;
-				while (m_window.pollEvent(event))
-				{
-					if (event.type == sf::Event::Closed)
-					{
-						m_window.close();
-						return;
-					}
-
-					if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::B)
-						m_objectsMove.push_back(std::make_unique<Bomb>(dataTexture::getInstance().getTexture(Entity::BOMB), dataTexture::getInstance().getTexture(Entity::EXLOSION), Robot::getInstance().getPosition()));
-				}
-
-				eventManager();
-				//================================================
-				if (Robot::getInstance().isWin())
-				{
-					m_window.close();	
-					m_dataLevel.clear();
-					Robot::getInstance().setNotWin();
-					resetObjects();
-				}
-				if (Robot::getInstance().isDead())
-				{
-					m_window.close();
-					return;
-				}
-				if (Robot::getInstance().lostLife())
-				{
-					resetObjects();
-				}
-
-				//================================================
+				updateWindow();
+				if (eventManager()) return;
+				exceptionManager();
 			}
 		}
 	}
@@ -90,6 +53,24 @@ void Controler::readLevels()
 		type = LoadFile::getInstance().getFromFile();
 	}
 	readLevelsGift();
+}
+//======================================
+void Controler::exceptionManager()
+{
+	if (Robot::getInstance().isWin())
+	{
+		m_window.close();
+		m_dataLevel.clear();
+		Robot::getInstance().setNotWin();
+		resetObjects();
+	}
+	if (Robot::getInstance().isDead())
+	{
+		m_window.close();
+		return;
+	}
+	if (Robot::getInstance().lostLife())
+		resetObjects();
 }
 //======================================
 void Controler::readLevelsGift()
@@ -118,7 +99,7 @@ void Controler::readLevelsGift()
 	}
 }
 //====================================
-void Controler::update()
+void Controler::updateWindow()
 {
 	m_window.clear(sf::Color::Red);
 	printDataGame();
@@ -146,16 +127,29 @@ void Controler::update()
 	Robot::getInstance().update(m_window);
 	m_window.display();
 
+	m_deltaTime = m_moveClock.restart().asSeconds();
 }
 //======================================
-void Controler::eventManager()
+bool Controler::eventManager()
 {
+	sf::Event userEvent;
+	while (m_window.pollEvent(userEvent))
+	{
+		if (userEvent.type == sf::Event::Closed)
+		{
+			m_window.close();
+			return true;
+		}
+		if (userEvent.type == sf::Event::KeyReleased && userEvent.key.code == sf::Keyboard::B)
+			m_objectsMove.push_back(std::make_unique<Bomb>(dataTexture::getInstance().getTexture(Entity::BOMB), dataTexture::getInstance().getTexture(Entity::EXLOSION), Robot::getInstance().getPosition()));
+	}
 	for (int i = 0; i < m_objectsMove.size(); i++)
 		m_objectsMove[i]->move(m_deltaTime);
 
 	Robot::getInstance().move(m_deltaTime);
 
 	collisionObjects();
+	return false;
 }
 //======================================
 void Controler::collisionObjects()
@@ -197,6 +191,8 @@ void Controler::clearObjectsGame()
 	m_objects.clear();
 	m_objectsMove.clear();
 	Guard::dontMove(0);
+	m_gameClock.restart();
+	m_moveClock.restart();
 }
 //========================================
 //======================================
