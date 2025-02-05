@@ -22,7 +22,7 @@ class Controler
 {
 public:
 	Controler();
-	void run();
+	bool run();
 private:
 	void readLevels();
 	void exceptionManager();

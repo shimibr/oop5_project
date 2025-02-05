@@ -7,7 +7,7 @@
 
 Controler::Controler() { }
 //======================================
-void Controler::run()
+bool Controler::run()
 {
 	LoadFile::getInstance();
 
@@ -27,11 +27,12 @@ void Controler::run()
 			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
 				updateWindow();
-				if (eventManager()) return;
+				if (eventManager()) return true;
 				exceptionManager();
 			}
 		}
 	}
+	return false;
 }
 //======================================
 void Controler::readLevels()

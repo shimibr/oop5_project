@@ -14,7 +14,7 @@ Guard::Guard()
 {
 	m_direction = rand() % 4;
 	m_countGuards++;
-	//Robot::addTempScore(3);
+	Robot::getInstance().addTempScore(3);
 }
 //======================================
 void Guard::reset()
@@ -70,7 +70,7 @@ void Guard::collided(Stone& stone)
 void Guard::collided(Explosion& explosion)
 {
 	m_isDead = true;
-	//Robot::addScore(5);
+	Robot::getInstance().addScore(5);
 }
 //======================================
 void Guard::collided(Guard& guard)
@@ -89,7 +89,7 @@ void Guard::killOneGuard()
 {
 	if (m_countGuards > 0)
 	{
-		//Robot::addScore(5);
+		Robot::getInstance().addScore(5);
 		m_killOneGuard = true;
 	}
 }
