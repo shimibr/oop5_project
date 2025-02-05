@@ -26,13 +26,13 @@ public:
 protected:
 	void initPositionLevel(sf::Vector2f position);
 	void setLastPosition(Object& object);
-	void moveBySmall(float move1, float move2,float& XorY);
-
+	void moveBySmall(const float move1, const float move2, float& XorY) const;
+	bool AttachObject(float& line1, const float line2) const;
 	bool m_isCollided = false;
 	int m_direction;
 	int m_speed;
-	sf::Vector2f m_lastPosition ;
+	sf::Vector2f m_lastPosition;
 	sf::Vector2f m_firstPosition;
 	sf::Vector2f m_fixPosition;
-	
+
 };

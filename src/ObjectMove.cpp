@@ -31,9 +31,9 @@ void ObjectMove::initPositionLevel(sf::Vector2f position)
 //===================================
 void ObjectMove::fixPosition()
 {
-	if(m_isCollided)
+	if (m_isCollided)
 		m_sprite.setPosition(m_fixPosition);
-	
+
 	m_isCollided = false;
 }
 //===================================
@@ -78,69 +78,73 @@ void ObjectMove::move(const float deltaTime)
 //======================================
 void ObjectMove::setLastPosition(Object& object)
 {
+	sf::FloatRect globlObject = object.getGlobalLoc();//את זה הפונקציה צריכה לקבל
 	m_isCollided = true;
-	sf::Vector2f position = m_sprite.getPosition();
-	sf::Vector2f move = m_lastPosition - position;
-	
-	sf::FloatRect globlObject  = object.getGlobalLoc();
-	if (move.y > 0) //זז למעלה
-	{
-		if (m_lastPosition.y == globlObject.getPosition().y + globlObject.height)
-		{
-			if (globlObject.contains(position))//מזיז ימינה
-				moveBySmall(globlObject.getPosition().x + globlObject.width - position.x, move.y, m_fixPosition.x);
 
-			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y }))//מזיז שמאלה
-				moveBySmall(-(position.x + getGlobalLoc().width - globlObject.getPosition().x), -move.y, m_fixPosition.x);
+	sf::Vector2f move = m_lastPosition - getGlobalLoc().getPosition(); // כמה האוביקט זז
+
+	switch (m_direction)
+	{
+	case 0:
+		if (AttachObject(m_fixPosition.y, globlObject.getPosition().y + globlObject.height))
+		{
+			if (globlObject.contains(getGlobalLoc().getPosition()))//מזיז ימינה
+				moveBySmall(globlObject.getPosition().x + globlObject.width - getGlobalLoc().left, move.y, m_fixPosition.x);
+
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top }))//מזיז שמאלה
+				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.getPosition().x), -move.y, m_fixPosition.x);
 		}
-		else	
-		m_fixPosition = {m_lastPosition.x, globlObject.getPosition().y + globlObject.height };
+		break;
+	case 1:
+		if (AttachObject(m_fixPosition.y, globlObject.getPosition().y - getGlobalLoc().height))
+		{
+			if (globlObject.contains({ getGlobalLoc().left, getGlobalLoc().top + getGlobalLoc().height - 1 }))//מזיז ימינה
+				moveBySmall(globlObject.getPosition().x + globlObject.width - getGlobalLoc().left, -move.y, m_fixPosition.x);
+
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top + getGlobalLoc().height - 1 }))// מזיז שמאלה
+				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.getPosition().x), move.y, m_fixPosition.x);
+		}
+		break;
+	case 2:
+		if (AttachObject(m_fixPosition.x, globlObject.getPosition().x + globlObject.width))
+		{
+			if (globlObject.contains(getGlobalLoc().getPosition()))// מזיז למטה
+				moveBySmall(globlObject.getPosition().y + globlObject.height - getGlobalLoc().top, move.x, m_fixPosition.y);
+
+			if (globlObject.contains({ getGlobalLoc().left , getGlobalLoc().top + getGlobalLoc().height - 1 }))//מזיז למעלה
+				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.getPosition().y), -move.x, m_fixPosition.y);
+		}
+		break;
+	case 3:
+		if (AttachObject(m_fixPosition.x, globlObject.getPosition().x - getGlobalLoc().width))
+		{
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width, getGlobalLoc().top }))// מזיז למטה
+				moveBySmall(globlObject.getPosition().y + globlObject.height - getGlobalLoc().top, -move.x, m_fixPosition.y);
+
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width, getGlobalLoc().top + getGlobalLoc().height }))//מזיז למעלה
+				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.getPosition().y), move.x, m_fixPosition.y);
+		}
+		break;
 	}
 
-	else if (move.y < 0) //זז למטה
-		if (m_lastPosition.y + getGlobalLoc().height == globlObject.getPosition().y)
-		{
-			if (globlObject.contains({ position.x, position.y + getGlobalLoc().height-1}))//מזיז ימינה
-				moveBySmall(globlObject.getPosition().x + globlObject.width - position.x, -move.y, m_fixPosition.x);
 
-			if (globlObject.contains({ position.x + getGlobalLoc().width-1, position.y + getGlobalLoc().height-1 }))// מזיז שמאלה
-				moveBySmall(-(position.x + getGlobalLoc().width - globlObject.getPosition().x), move.y, m_fixPosition.x);
-		}
-		else
-			m_fixPosition = { m_lastPosition.x, globlObject.getPosition().y - getGlobalLoc().height};
-	
 
-	else if (move.x > 0) //זז שמאלה
-		if (m_lastPosition.x == globlObject.getPosition().x + globlObject.width)
-		{
-			if (globlObject.contains(position))// מזיז למטה
-				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, move.x, m_fixPosition.y);
-			
-			if (globlObject.contains({ position.x , position.y + getGlobalLoc().height-1 }))//מזיז למעלה
-				moveBySmall(-(position.y +getGlobalLoc().height - globlObject.getPosition().y), -move.x, m_fixPosition.y);		
-		}
-		else
-			m_fixPosition = { globlObject.getPosition().x + globlObject.width, m_lastPosition.y };
-
-	else if (move.x < 0) // זז ימינה
-		if (m_lastPosition.x + getGlobalLoc().width == globlObject.getPosition().x)
-		{
-			if (globlObject.contains({ position.x + getGlobalLoc().width, position.y }))// מזיז למטה
-				moveBySmall(globlObject.getPosition().y + globlObject.height - position.y, -move.x, m_fixPosition.y);
-			
-			if (globlObject.contains({ position.x + getGlobalLoc().width, position.y + getGlobalLoc().height}))//מזיז למעלה
-				moveBySmall(-(position.y + getGlobalLoc().height - globlObject.getPosition().y), move.x, m_fixPosition.y);			
-		}
-		else
-			m_fixPosition = { globlObject.getPosition().x - getGlobalLoc().width, m_lastPosition.y };
-	
 }
 //===================================
-void ObjectMove::moveBySmall(float move1, float move2, float& XorY)
+void ObjectMove::moveBySmall(const float move1, const float move2, float& XorY) const
 {
-	if (std::abs(move1) < std::abs(move2) || std::abs(move1)- std::abs(move2) < 1)
+	if (std::abs(move1) < std::abs(move2) || std::abs(move1) - std::abs(move2) < 1)
 		XorY += move1;
 	else
 		XorY += move2;
+}
+//===========================
+bool ObjectMove::AttachObject(float& line1, const float line2) const
+{
+	if (line1 == line2)
+		return true;
+
+	line1 = line2;
+	return false;
 }
 //===================================
