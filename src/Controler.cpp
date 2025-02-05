@@ -12,20 +12,13 @@ void Controler::run()
 	LoadFile::getInstance();
 
 	while (LoadFile::getInstance().fillData())
-	{
-		m_startMenu.runMenu();
-		if (m_startMenu.getCloseGame())
-			return;
-
-		
-		m_dataLevel = LoadFile::getInstance().getLevelInfo();
-		
+	{		
+		m_dataLevel = LoadFile::getInstance().getLevelInfo();	
 
 		sf::Vector2f size = LoadFile::getInstance().getSize();
 		m_window.create(sf::VideoMode((int)size.x* Entity::SIZE_PIXEL, ((int)size.y + 2)* Entity::SIZE_PIXEL), "Window Game");
 		m_window.setFramerateLimit(60);
-
-		
+	
 		while (m_window.isOpen())
 		{
 			clearObjectsGame();
@@ -33,8 +26,7 @@ void Controler::run()
 
 			m_gameClock.restart();
 			m_moveClock.restart();
-
-			
+	
 			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
 				update();
@@ -60,6 +52,8 @@ void Controler::run()
 				{
 					m_window.close();	
 					m_dataLevel.clear();
+					Robot::getInstance().setNotWin();
+					resetObjects();
 				}
 				if (Robot::getInstance().isDead())
 				{
@@ -67,7 +61,9 @@ void Controler::run()
 					return;
 				}
 				if (Robot::getInstance().lostLife())
+				{
 					resetObjects();
+				}
 
 				//================================================
 			}
@@ -81,7 +77,7 @@ void Controler::readLevels()
 	while (type != ' ')
 	{
 		if (type == Entity::ROBOT)
-			Robot::getInstance();
+			Robot::getInstance().startLevel();
 		else if (type == Entity::GUARD)
 			m_objectsMove.push_back(std::make_unique<Guard>());
 		else if (type == Entity::WALL_OR_EDGE)
@@ -190,11 +186,10 @@ void Controler::collisionObjects()
 //======================================
 void Controler::resetObjects()
 {
+	Robot::getInstance().reset();
+
 	for (int i = 0; i < m_objectsMove.size(); i++)
-	{
 		m_objectsMove[i]->reset();
-	}
-	
 }
 //======================================
 void Controler::clearObjectsGame()

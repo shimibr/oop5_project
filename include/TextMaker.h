@@ -8,6 +8,8 @@ public:
 
     sf::Text makeText(const std::string& text, sf::Vector2f position);
 
+    sf::Text makeText(const std::string& text, sf::Vector2f position, sf::Color color);
+
     sf::Text makeText(const sf::Clock& clock, sf::Vector2f position);
 
     sf::Text makeText(const sf::Time& time, sf::Vector2f position);
@@ -16,6 +18,8 @@ public:
  
 
 private:
+    std::string formatTime(const sf::Time& time);
+
     sf::Font m_font;
     sf::Text m_text;
 };

@@ -2,7 +2,7 @@
 #include <iostream>
 
 LoadFile::LoadFile()
-    :m_file("Levels.txt")
+    :m_file("Levels.txt"), m_sizeCol(0)
 {}
 //====================================
 LoadFile& LoadFile::getInstance() {
@@ -22,8 +22,11 @@ bool LoadFile::fillData()
     while (std::getline(m_file, line) && !isdigit(line[0]))
         m_data.push_back(line);
 
-    if(line.size() == 0)
-        return false;
+    if (line.empty()) {
+        m_file.clear(); 
+        m_file.seekg(0); 
+        return false;    
+    }
 
     m_sizeCol = colSize();
 

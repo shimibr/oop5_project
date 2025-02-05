@@ -1,10 +1,9 @@
 #pragma once
-#include "Controler.h"
-#include <iostream>//for testing
+#include "StartMenu.h"
 
 int main()
 {
-	Controler x;
-	x.run();
+	StartMenu x;
+	x.runMenu();
 	return 0;
 }

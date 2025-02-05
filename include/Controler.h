@@ -10,7 +10,7 @@
 #include "Wall.h"
 #include "Stone.h"
 #include "Door.h"
-#include "StartMenu.h"
+//#include "StartMenu.h"
 #include "Bomb.h"
 #include "GiftStopGuards.h"
 #include "GiftAddLife.h"
@@ -35,8 +35,6 @@ private:
 	void readLevelsGift();
 
 	sf::RenderWindow m_window;
-
-	StartMenu m_startMenu;
 
 	float m_deltaTime = 0;
 	sf::Clock m_gameClock;

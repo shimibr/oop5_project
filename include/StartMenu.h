@@ -1,17 +1,15 @@
 #pragma once
 
-#include <fstream>
-#include <sstream>
 #include <SFML/Graphics.hpp>
 #include "TextMaker.h"
 #include "io.h"
+#include "Controler.h"
 
 class StartMenu
 {
 public:
 	StartMenu();
 	void runMenu();
-	bool getCloseGame() const;
 
 private:
 	void createWindow();
@@ -19,13 +17,14 @@ private:
 	void clickManagment(const sf::Event& event, sf::Vector2i mousePosition);
 	void fillText();
 	void drawEndDisplay();
-	std::string loadHelpText();
 	void showHelp();
+	std::string loadHelpText();
+
 	TextMaker m_textMaker;
+	Controler m_controler;
 
 	sf::RenderWindow m_window;
 	sf::Font m_font;
 	std::vector<sf::RectangleShape> m_rectangles;
 	std::vector<sf::Text> m_texts;
-	bool m_closeGame;
 };

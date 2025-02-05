@@ -16,9 +16,16 @@ ObjectMove::~ObjectMove()
 }
 //===================================
 ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed)
-	:m_speed(speed), m_firstPosition(position), m_fixPosition(position)
+	:m_speed(speed)
 {
+	initPositionLevel(position);
 	m_sprite.setTexture(texture);
+}
+//===================================
+void ObjectMove::initPositionLevel(sf::Vector2f position)
+{
+	m_firstPosition = position;
+	m_fixPosition = position;
 	m_sprite.setPosition(position);
 }
 //===================================
@@ -68,7 +75,7 @@ void ObjectMove::move(const float deltaTime)
 		break;
 	}
 }
-//===================================
+//======================================
 void ObjectMove::setLastPosition(Object& object)
 {
 	m_isCollided = true;

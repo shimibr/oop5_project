@@ -9,12 +9,11 @@ class Robot : public ObjectMove
 {
 public:
 	static Robot& getInstance();
-	//static Robot & getInstance(sf::Texture& texture, sf::Vector2f position, const int robotClock);
 
 	Robot& operator=(Robot& other) = delete;
 	Robot(Robot & other) = delete;
 
-
+	void startLevel();
 	const sf::Vector2f getPosition();
 	void printRobotData(sf::RenderWindow& window) const;
 	bool isWin() const;
@@ -36,6 +35,7 @@ public:
 	void collided(Explosion& explosion);
 	virtual void collided(GiftAddLife& giftAddLife);
 	virtual void collided(GiftAddTime& giftAddTime);
+	void setPosition();
 
 private:
 	Robot();

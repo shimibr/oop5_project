@@ -1,5 +1,8 @@
 #pragma once
 #include "TextMaker.h"
+#include <iomanip>   
+#include <sstream> 
+
 
 TextMaker::TextMaker()
 {
@@ -15,20 +18,36 @@ sf::Text TextMaker::makeText(const std::string& text, sf::Vector2f position)
    m_text.setPosition(position);
    return m_text;
 }
+//==============================================
+sf::Text TextMaker::makeText(const std::string& text, sf::Vector2f position, sf::Color color)
+{
+	m_text.setFillColor(color);
+	return makeText(text, position);
+}
 //=============================================
 sf::Text TextMaker::makeText(const sf::Clock& clock, sf::Vector2f position)
 {
-	return makeText(std::to_string((int)(clock.getElapsedTime().asSeconds() / 60)) + ":"
-			+ std::to_string(((int)clock.getElapsedTime().asSeconds() % 60)), position);
+	return makeText(formatTime(clock.getElapsedTime()), position);
 }
 //==============================================
 sf::Text TextMaker::makeText(const sf::Time& time, sf::Vector2f position)
 {
-	return makeText(std::to_string((int)(time.asSeconds() / 60)) + ":"
-		+ std::to_string(((int)time.asSeconds() % 60)), position);
+	return makeText(formatTime(time), position);
 }
 //============================================
 sf::Text TextMaker::makeText(const int text, sf::Vector2f position)
 {
 	return makeText(std::to_string(text), position);
+}
+//============================================
+std::string TextMaker::formatTime(const sf::Time& time)
+{
+	int minutes = static_cast<int>(time.asSeconds()) / 60;
+	int seconds = static_cast<int>(time.asSeconds()) % 60;
+
+	std::ostringstream oss;
+	oss << std::setw(2) << std::setfill('0') << minutes << ":"
+		<< std::setw(2) << std::setfill('0') << seconds;
+
+	return oss.str();
 }

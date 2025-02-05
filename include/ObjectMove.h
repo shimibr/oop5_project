@@ -24,13 +24,14 @@ public:
 
 
 protected:
+	void initPositionLevel(sf::Vector2f position);
 	void setLastPosition(Object& object);
 	void moveBySmall(float move1, float move2,float& XorY);
 
 	bool m_isCollided = false;
 	int m_direction;
 	int m_speed;
-	sf::Vector2f m_lastPosition;
+	sf::Vector2f m_lastPosition ;
 	sf::Vector2f m_firstPosition;
 	sf::Vector2f m_fixPosition;
 	

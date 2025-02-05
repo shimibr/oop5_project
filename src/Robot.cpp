@@ -17,15 +17,18 @@ Robot& Robot::getInstance() {
 	static Robot instance;
 	return instance;
 }
-//=====================================
-// 
 //======================================
 Robot::Robot()
 	: ObjectMove(dataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Entity::ROBOT_SPEED)
 {
-	isLimitedTime(LoadFile::getInstance().getLevelInfo()[2]);
 }
 //======================================
+void Robot::startLevel()
+{
+	initPositionLevel(LoadFile::getInstance().getPosition());
+	isLimitedTime(LoadFile::getInstance().getLevelInfo()[2]);
+}
+//=====================================
 void Robot::reset()
 {
 	m_sprite.setPosition(m_firstPosition);
@@ -40,7 +43,6 @@ void Robot::move(const float deltaTime)
 	{
 		m_direction = 0;
 		ObjectMove::move(deltaTime);
-
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
@@ -59,9 +61,8 @@ void Robot::move(const float deltaTime)
 		m_direction = 3;
 		ObjectMove::move(deltaTime);
 	}
-
 }
-//=====================================
+//====================================
 const sf::Vector2f Robot::getPosition()
 {
 	return m_sprite.getPosition();
@@ -131,13 +132,21 @@ void Robot::collided(GiftAddTime& giftAddTime)
 {
 	m_robotClock += sf::seconds(20);
 }
+//======================================
+void Robot::setPosition()
+{
+	 m_sprite.move(LoadFile::getInstance().getPosition()); 
+}
 //=========================================
 void Robot::isLimitedTime(const int robotClock)
 {
 	if (robotClock == 0)
 		m_unlimitedTime = true;
 	else
-	m_robotClock = sf::seconds(robotClock);
+	{
+		m_unlimitedTime = false;
+		m_robotClock = sf::seconds(robotClock);
+	}
 }
 //=======================================
 void Robot::printRobotData(sf::RenderWindow& window) const

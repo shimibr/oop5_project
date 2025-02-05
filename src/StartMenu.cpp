@@ -1,11 +1,8 @@
 #pragma once
 
 #include "StartMenu.h"
-#include <iostream>
 
-StartMenu::StartMenu()
-	:m_closeGame(false)
-{ }
+StartMenu::StartMenu() { }
 //======================================
 void StartMenu::runMenu()
 {
@@ -15,13 +12,11 @@ void StartMenu::runMenu()
 	while (m_window.isOpen())
 	{
 		sf::Event event;
-
 		while (m_window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 			{
 				m_window.close();
-				m_closeGame = true;
 			}
 
 			else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
@@ -32,11 +27,6 @@ void StartMenu::runMenu()
 		}
 	drawEndDisplay();
 	}
-}
-//======================================
-bool StartMenu::getCloseGame() const
-{
-	return m_closeGame;
 }
 //======================================
 void StartMenu::createWindow()
@@ -56,7 +46,6 @@ void StartMenu::createWindow()
 		rectangle.setPosition(recPosition.x, recPosition.y * i + rectangle.getSize().y);
 		m_rectangles.push_back(rectangle);
 	}
-
 }
 //======================================
 void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePosition)
@@ -68,14 +57,13 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 			switch (i)
 			{
 			case 0:
-				m_window.close();
-				m_closeGame = false;
+				m_controler.run();
+				m_window.display();
 				break;
 			case 1:
 				showHelp();
 				break;
 			case 2:
-				m_closeGame = true;
 				m_window.close();
 				break;
 			default:
@@ -87,7 +75,6 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 //======================================
 void StartMenu::fillText()
 {
-
 	std::vector<std::string> tempTexsts = {"Start Game" ,"Help" ,"Exit" };
 
 	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
@@ -97,7 +84,6 @@ void StartMenu::fillText()
 																rectBounds.getPosition().y + rectBounds.getSize().y / 2 - Entity::CHAR_SIZE / 2 }));
 	}
 }
-
 //======================================
 void StartMenu::drawEndDisplay()
 {
@@ -120,7 +106,7 @@ std::string StartMenu::loadHelpText()
 //======================================
 void StartMenu::showHelp()
 {
-	sf::Text helpText = m_textMaker.makeText(loadHelpText(), {20,20});
+	sf::Text helpText = m_textMaker.makeText(loadHelpText(), {20,20}, sf::Color::White);
 
 	float moveSize = 0.0f;
 	const float moveSpeed = 10.0f;
@@ -138,7 +124,6 @@ void StartMenu::showHelp()
 		{
 			if (event.type == sf::Event::Closed)
 			{
-				m_closeGame = true;
 				m_window.close();
 				return;
 			}
@@ -146,16 +131,11 @@ void StartMenu::showHelp()
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Up)
-				{
-					if (moveSize <= 0)
-						moveSize += moveSpeed;
-				}
+					if (moveSize <= 0) moveSize += moveSpeed;
 
-				if (event.key.code == sf::Keyboard::Down)
-				{
-					if (moveSize >= -(helpText.getLocalBounds().height - m_window.getSize().y - Entity::SIZE_PIXEL))
+				if (event.key.code == sf::Keyboard::Down) 
+					if (moveSize >= -(helpText.getLocalBounds().height - m_window.getSize().y + Entity::SIZE_PIXEL))
 						moveSize -= moveSpeed;
-				}
 			}
 
 			if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
