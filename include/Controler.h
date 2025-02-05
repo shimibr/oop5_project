@@ -10,7 +10,6 @@
 #include "Wall.h"
 #include "Stone.h"
 #include "Door.h"
-//#include "StartMenu.h"
 #include "Bomb.h"
 #include "GiftStopGuards.h"
 #include "GiftAddLife.h"
@@ -25,7 +24,7 @@ public:
 	bool run();
 private:
 	void readLevels();
-	void exceptionManager();
+	bool exceptionManager();
 	void printDataGame();
 	void updateWindow();
 	bool eventManager();

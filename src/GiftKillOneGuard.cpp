@@ -8,6 +8,7 @@ GiftKillOneGuard::GiftKillOneGuard(sf::Texture& texture, sf::Vector2f position)
 //=====================================
 void GiftKillOneGuard::collided(Robot& robot)
 {
+	SoundManager::getInstance().playGiftSound();
 	m_isDead = true;
 	Guard::killOneGuard();
 }

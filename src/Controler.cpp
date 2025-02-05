@@ -14,12 +14,12 @@ bool Controler::run()
 	while (LoadFile::getInstance().fillData())
 	{		
 		m_dataLevel = LoadFile::getInstance().getLevelInfo();	
-
+		SoundManager::getInstance().playStartLevelSounds();
 		sf::Vector2f size = LoadFile::getInstance().getSize();
 		m_window.create(sf::VideoMode((int)size.x * Entity::SIZE_PIXEL, ((int)size.y + 2) * Entity::SIZE_PIXEL), "Window Game");
 		m_window.setFramerateLimit(60);
 	
-		while (m_window.isOpen())
+		while (m_window.isOpen() && !Robot::getInstance().isDead())
 		{
 			clearObjectsGame();
 			readLevels();
@@ -28,7 +28,7 @@ bool Controler::run()
 			{
 				updateWindow();
 				if (eventManager()) return true;
-				exceptionManager();
+				if (exceptionManager()) return true;
 			}
 		}
 	}
@@ -56,10 +56,11 @@ void Controler::readLevels()
 	readLevelsGift();
 }
 //======================================
-void Controler::exceptionManager()
+bool Controler::exceptionManager()
 {
 	if (Robot::getInstance().isWin())
 	{
+		SoundManager::getInstance().playWinSound();
 		m_window.close();
 		m_dataLevel.clear();
 		Robot::getInstance().setNotWin();
@@ -68,10 +69,11 @@ void Controler::exceptionManager()
 	if (Robot::getInstance().isDead())
 	{
 		m_window.close();
-		return;
+		return true;
 	}
 	if (Robot::getInstance().lostLife())
 		resetObjects();
+	return false;
 }
 //======================================
 void Controler::readLevelsGift()

@@ -7,6 +7,7 @@ GiftAddTime::GiftAddTime(sf::Texture& texture, sf::Vector2f position)
 //=====================================
 void GiftAddTime::collided(Robot& robot)
 {
+	SoundManager::getInstance().playGiftSound();
 	m_isDead = true;
 	robot.collided(*this);
 }

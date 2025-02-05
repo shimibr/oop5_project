@@ -7,6 +7,7 @@ GiftStopGuards::GiftStopGuards(sf::Texture& texture, sf::Vector2f position)
 //==================================
 void GiftStopGuards::collided(Robot& robot)
 {
+	SoundManager::getInstance().playGiftSound();
 	m_isDead = true;
 	Guard::dontMove(4);
 }

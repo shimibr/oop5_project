@@ -57,14 +57,14 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
-	m_direction = rand() % 4;
 	setLastPosition(wall);
+	m_direction = rand() % 4;
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
-	m_direction = rand() % 4;
 	setLastPosition(stone);
+	m_direction = rand() % 4;
 }
 //======================================
 void Guard::collided(Explosion& explosion)

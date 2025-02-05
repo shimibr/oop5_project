@@ -12,6 +12,9 @@ SoundManager::SoundManager() {
     loadSound(m_loseBuffer, m_loseSound, "lose.wav");
     loadSound(m_exlosionBuffer, m_exlosionSound, "exlosion.wav");
     loadSound(m_giftBuffer, m_giftSound, "gift.wav");
+    loadSound(m_startLevelBuffer, m_startLevelSound, "startLevel.wav");
+    loadSound(m_clickBuffer, m_clickSound, "click.wav");
+    loadSound(m_winBuffer, m_winSound, "win.wav");
 }
 //======================================
 void SoundManager::loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const std::string& filePath) {
@@ -19,25 +22,10 @@ void SoundManager::loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const st
     sound.setBuffer(buffer);
 }
 //======================================
-void SoundManager::playWinSound() {
-    m_winSound.play();
-}
-//======================================
-void SoundManager::playLoseSound() {
-    m_loseSound.play();
-}
-//======================================
-void SoundManager::playExlosionSound() {
-    m_exlosionSound.play();
-}
-//======================================
-void SoundManager::playGiftSound() {
-    m_giftSound.play();
-}
-//======================================
 void SoundManager::stopAllSounds() {
     m_winSound.stop();
     m_loseSound.stop();
     m_exlosionSound.stop();
+    m_clickSound.stop();
 }
 //======================================

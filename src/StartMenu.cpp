@@ -54,6 +54,8 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 	{
 		if (m_rectangles[i].getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 		{
+			SoundManager::getInstance().playClickSounds();
+
 			switch (i)
 			{
 			case 0:
@@ -124,6 +126,7 @@ void StartMenu::showHelp()
 		sf::Event event;
 		while (m_window.pollEvent(event))
 		{
+
 			if (event.type == sf::Event::Closed)
 			{
 				m_window.close();
@@ -132,6 +135,8 @@ void StartMenu::showHelp()
 
 			if (event.type == sf::Event::KeyPressed)
 			{
+				SoundManager::getInstance().playClickSounds();
+
 				if (event.key.code == sf::Keyboard::Up)
 					if (moveSize <= 0) moveSize += moveSpeed;
 
@@ -145,6 +150,7 @@ void StartMenu::showHelp()
 				sf::Vector2i mousePosition = sf::Mouse::getPosition(m_window);
 				if (backButton.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 				{
+					SoundManager::getInstance().playClickSounds();
 					drawEndDisplay();
 					return;
 				}

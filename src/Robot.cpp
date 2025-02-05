@@ -168,6 +168,8 @@ bool Robot::lostLife()
 {
 	if (m_lostLife)
 	{
+		if (m_lives <= 0)
+			m_isDead = true;
 		m_lostLife = false;
 		return true;
 	}
@@ -179,6 +181,7 @@ bool Robot::timeLeft()
 	if (m_robotClock <= sf::seconds(0) && !m_unlimitedTime)
 	{
 		m_lives--;
+		m_lostLife = true;
 		return true;
 	}
 	return false;
