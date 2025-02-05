@@ -15,4 +15,6 @@ configure_file ("startLevel.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("click.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("win.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gift.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("lostLive.wav" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("secend.wav" ${CMAKE_BINARY_DIR} COPYONLY)
 
