@@ -35,9 +35,9 @@ void StartMenu::createWindow()
 	m_window.create(defaultSizeWindow, "Start Menu");
 
 	sf::RectangleShape rectangle(sf::Vector2f(Entity::SIZE_PIXEL * 5, Entity::SIZE_PIXEL * 1.5));
-	rectangle.setFillColor(sf::Color::White);
-	rectangle.setOutlineThickness(4);
-	rectangle.setOutlineColor(sf::Color(0, 255, 128));
+	rectangle.setFillColor(sf::Color::Yellow);
+	rectangle.setOutlineThickness(8);
+	rectangle.setOutlineColor(sf::Color::Green);
 
 	sf::Vector2f recPosition((defaultSizeWindow.width - rectangle.getSize().x) / 2, rectangle.getSize().y * 1.5);
 
@@ -84,8 +84,8 @@ void StartMenu::fillText()
 	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
 	{
 		sf::FloatRect rectBounds = m_rectangles[i].getGlobalBounds();
-		m_texts.push_back(m_textMaker.makeText(tempTexsts[i], { rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE/ 5 ,
-																rectBounds.getPosition().y + rectBounds.getSize().y / 2 - Entity::CHAR_SIZE / 2 }));
+		m_texts.push_back(m_textMaker.makeText(tempTexsts[i], { rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE/ 4 ,
+																rectBounds.getPosition().y + rectBounds.getSize().y / 2 - Entity::CHAR_SIZE / 2 }, 35));
 	}
 }
 //======================================

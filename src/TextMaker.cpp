@@ -12,30 +12,36 @@ TextMaker::TextMaker()
 	m_text.setFillColor(sf::Color::Red);
 }
 //==============================================
-sf::Text TextMaker::makeText(const std::string& text, sf::Vector2f position)
+sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position)
 {
    m_text.setString(text);
    m_text.setPosition(position);
    return m_text;
 }
 //==============================================
-sf::Text TextMaker::makeText(const std::string& text, sf::Vector2f position, sf::Color color)
+sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position, const sf::Color color)
 {
 	m_text.setFillColor(color);
 	return makeText(text, position);
 }
+//==============================================
+sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position, const int charSize)
+{
+	m_text.setCharacterSize(charSize);
+	return makeText(text, position);
+}
 //=============================================
-sf::Text TextMaker::makeText(const sf::Clock& clock, sf::Vector2f position)
+sf::Text TextMaker::makeText(const sf::Clock& clock, const sf::Vector2f position)
 {
 	return makeText(formatTime(clock.getElapsedTime()), position);
 }
 //==============================================
-sf::Text TextMaker::makeText(const sf::Time& time, sf::Vector2f position)
+sf::Text TextMaker::makeText(const sf::Time& time, const sf::Vector2f position)
 {
 	return makeText(formatTime(time), position);
 }
 //============================================
-sf::Text TextMaker::makeText(const int text, sf::Vector2f position)
+sf::Text TextMaker::makeText(const int text, const sf::Vector2f position)
 {
 	return makeText(std::to_string(text), position);
 }
