@@ -86,43 +86,43 @@ void ObjectMove::setLastPosition(Object& object)
 	switch (m_direction)
 	{
 	case 0:
-		if (AttachObject(m_fixPosition.y, globlObject.getPosition().y + globlObject.height))
+		if (AttachObject(m_fixPosition.y, globlObject.top + globlObject.height))
 		{
 			if (globlObject.contains(getGlobalLoc().getPosition()))//מזיז ימינה
-				moveBySmall(globlObject.getPosition().x + globlObject.width - getGlobalLoc().left, move.y, m_fixPosition.x);
+				moveBySmall(globlObject.left + globlObject.width - getGlobalLoc().left, move.y, m_fixPosition.x);
 
 			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top }))//מזיז שמאלה
-				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.getPosition().x), -move.y, m_fixPosition.x);
+				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.left), -move.y, m_fixPosition.x);
 		}
 		break;
 	case 1:
-		if (AttachObject(m_fixPosition.y, globlObject.getPosition().y - getGlobalLoc().height))
+		if (AttachObject(m_fixPosition.y, globlObject.top - getGlobalLoc().height))
 		{
 			if (globlObject.contains({ getGlobalLoc().left, getGlobalLoc().top + getGlobalLoc().height - 1 }))//מזיז ימינה
-				moveBySmall(globlObject.getPosition().x + globlObject.width - getGlobalLoc().left, -move.y, m_fixPosition.x);
+				moveBySmall(globlObject.left + globlObject.width - getGlobalLoc().left, -move.y, m_fixPosition.x);
 
 			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width - 1, getGlobalLoc().top + getGlobalLoc().height - 1 }))// מזיז שמאלה
-				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.getPosition().x), move.y, m_fixPosition.x);
+				moveBySmall(-(getGlobalLoc().left + getGlobalLoc().width - globlObject.left), move.y, m_fixPosition.x);
 		}
 		break;
 	case 2:
-		if (AttachObject(m_fixPosition.x, globlObject.getPosition().x + globlObject.width))
+		if (AttachObject(m_fixPosition.x, globlObject.left + globlObject.width))
 		{
 			if (globlObject.contains(getGlobalLoc().getPosition()))// מזיז למטה
-				moveBySmall(globlObject.getPosition().y + globlObject.height - getGlobalLoc().top, move.x, m_fixPosition.y);
+				moveBySmall(globlObject.top + globlObject.height - getGlobalLoc().top, move.x, m_fixPosition.y);
 
 			if (globlObject.contains({ getGlobalLoc().left , getGlobalLoc().top + getGlobalLoc().height - 1 }))//מזיז למעלה
-				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.getPosition().y), -move.x, m_fixPosition.y);
+				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.top), -move.x, m_fixPosition.y);
 		}
 		break;
 	case 3:
-		if (AttachObject(m_fixPosition.x, globlObject.getPosition().x - getGlobalLoc().width))
+		if (AttachObject(m_fixPosition.x, globlObject.left - getGlobalLoc().width))
 		{
-			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width, getGlobalLoc().top }))// מזיז למטה
-				moveBySmall(globlObject.getPosition().y + globlObject.height - getGlobalLoc().top, -move.x, m_fixPosition.y);
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width-1, getGlobalLoc().top }))// מזיז למטה
+				moveBySmall(globlObject.top + globlObject.height - getGlobalLoc().top, -move.x, m_fixPosition.y);
 
-			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width, getGlobalLoc().top + getGlobalLoc().height }))//מזיז למעלה
-				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.getPosition().y), move.x, m_fixPosition.y);
+			if (globlObject.contains({ getGlobalLoc().left + getGlobalLoc().width-1, getGlobalLoc().top + getGlobalLoc().height -1 }))//מזיז למעלה
+				moveBySmall(-(getGlobalLoc().top + getGlobalLoc().height - globlObject.top), move.x, m_fixPosition.y);
 		}
 		break;
 	}
