@@ -155,10 +155,9 @@ void Controler::update()
 void Controler::eventManager()
 {
 	for (int i = 0; i < m_objectsMove.size(); i++)
-	{
 		m_objectsMove[i]->move(m_deltaTime);
-		Robot::getInstance().move(m_deltaTime);
-	}
+
+	Robot::getInstance().move(m_deltaTime);
 
 	collisionObjects();
 }
@@ -167,29 +166,26 @@ void Controler::collisionObjects()
 {
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
+		m_objectsMove[i]->collision(Robot::getInstance());
+
 		for (int j = 0; j < m_objects.size(); j++)
-		{
 			m_objectsMove[i]->collision(*m_objects[j]);
-			Robot::getInstance().collision(*m_objects[j]);
-		}
 
 		m_objectsMove[i]->inWindow(m_window.getSize());
-		Robot::getInstance().inWindow(m_window.getSize());
 
 		for (int j = 0; j < m_objectsMove.size(); j++)
-		{
 			m_objectsMove[i]->collision(*m_objectsMove[j]);
-			Robot::getInstance().collision(*m_objectsMove[j]);
-		}
 	}
+
 	for (int i = 0; i < m_objects.size(); i++)
+		Robot::getInstance().collision(*m_objects[i]);
 
+		Robot::getInstance().inWindow(m_window.getSize());
 
-	for (int i = 0; i < m_objectsMove.size(); i++)
-	{
+	for (int i = 0; i < m_objectsMove.size(); i++)	
 		m_objectsMove[i]->fixPosition();
-		Robot::getInstance().fixPosition();
-	}
+
+	Robot::getInstance().fixPosition();
 }
 //======================================
 void Controler::resetObjects()
