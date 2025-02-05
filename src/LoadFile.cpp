@@ -1,7 +1,9 @@
 #include "LoadFile.h"
 #include <iostream>
 
-LoadFile::LoadFile() {}
+LoadFile::LoadFile()
+    :m_file("Levels.txt")
+{}
 //====================================
 LoadFile& LoadFile::getInstance() {
     static LoadFile instance;
@@ -81,8 +83,9 @@ char LoadFile::getFromFile()
         {
             if (m_data[m_row][m_col] != Entity::FREE_SPASE)
             {
-                return m_data[m_row][m_col];
+                char ch = m_data[m_row][m_col];
                 m_col++;
+                return ch;
             }
         }
         m_col = 0;
@@ -94,7 +97,7 @@ char LoadFile::getFromFile()
 //===================================
 sf::Vector2f LoadFile::getPosition()
 {
-    return sf::Vector2f(m_col-1,m_row);
+    return sf::Vector2f(((m_col - 1) * Entity::SIZE_PIXEL), m_row * Entity::SIZE_PIXEL);
 }
 //====================================
 sf::Vector2f LoadFile::getSize() const

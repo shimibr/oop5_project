@@ -7,7 +7,10 @@ dataTexture& dataTexture::getInstance() {
 	return instance;
 }
 //============================
-dataTexture::dataTexture() { }
+dataTexture::dataTexture() 
+{
+	loadTexture();
+}
 //=============================
 sf::Texture& dataTexture::getTexture(const char ch)
 { 
@@ -16,6 +19,7 @@ sf::Texture& dataTexture::getTexture(const char ch)
 		if (m_textures[i].type == ch)
 			return m_textures[i].texture;
 	}
+	return m_textures[0].texture;
 }
 //==============================
 void dataTexture::poshTexture(std::string fileName, char type)
