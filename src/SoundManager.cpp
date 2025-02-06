@@ -17,6 +17,7 @@ SoundManager::SoundManager() {
     loadSound(m_winBuffer, m_winSound, "win.wav");
     loadSound(m_timerBuffer, m_timerSound, "timer.wav");
     loadSound(m_lostLiveBuffer, m_lostLiveSound, "lostLive.wav");
+    loadSound(m_bombTimerBuffer, m_bombTimerSound, "lostLive.wav");
 }
 //======================================
 void SoundManager::loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const std::string& filePath) {
