@@ -17,8 +17,22 @@ Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f
 //======================================
 void Bomb::collision(Object& other)
 {
+    if (&other == this)
+        return;
+
+    if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
+    {
+        other.collided(*this);
+    }
+
     for (int i = 0; i < m_explosion.size(); i++)
         m_explosion[i].collision(other);
+}
+//====================================
+void Bomb::collided(Bomb& bomb)
+{
+    //if(!m_isDead)
+      //  bomb.m_isDead = true;
 }
 //======================================
 void Bomb::reset()

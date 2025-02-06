@@ -9,10 +9,11 @@ public:
 	Bomb();
 	Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture,  sf::Vector2f position);
 
-	void collision(Object& other);
-
+	virtual void collision(Object& other)override;
 	virtual void reset() override;
 	virtual void move(const float deltaTime) override;
+	virtual void collided(Bomb& bomb) override;
+
 	void update(sf::RenderWindow& window);
 	void moving(const float deltaTime);
 

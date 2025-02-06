@@ -10,6 +10,8 @@ class Explosion;
 class Door;
 class Gift;
 class GiftStopGuards;
+class Bomb;
+
 class Object
 {
 public:
@@ -20,12 +22,12 @@ public:
 	bool isDead() const;
 	sf::FloatRect getGlobalLoc() const;
 
-	virtual void collided(Guard& guard);
-	virtual void collided(Wall& wall);
-	virtual void collided(Robot& robot);
-	virtual void collided(Door& door);
-	virtual void collided(Explosion& explosion);
-	//const sf::Sprite& getSprite(); // צריך לבדוק אולי אפשר למחוק
+	virtual void collided(Guard& guard) {}
+	virtual void collided(Wall& wall) {}
+	virtual void collided(Robot& robot) {}
+	virtual void collided(Door& door) {}
+	virtual void collided(Bomb& bomb) {}
+	virtual void collided(Explosion& explosion) {}
 
 protected:
 	sf::Sprite m_sprite;
