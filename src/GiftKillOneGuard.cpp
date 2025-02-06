@@ -3,8 +3,8 @@
 #include "Robot.h"
 #include "Guard.h"
 
-GiftKillOneGuard::GiftKillOneGuard(sf::Texture& texture, sf::Vector2f position, const bool isHidden)
-	: Gift(texture, position, isHidden) { }
+GiftKillOneGuard::GiftKillOneGuard()
+	: Gift(0) { }
 //=====================================
 void GiftKillOneGuard::collided(Robot& robot)
 {

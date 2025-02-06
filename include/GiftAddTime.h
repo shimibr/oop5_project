@@ -5,7 +5,7 @@
 class GiftAddTime : public Gift
 {
 public:
-	GiftAddTime(sf::Texture& texture, sf::Vector2f position, const bool isHidden);
+	GiftAddTime();
 	virtual void collided(Robot& robot) override;
 
 

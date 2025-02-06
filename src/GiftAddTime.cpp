@@ -2,8 +2,8 @@
 #include "GiftAddTime.h"
 #include "Robot.h"
 
-GiftAddTime::GiftAddTime(sf::Texture& texture, sf::Vector2f position, const bool isHidden)
-	: Gift(texture, position, isHidden) { }
+GiftAddTime::GiftAddTime()
+	: Gift(0) { }
 //=====================================
 void GiftAddTime::collided(Robot& robot)
 {

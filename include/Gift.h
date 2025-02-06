@@ -7,7 +7,7 @@
 class Gift : public Object
 {
 public:
-	Gift(sf::Texture& texture, sf::Vector2f position, const bool isHidden);
+	Gift(bool isHidden);
 	virtual ~Gift() = default;
 	virtual void collided(Robot& robot) = 0;
 	void collided(Explosion& explosion);

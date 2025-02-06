@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Gift.h"
+#include "dataTexture.h"
+#include "LoadFile.h"
 
 //=================================
-Gift::Gift(sf::Texture& texture, sf::Vector2f position ,const bool isHidden)
-	:Object(texture, position) , m_hidden(isHidden) { }
+Gift::Gift(bool isHidden)
+	:Object(dataTexture::getInstance().getTexture(Entity::GIFT), LoadFile::getInstance().getLegalGiftLoc(isHidden)) , m_hidden(isHidden) { }
 //=================================
 void Gift::collided(Explosion& explosion)
 {

@@ -5,7 +5,7 @@
 class GiftStopGuards : public Gift
 {
 public:
-	GiftStopGuards(sf::Texture& texture, sf::Vector2f position, const bool isHidden);
+	GiftStopGuards();
 	void collided(Robot& robot);
 
 

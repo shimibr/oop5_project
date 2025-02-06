@@ -5,7 +5,7 @@
 class GiftAddLife : public Gift
 {
 public:
-	GiftAddLife(sf::Texture& texture, sf::Vector2f position, const bool isHidden);
+	GiftAddLife();
 	virtual void collided(Robot& robot)override;
 
 

@@ -2,8 +2,8 @@
 #include "GiftAddLife.h"
 #include "Robot.h"
 
-GiftAddLife::GiftAddLife(sf::Texture& texture, sf::Vector2f position, const bool isHidden)
-	: Gift(texture, position, isHidden) { }
+GiftAddLife::GiftAddLife()
+	: Gift(0) { }
 //=====================================
 void GiftAddLife::collided(Robot& robot)
 {

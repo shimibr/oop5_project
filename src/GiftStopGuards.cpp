@@ -2,8 +2,8 @@
 #include "GiftStopGuards.h"
 #include "Guard.h"
 
-GiftStopGuards::GiftStopGuards(sf::Texture& texture, sf::Vector2f position, const bool isHidden)
-	: Gift(texture, position, isHidden) { }
+GiftStopGuards::GiftStopGuards()
+	: Gift(0) { }
 //==================================
 void GiftStopGuards::collided(Robot& robot)
 {
