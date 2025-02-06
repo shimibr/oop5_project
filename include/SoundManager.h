@@ -18,7 +18,8 @@ public:
     void playClickSounds() { m_clickSound.play(); }
     void playTimerSounds() { m_timerSound.play(); }
     void playlostLiveSounds() { m_lostLiveSound.play(); }
-    void playbombTimerSounds() { m_bombTimerSound.play(); }
+    void playBombTimerSounds() { m_bombTimerSound.play(); }
+    void playBackgroundMusic();
 
     void stopAllSounds();
 
@@ -44,6 +45,8 @@ private:
     sf::Sound m_timerSound;
     sf::Sound m_lostLiveSound;
     sf::Sound m_bombTimerSound;
+
+    sf::Music m_backgroundMusic;
 
     void loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const std::string& filePath);
 };

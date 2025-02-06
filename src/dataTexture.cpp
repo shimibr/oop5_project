@@ -11,6 +11,15 @@ dataTexture::dataTexture()
 {
 	loadTexture();
 }
+//==============================
+sf::Texture dataTexture::getGameOverTexture()
+{
+//	sf::Sprite sprite;
+	texture.loadFromFile("gameOver.png");
+//	sprite.setTexture(texture);
+//	sprite.setPosition(positin);
+	return texture;
+}
 //=============================
 sf::Texture& dataTexture::getTexture(const char ch)
 { 

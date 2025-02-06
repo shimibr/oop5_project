@@ -3,7 +3,8 @@
 #include "Controler.h"
 #include <iostream>
 #include "TextMaker.h"
-
+#include <chrono>
+#include <thread>
 
 Controler::Controler() { }
 //======================================
@@ -68,6 +69,13 @@ bool Controler::exceptionManager()
 	}
 	if (Robot::getInstance().isDead())
 	{
+//		sf::Sprite sprite;
+//		sprite.setTexture(dataTexture::getInstance().getGameOverTexture());
+//		sprite.setPosition(0,0);
+//		m_window.draw(dataTexture::getInstance().getGameOverTexture({ (float)m_window.getSize().x - 400, (float)m_window.getSize().y - 500}));
+//		m_window.draw(sprite);
+//		m_window.display();
+//		std::this_thread::sleep_for(std::chrono::seconds(5));
 		m_window.close();
 		return true;
 	}
@@ -198,7 +206,6 @@ void Controler::clearObjectsGame()
 	m_gameClock.restart();
 	m_moveClock.restart();
 }
-//========================================
 //======================================
 void Controler::printDataGame()
 {

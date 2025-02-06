@@ -10,7 +10,6 @@ Bomb::Bomb()
 Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f position)
     : ObjectMove(bombTexture, position, 0), m_explosionTexture(explosionTexture), m_hasExploded(false)
 {
-    SoundManager::getInstance().playTimerSounds();
     initPositionLevel(sf::Vector2f( (int)position.x - int(position.x) % Entity::SIZE_PIXEL ,(int)position.y - (int)position.y % Entity::SIZE_PIXEL ));
     textNumber();
 }
@@ -42,7 +41,10 @@ void Bomb::reset()
 //======================================
 void Bomb::move(const float deltaTime)
 {
+    int soundSum = m_timer;
     m_timer -= deltaTime;
+    if (soundSum > (int)m_timer && m_timer > 0)
+        SoundManager::getInstance().playBombTimerSounds();
     if (m_timer <= 0 && !m_hasExploded)
     {
         SoundManager::getInstance().playExlosionSound();

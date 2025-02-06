@@ -36,8 +36,10 @@ void Robot::reset()
 //======================================
 void Robot::move(const float deltaTime)
 {
+	int soundSum = (int)m_robotClock.asSeconds();
 	m_robotClock -= sf::seconds(deltaTime);
-	if (m_robotClock.asSeconds() >= 5 && !m_unlimitedTime) SoundManager::getInstance().playTimerSounds();
+	if (soundSum > (int)m_robotClock.asSeconds() && m_robotClock.asSeconds() <= 10  && !m_unlimitedTime)
+		SoundManager::getInstance().playTimerSounds();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -174,6 +176,7 @@ bool Robot::lostLife()
 {
 	if (m_lostLife)
 	{
+		SoundManager::getInstance().playlostLiveSounds();
 		if (m_lives <= 0)
 			m_isDead = true;
 		m_lostLife = false;

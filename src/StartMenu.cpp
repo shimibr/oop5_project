@@ -54,20 +54,23 @@ void StartMenu::clickManagment(const sf::Event& event, sf::Vector2i mousePositio
 	{
 		if (m_rectangles[i].getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 		{
-			SoundManager::getInstance().playClickSounds();
-
 			switch (i)
 			{
 			case 0:
+				SoundManager::getInstance().playClickSounds();
 				m_window.close();
+				SoundManager::getInstance().playBackgroundMusic();
 				if (m_controler.run())
 					return;
+				SoundManager::getInstance().stopAllSounds();
 				createWindow();
 				break;
 			case 1:
+				SoundManager::getInstance().playClickSounds();
 				showHelp();
 				break;
 			case 2:
+				SoundManager::getInstance().playClickSounds();
 				m_window.close();
 				break;
 			default:
