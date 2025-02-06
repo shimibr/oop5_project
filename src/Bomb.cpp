@@ -31,8 +31,8 @@ void Bomb::collision(Object& other)
 //====================================
 void Bomb::collided(Bomb& bomb)
 {
-    //if(!m_isDead)
-      //  bomb.m_isDead = true;
+    if(!m_isDead)
+        bomb.m_isDead = true;
 }
 //======================================
 void Bomb::reset()

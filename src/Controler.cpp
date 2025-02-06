@@ -78,25 +78,26 @@ bool Controler::exceptionManager()
 //======================================
 void Controler::readLevelsGift()
 {
+	bool giftIsHidden = false;
 	for (int i = 0; i < m_dataLevel[1]; i++)
 	{
-		sf::Vector2f giftLoc = LoadFile::getInstance().getLegalGiftLoc();
+		sf::Vector2f giftLoc = LoadFile::getInstance().getLegalGiftLoc(giftIsHidden);
 
 		int type = rand() % (m_dataLevel[2] == 0 ? 3 : 4); //לא מוסיף מתנה של הוספת זמן במידה ואין מגבלת זמן
 
 		switch (type)
 		{
 		case 0:
-			m_objects.push_back(std::make_unique<GiftStopGuards>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftStopGuards>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc , giftIsHidden));
 			break;
 		case 1:
-			m_objects.push_back(std::make_unique<GiftAddLife>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftAddLife>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc, giftIsHidden));
 			break;
 		case 2:
-			m_objects.push_back(std::make_unique<GiftKillOneGuard>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftKillOneGuard>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc, giftIsHidden));
 			break;
 		case 3:
-			m_objects.push_back(std::make_unique<GiftAddTime>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc));
+			m_objects.push_back(std::make_unique<GiftAddTime>(dataTexture::getInstance().getTexture(Entity::GIFT), giftLoc, giftIsHidden));
 			break;
 		}
 	}
@@ -157,7 +158,7 @@ bool Controler::eventManager()
 //======================================
 void Controler::collisionObjects()
 {
-	for (int i = 0; i < m_objectsMove.size(); i++)
+	for (int i = m_objectsMove.size() -1; i >=0 ; i--)
 	{
 		m_objectsMove[i]->collision(Robot::getInstance());
 

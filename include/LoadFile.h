@@ -18,7 +18,7 @@ public:
 
     std::vector<int>& getLevelInfo()  { return m_levelInfo; }
     sf::Vector2f getSize() const;
-    sf::Vector2f getLegalGiftLoc();
+    sf::Vector2f getLegalGiftLoc(bool& isHidden);
 
 private:
     LoadFile();

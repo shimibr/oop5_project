@@ -50,7 +50,7 @@ int LoadFile::colSize() const
     return size;
 }
 //====================================
-sf::Vector2f LoadFile::getLegalGiftLoc()
+sf::Vector2f LoadFile::getLegalGiftLoc(bool& isHidden)
 {
     sf::Vector2f loc;
     do
@@ -59,6 +59,8 @@ sf::Vector2f LoadFile::getLegalGiftLoc()
         loc.y = (float)(rand() % (int)getSize().y);
 
     } while (!checkGiftsLoc(loc));
+
+    isHidden = m_data[loc.y][loc.x] == Entity::STONE;
 
     m_giftsLoc.push_back(loc);
     return loc * (float)Entity::SIZE_PIXEL;
