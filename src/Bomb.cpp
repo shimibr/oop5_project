@@ -10,7 +10,7 @@ Bomb::Bomb()
 Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f position)
     : ObjectMove(bombTexture, position, 0), m_explosionTexture(explosionTexture), m_hasExploded(false)
 {
-    
+    SoundManager::getInstance().playTimerSounds();
     initPositionLevel(sf::Vector2f( (int)position.x - int(position.x) % Entity::SIZE_PIXEL ,(int)position.y - (int)position.y % Entity::SIZE_PIXEL ));
     textNumber();
 }

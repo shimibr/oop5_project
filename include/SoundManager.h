@@ -16,7 +16,7 @@ public:
     void playGiftSound(){ m_giftSound.play(); }
     void playStartLevelSounds() { m_startLevelSound.play(); }
     void playClickSounds() { m_clickSound.play(); }
-    void playsecendSounds();
+    void playTimerSounds() { m_timerSound.play(); }
     void playlostLiveSounds() { m_lostLiveSound.play(); }
 
     void stopAllSounds();
@@ -30,7 +30,7 @@ private:
     sf::SoundBuffer m_giftBuffer;
     sf::SoundBuffer m_startLevelBuffer;
     sf::SoundBuffer m_clickBuffer;
-    sf::SoundBuffer m_secendBuffer;
+    sf::SoundBuffer m_timerBuffer;
     sf::SoundBuffer m_lostLiveBuffer;
 
     sf::Sound m_winSound;
@@ -39,12 +39,9 @@ private:
     sf::Sound m_giftSound;
     sf::Sound m_startLevelSound;
     sf::Sound m_clickSound;
-    sf::Sound m_secendSound;
+    sf::Sound m_timerSound;
     sf::Sound m_lostLiveSound;
 
     void loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const std::string& filePath);
-
-    float m_timerCount = 0;
-    sf::Clock timer;
 };
 

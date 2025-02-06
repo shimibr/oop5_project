@@ -37,6 +37,7 @@ void Robot::reset()
 void Robot::move(const float deltaTime)
 {
 	m_robotClock -= sf::seconds(deltaTime);
+	if (m_robotClock.asSeconds() >= 5 && !m_unlimitedTime) SoundManager::getInstance().playTimerSounds();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
@@ -75,6 +76,7 @@ void Robot::collided(Door& door)
 	sf::FloatRect globalDoor = door.getGlobalLoc();
 	if (m_sprite.getGlobalBounds().contains({ globalDoor.left + globalDoor.width/2, globalDoor.top + globalDoor.height/2}))
 	{
+		SoundManager::getInstance().stopAllSounds();
 		m_win = true;
 		m_score += m_tempScore;
 		m_tempScore = 25;
@@ -158,7 +160,6 @@ void Robot::printRobotData(sf::RenderWindow& window) const
 	if(!m_unlimitedTime)
 	{
 		window.draw(m_textMaker.makeText(m_robotClock, sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
-		if(m_robotClock.asSeconds() <= 4) SoundManager::getInstance().playsecendSounds();
 	}
 	else
 		window.draw(m_textMaker.makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));

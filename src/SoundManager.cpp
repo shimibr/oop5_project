@@ -15,8 +15,8 @@ SoundManager::SoundManager() {
     loadSound(m_startLevelBuffer, m_startLevelSound, "startLevel.wav");
     loadSound(m_clickBuffer, m_clickSound, "click.wav");
     loadSound(m_winBuffer, m_winSound, "win.wav");
-    loadSound(m_secendBuffer, m_secendSound, "win.wav");
-    loadSound(m_lostLiveBuffer, m_lostLiveSound, "win.wav");
+    loadSound(m_timerBuffer, m_timerSound, "timer.wav");
+    loadSound(m_lostLiveBuffer, m_lostLiveSound, "lostLive.wav");
 }
 //======================================
 void SoundManager::loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const std::string& filePath) {
@@ -24,22 +24,11 @@ void SoundManager::loadSound(sf::SoundBuffer& buffer, sf::Sound& sound, const st
     sound.setBuffer(buffer);
 }
 //=======================================
-void SoundManager::playsecendSounds()
-{
-    //m_timerCount += timer.getElapsedTime().asSeconds();
-    //if(m_timerCount >= 1)
-    //{
-    //    m_secendSound.play();
-    //    timer.restart();
-    //    m_timerCount--;
-    //}
-
-}
-//======================================
 void SoundManager::stopAllSounds() {
     m_winSound.stop();
     m_loseSound.stop();
     m_exlosionSound.stop();
     m_clickSound.stop();
+    m_timerSound.stop();
 }
 //======================================
