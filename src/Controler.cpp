@@ -163,17 +163,16 @@ void Controler::collisionObjects()
 		m_objectsMove[i]->collision(Robot::getInstance());
 
 		for (int j = 0; j < m_objects.size(); j++)
+		{
+			Robot::getInstance().collision(*m_objects[j]);
 			m_objectsMove[i]->collision(*m_objects[j]);
-
-		m_objectsMove[i]->inWindow(m_window.getSize());
+		}
 
 		for (int j = 0; j < m_objectsMove.size(); j++)
 			m_objectsMove[i]->collision(*m_objectsMove[j]);
+
+		m_objectsMove[i]->inWindow(m_window.getSize());
 	}
-
-	for (int i = 0; i < m_objects.size(); i++)
-		Robot::getInstance().collision(*m_objects[i]);
-
 		Robot::getInstance().inWindow(m_window.getSize());
 
 	for (int i = 0; i < m_objectsMove.size(); i++)	
