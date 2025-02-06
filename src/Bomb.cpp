@@ -11,7 +11,7 @@ Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f
     : ObjectMove(bombTexture, position, 0), m_explosionTexture(explosionTexture), m_hasExploded(false)
 {
     
-    initPositionLevel({ position.x -= int(position.x) % Entity::SIZE_PIXEL ,position.y -= int(position.y) % Entity::SIZE_PIXEL });
+    initPositionLevel(sf::Vector2f( (int)position.x - int(position.x) % Entity::SIZE_PIXEL ,(int)position.y - (int)position.y % Entity::SIZE_PIXEL ));
     textNumber();
 }
 //======================================
