@@ -8,7 +8,7 @@
 #include "Door.h"
 #include <iostream>
 Explosion::Explosion(sf::Texture& texture, sf::Vector2f position,const int direction)
-	: ObjectMove(texture, position, Entity::SIZE_PIXEL)
+	: ObjectMove(texture, position, Entity::SIZE_PIXEL-10)
 {
 	m_direction = direction;
 }

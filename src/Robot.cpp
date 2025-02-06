@@ -64,13 +64,16 @@ void Robot::move(const float deltaTime)
 //====================================
 const sf::Vector2f Robot::getPosition()
 {
-	return m_sprite.getPosition();
+	sf::Vector2f tempPosition = getGlobalLoc().getPosition();
+	tempPosition.x += getGlobalLoc().width / 2;
+	tempPosition.y += getGlobalLoc().height / 2;
+	return tempPosition;
 }
 //======================================
 void Robot::collided(Door& door)
 {
 	sf::FloatRect globalDoor = door.getGlobalLoc();
-	if (m_sprite.getGlobalBounds().contains({ globalDoor.getPosition().x + globalDoor.width/2, globalDoor.getPosition().y + globalDoor.height/2}))
+	if (m_sprite.getGlobalBounds().contains({ globalDoor.left + globalDoor.width/2, globalDoor.top + globalDoor.height/2}))
 	{
 		m_win = true;
 		m_score += m_tempScore;
