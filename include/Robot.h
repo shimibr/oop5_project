@@ -8,15 +8,20 @@ class GiftKillOneGuard;
 class Robot : public ObjectMove
 {
 public:
-	static Robot& getInstance();
 
 	Robot& operator=(Robot& other) = delete;
 	Robot(Robot & other) = delete;
-
+	static Robot& getInstance();
 	void startLevel();
-	const sf::Vector2f getPosition();
+
+	virtual void reset() override;
+	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
+
+	const sf::Vector2f getPosition() const;
+
 	void printRobotData(sf::RenderWindow& window) const;
-	bool isWin() const;
+
+	bool isWin();
 	void setNotWin() { m_win = false; }
 	bool lostLife();
 	bool timeLeft();
@@ -24,8 +29,6 @@ public:
 	void addScore(const int score) { m_score += score; }
 	void addTempScore(const int tempScore) { m_tempScore += tempScore; }
 
-	virtual void reset() override;
-	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
 	
 	void collision(Object& other);
 	void collided(Guard& guard);

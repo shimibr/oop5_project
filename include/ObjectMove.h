@@ -11,11 +11,11 @@ class ObjectMove : public Object
 {
 public:
 	ObjectMove();
-	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
+	ObjectMove(sf::Texture& texture, const sf::Vector2f position, const int speed);
 	virtual ~ObjectMove();
 
 
-	virtual void reset();
+	virtual void reset() = 0;
 	virtual void collision(Object& other);
 	virtual void move(const sf::Vector2u sizeWindow, const float deltaTime) = 0;
 

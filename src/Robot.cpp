@@ -65,7 +65,7 @@ void Robot::move(const sf::Vector2u sizeWindow,const float deltaTime)
 	}
 }
 //====================================
-const sf::Vector2f Robot::getPosition()
+const sf::Vector2f Robot::getPosition() const
 {
 	sf::Vector2f tempPosition = getGlobalLoc().getPosition();
 	tempPosition.x += getGlobalLoc().width / 2;
@@ -167,9 +167,14 @@ void Robot::printRobotData(sf::RenderWindow& window) const
 		window.draw(m_textMaker.makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 }
 //======================================
-bool Robot::isWin() const
+bool Robot::isWin() 
 {
-	return m_win;
+	if (m_win)
+	{
+		m_win = false;
+		return true;
+	}
+	return false;
 }
 //======================================
 bool Robot::lostLife()

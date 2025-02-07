@@ -8,6 +8,8 @@ class Explosion : public ObjectMove
 public:
 	Explosion(sf::Vector2f position, const int direction);
 	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
+	virtual void reset() override {}
+
 	void collision(Object& other);
 	void collided(Guard& guard);
 	void collided(Robot& robot);
