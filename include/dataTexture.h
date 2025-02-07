@@ -11,12 +11,10 @@ public:
 	dataTexture& operator=(dataTexture& other) = delete;
 	dataTexture(dataTexture& other) = delete;
 
-	sf::Texture getGameOverTexture();
+	void printEventTexture(sf::RenderWindow& window, std::string fileName);
 	sf::Texture& getTexture(const char ch); 
 
 private:
-	sf::Texture texture;
-
 	dataTexture();
 	void poshTexture(std::string fileName,char type);
 	void loadTexture();

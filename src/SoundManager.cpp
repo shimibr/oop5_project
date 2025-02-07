@@ -9,7 +9,7 @@ SoundManager& SoundManager::getInstance() {
 //======================================
 SoundManager::SoundManager() {
     loadSound(m_winBuffer, m_winSound, "win.wav");
-//    loadSound(m_loseBuffer, m_loseSound, "lose.wav");
+    loadSound(m_loseBuffer, m_loseSound, "lose.wav");
     loadSound(m_exlosionBuffer, m_exlosionSound, "exlosion.wav");
     loadSound(m_giftBuffer, m_giftSound, "gift.wav");
     loadSound(m_startLevelBuffer, m_startLevelSound, "startLevel.wav");

@@ -22,6 +22,8 @@ bool LoadFile::fillData()
     while (std::getline(m_file, line) && !isdigit(line[0]))
         m_data.push_back(line);
 
+    m_endOfFile = true;
+
     if (line.empty()) {
         m_file.clear(); 
         m_file.seekg(0); 

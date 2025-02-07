@@ -12,13 +12,16 @@ dataTexture::dataTexture()
 	loadTexture();
 }
 //==============================
-sf::Texture dataTexture::getGameOverTexture()
+void dataTexture::printEventTexture(sf::RenderWindow& window, std::string fileName)
 {
-//	sf::Sprite sprite;
-	texture.loadFromFile("gameOver.png");
-//	sprite.setTexture(texture);
-//	sprite.setPosition(positin);
-	return texture;
+	window.clear(sf::Color::Yellow);
+	sf::Texture texture;
+	sf::Sprite sprite;
+	texture.loadFromFile(fileName);
+	sprite.setTexture(texture);
+	sprite.setPosition(window.getSize().x / 2 - sprite.getGlobalBounds().width / 2, window.getSize().y / 2 - sprite.getGlobalBounds().height / 2);
+	window.draw(sprite);
+	window.display();
 }
 //=============================
 sf::Texture& dataTexture::getTexture(const char ch)

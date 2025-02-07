@@ -61,19 +61,18 @@ bool Controler::exceptionManager()
 {
 	if (Robot::getInstance().isWin())
 	{
+		dataTexture::getInstance().printEventTexture(m_window, "levelUp.png");
 		SoundManager::getInstance().playWinSound();
+		std::this_thread::sleep_for(std::chrono::seconds(2));
 		m_window.close();
 		m_dataLevel.clear();
+		SoundManager::getInstance().playBackgroundMusic();
 	}
 	if (Robot::getInstance().isDead())
 	{
-//		sf::Sprite sprite;
-//		sprite.setTexture(dataTexture::getInstance().getGameOverTexture());
-//		sprite.setPosition(0,0);
-//		m_window.draw(dataTexture::getInstance().getGameOverTexture({ (float)m_window.getSize().x - 400, (float)m_window.getSize().y - 500}));
-//		m_window.draw(sprite);
-//		m_window.display();
-//		std::this_thread::sleep_for(std::chrono::seconds(5));
+		SoundManager::getInstance().playLoseSound();
+		dataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
+		std::this_thread::sleep_for(std::chrono::seconds(5));
 		m_window.close();
 		return true;
 	}
