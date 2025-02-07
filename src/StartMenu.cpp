@@ -41,7 +41,7 @@ void StartMenu::createWindow()
 
 	sf::Vector2f recPosition((defaultSizeWindow.width - rectangle.getSize().x) / 2, rectangle.getSize().y * 1.5);
 
-	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
+	for (int i = 0; i < MENU_BUTTONS; i++)
 	{
 		rectangle.setPosition(recPosition.x, recPosition.y * i + rectangle.getSize().y);
 		m_rectangles.push_back(rectangle);
@@ -84,7 +84,7 @@ void StartMenu::fillText()
 {
 	std::vector<std::string> tempTexsts = {"Start Game" ,"Help" ,"Exit" };
 
-	for (int i = 0; i < Entity::MENU_BUTTONS; i++)
+	for (int i = 0; i < MENU_BUTTONS; i++)
 	{
 		sf::FloatRect rectBounds = m_rectangles[i].getGlobalBounds();
 		m_texts.push_back(m_textMaker.makeText(tempTexsts[i], { rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE/ 4 ,
@@ -95,7 +95,7 @@ void StartMenu::fillText()
 void StartMenu::drawEndDisplay()
 {
 	m_window.clear();
-	for (int i = 0; i < Entity::MENU_BUTTONS; ++i)
+	for (int i = 0; i < MENU_BUTTONS; ++i)
 	{
 		m_window.draw(m_rectangles[i]);
 		m_window.draw(m_texts[i]);

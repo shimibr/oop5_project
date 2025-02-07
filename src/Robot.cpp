@@ -19,7 +19,7 @@ Robot& Robot::getInstance() {
 }
 //======================================
 Robot::Robot()
-	: ObjectMove(dataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Entity::ROBOT_SPEED)
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Speed::ROBOT)
 {
 }
 //======================================
@@ -38,29 +38,30 @@ void Robot::move(const sf::Vector2u sizeWindow,const float deltaTime)
 {
 	int soundSum = (int)m_robotClock.asSeconds();
 	m_robotClock -= sf::seconds(deltaTime);
+
 	if (soundSum > (int)m_robotClock.asSeconds() && m_robotClock.asSeconds() <= 10  && !m_unlimitedTime)
 		SoundManager::getInstance().playTimerSounds();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		m_direction = 0;
+		m_direction = Direction::UP;
 		ObjectMove::move( sizeWindow,deltaTime);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_direction = 1;
+		m_direction = Direction::DOWN;
 		ObjectMove::move(sizeWindow,deltaTime);
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_direction = 2;
+		m_direction = Direction::LEFT;
 		ObjectMove::move(sizeWindow,deltaTime);
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_direction = 3;
+		m_direction = Direction::RIGHT;
 		ObjectMove::move(sizeWindow,deltaTime);
 	}
 }
@@ -80,13 +81,15 @@ void Robot::collided(Door& door)
 	{
 		SoundManager::getInstance().stopAllSounds();
 		m_win = true;
-		m_score += m_tempScore;
-		m_tempScore = 25;
+		m_score += m_tempScore + Score::WIN_LEVEL;
 	}
 }
 //======================================
 void Robot::collision(Object& other)
 {
+	if (&other == this)
+		return;
+
 	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
 	{
 		other.collided(*this);
@@ -137,11 +140,6 @@ void Robot::collided(GiftAddLife& giftAddLife)
 void Robot::collided(GiftAddTime& giftAddTime)
 {
 	m_robotClock += sf::seconds(20);
-}
-//======================================
-void Robot::setPosition()
-{
-	 m_sprite.move(LoadFile::getInstance().getPosition()); 
 }
 //=========================================
 void Robot::isLimitedTime(const int robotClock)

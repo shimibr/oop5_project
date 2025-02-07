@@ -9,7 +9,7 @@
 #include "dataTexture.h"
 #include <iostream>
 Explosion::Explosion(sf::Vector2f position,const int direction)
-	: ObjectMove(dataTexture::getInstance().getTexture(Entity::EXLOSION), position, Entity::SIZE_PIXEL-10)
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::EXLOSION), position, Speed::EXPLOSION)
 {
 	m_direction = direction;
 }

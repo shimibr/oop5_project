@@ -10,11 +10,11 @@
 
 
 Guard::Guard()
-	: ObjectMove(dataTexture::getInstance().getTexture(Entity::GUARD), LoadFile::getInstance().getPosition(), (int)Entity::GUARD_SPEED)
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::GUARD), LoadFile::getInstance().getPosition(), Speed::GUARD)
 {
-	m_direction = rand() % 4;
+	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
 	m_countGuards++;
-	Robot::getInstance().addTempScore(3);
+	Robot::getInstance().addTempScore(Score::GUARD_EXISTS);
 }
 //======================================
 void Guard::reset()
@@ -57,19 +57,19 @@ void Guard::collided(Robot& robot)
 void Guard::collided(Wall& wall)
 {
 	setLastPosition(wall);
-	m_direction = rand() % 4;
+	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
 	setLastPosition(stone);
-	m_direction = rand() % 4;
+	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
 }
 //======================================
 void Guard::collided(Explosion& explosion)
 {
 	m_isDead = true;
-	Robot::getInstance().addScore(5);
+	Robot::getInstance().addScore(Score::KILL_GUARD);
 }
 //======================================
 void Guard::collided(Guard& guard)
@@ -78,6 +78,9 @@ void Guard::collided(Guard& guard)
 //======================================
 void Guard::collision(Object& other)
 {
+	if (&other == this)
+		return;
+
 	if (m_sprite.getGlobalBounds().intersects(other.getGlobalLoc()))
 	{
 		other.collided(*this);
@@ -88,7 +91,7 @@ void Guard::killOneGuard()
 {
 	if (m_countGuards > 0)
 	{
-		Robot::getInstance().addScore(5);
+		Robot::getInstance().addScore(Score::KILL_GUARD);
 		m_killOneGuard = true;
 	}
 }

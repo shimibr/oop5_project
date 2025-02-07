@@ -17,27 +17,25 @@ public:
 	virtual void reset() override;
 	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
 
+
+
 	const sf::Vector2f getPosition() const;
-
 	void printRobotData(sf::RenderWindow& window) const;
-
 	bool isWin();
 	bool lostLife();
 	bool timeLeft();
-	
 	void addScore(const int score) { m_score += score; }
 	void addTempScore(const int tempScore) { m_tempScore += tempScore; }
 
-	
-	void collision(Object& other);
+	//=============================================== התנגשויות
+	virtual void collision(Object& other)override;
 	void collided(Guard& guard);
 	void collided(Door& door);
 	void collided(Wall& wall);
-	virtual void collided(Stone& stone);
+	void collided(Stone& stone);
 	void collided(Explosion& explosion);
-	virtual void collided(GiftAddLife& giftAddLife);
-	virtual void collided(GiftAddTime& giftAddTime);
-	void setPosition();
+	void collided(GiftAddLife& giftAddLife);
+	void collided(GiftAddTime& giftAddTime);
 
 private:
 	Robot();
@@ -50,7 +48,7 @@ private:
 	bool m_win = false;
 	int m_lives = 3;
 	int m_score = 0;
-	int m_tempScore = 25;
+	int m_tempScore = 0;
 
 	
 

@@ -14,15 +14,15 @@ public:
 	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
 
 	static void dontMove(float sleepFor) { m_sleep = sleepFor; }
+	static void killOneGuard();
 
-	void collision(Object& other);
+	virtual void collision(Object& other) override;
 	void collided(Robot& robot);
 	void collided(Wall& wall);
-	virtual	void collided(Stone& stone);
+	void collided(Stone& stone);
 	void collided(Explosion& explosion);
 	void collided(Guard& guard);
 
-	static void killOneGuard();
 
 private:
 	bool firstCheck(const float deltaTime);

@@ -16,7 +16,7 @@ public:
 
 
 	virtual void reset() = 0;
-	virtual void collision(Object& other);
+	virtual void collision(Object& other) = 0;
 	virtual void move(const sf::Vector2u sizeWindow, const float deltaTime) = 0;
 
 

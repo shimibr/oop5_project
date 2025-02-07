@@ -20,6 +20,7 @@ private:
 	void showHelp();
 	std::string loadHelpText();
 
+	const int MENU_BUTTONS = 3;
 	TextMaker m_textMaker;
 	Controler m_controler;
 
