@@ -36,7 +36,7 @@ void ObjectMove::inWindow(const sf::Vector2u sizeWindow)
 		|| getGlobalLoc().top + getGlobalLoc().height > sizeWindow.y - Entity::SIZE_PIXEL * 2)
 	{
 		m_sprite.setPosition(m_lastPosition);
-		m_direction = rand() % 4;
+		m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
 	}
 }
 //==================================
@@ -53,52 +53,55 @@ void ObjectMove::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 
 	m_lastPosition = m_sprite.getPosition();
 
-	float distanceLeft = (getGlobalLoc().left - ((int)getGlobalLoc().left / Entity::SIZE_PIXEL * Entity::SIZE_PIXEL));
-	float distanceTop = (getGlobalLoc().top - ((int)getGlobalLoc().top / Entity::SIZE_PIXEL * Entity::SIZE_PIXEL));
+	const float distanceLeft = (getGlobalLoc().left - ((int)getGlobalLoc().left / Entity::SIZE_PIXEL * Entity::SIZE_PIXEL));
+	const float distanceTop = (getGlobalLoc().top - ((int)getGlobalLoc().top / Entity::SIZE_PIXEL * Entity::SIZE_PIXEL));
 
 	switch (m_direction)
 	{
-	case 0:
+	case Direction::UP:
 		if (distanceLeft == 0)
 			m_sprite.move(0.0f, -m_speed * deltaTime);
 		else
-		{
-			if (distanceLeft > Entity::SIZE_PIXEL / 2)
-				m_sprite.move(std::min(m_speed * deltaTime, Entity::SIZE_PIXEL - distanceLeft), 0.0f);
-			else
-				m_sprite.move(std::max(-m_speed * deltaTime, -distanceLeft), 0.0f);
-		}
+			straightenUpByLeft(distanceLeft, deltaTime);
 
 		break;
-	case 1:
+		case Direction::DOWN:
 		if (distanceLeft == 0)
 			m_sprite.move(0.0f, m_speed * deltaTime);
 		else
-			if(distanceLeft > Entity::SIZE_PIXEL / 2)
-				m_sprite.move(std::min(m_speed * deltaTime, Entity::SIZE_PIXEL- distanceLeft), 0.0f);
-			else
-				m_sprite.move(std::max(-m_speed * deltaTime, -distanceLeft), 0.0f);
+			straightenUpByLeft(distanceLeft, deltaTime);
 		break;
-	case 2:
+		case Direction::LEFT:
 		if (distanceTop == 0)
 			m_sprite.move(-m_speed * deltaTime, 0.0f);
 		else
-			if (distanceTop > Entity::SIZE_PIXEL / 2)
-				m_sprite.move(0.0f,std::min(m_speed * deltaTime, Entity::SIZE_PIXEL - distanceTop));
-			else
-				m_sprite.move( 0.0f,std::max(-m_speed * deltaTime, -distanceTop));
+			straightenUpByTop(distanceTop, deltaTime);
 		break;
-	case 3:
-		if (distanceTop == 0)
-			m_sprite.move(m_speed * deltaTime, 0.0f);
-		else
-			if (distanceTop > Entity::SIZE_PIXEL / 2)
-				m_sprite.move(0.0f, std::min(m_speed * deltaTime, Entity::SIZE_PIXEL - distanceTop));
+		case Direction::RIGHT:
+			if (distanceTop == 0)
+				m_sprite.move(m_speed * deltaTime, 0.0f);
 			else
-				m_sprite.move(0.0f, std::max(-m_speed * deltaTime, -distanceTop));
+				straightenUpByTop(distanceTop, deltaTime);
 		break;
 	}
 	inWindow(sizeWindow);
+}
+//======================================
+void ObjectMove::straightenUpByTop(const float distanceTop, const float deltaTime)
+{
+	if (distanceTop > Entity::SIZE_PIXEL / 2)
+		m_sprite.move(0.0f, std::min(m_speed * deltaTime, Entity::SIZE_PIXEL - distanceTop));
+	else
+		m_sprite.move(0.0f, std::max(-m_speed * deltaTime, -distanceTop));
+
+}
+//======================================
+void ObjectMove::straightenUpByLeft(const float distanceLeft, const float deltaTime)
+{
+	if (distanceLeft > Entity::SIZE_PIXEL / 2)
+		m_sprite.move(std::min(m_speed * deltaTime, Entity::SIZE_PIXEL - distanceLeft), 0.0f);
+	else
+		m_sprite.move(std::max(-m_speed * deltaTime, -distanceLeft), 0.0f);
 }
 //======================================
 void ObjectMove::setLastPosition(Object& object)

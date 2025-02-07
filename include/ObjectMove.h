@@ -22,6 +22,8 @@ public:
 
 
 protected:
+	void straightenUpByTop(const float distanceTop, const float deltaTime);
+	void straightenUpByLeft(const float distanceLeft, const float deltaTime);
 	void inWindow(const sf::Vector2u sizeWindow);
 	void initPositionLevel(const sf::Vector2f position);
 	void setLastPosition(Object& object);
