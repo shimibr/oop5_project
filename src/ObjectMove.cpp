@@ -22,14 +22,14 @@ ObjectMove::ObjectMove(sf::Texture& texture, sf::Vector2f position, const int sp
 	initPositionLevel(position);
 }
 //===================================
-void ObjectMove::initPositionLevel(sf::Vector2f position)
+void ObjectMove::initPositionLevel(const sf::Vector2f position)
 {
 	m_firstPosition = position;
 	m_lastPosition = position;
 	m_sprite.setPosition(position);
 }
 //===================================
-void ObjectMove::inWindow(sf::Vector2u sizeWindow)
+void ObjectMove::inWindow(const sf::Vector2u sizeWindow)
 {
 	if (getGlobalLoc().left < 0 || getGlobalLoc().top < 0
 		|| getGlobalLoc().left + getGlobalLoc().width > sizeWindow.x
@@ -46,7 +46,7 @@ void ObjectMove::reset()
 void ObjectMove::collision(Object& other)
 {}
 //===================================
-void ObjectMove::move(const float deltaTime)
+void ObjectMove::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 {
 	if (m_isDead)
 		return;
@@ -98,6 +98,7 @@ void ObjectMove::move(const float deltaTime)
 				m_sprite.move(0.0f, std::max(-m_speed * deltaTime, -distanceTop));
 		break;
 	}
+	inWindow(sizeWindow);
 }
 //======================================
 void ObjectMove::setLastPosition(Object& object)

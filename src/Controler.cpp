@@ -154,9 +154,9 @@ bool Controler::eventManager()
 			m_objectsMove.push_back(std::make_unique<Bomb>());
 	}
 	for (int i = 0; i < m_objectsMove.size(); i++)
-		m_objectsMove[i]->move(m_deltaTime);
+		m_objectsMove[i]->move(m_window.getSize(),m_deltaTime);
 
-	Robot::getInstance().move(m_deltaTime);
+	Robot::getInstance().move(m_window.getSize(),m_deltaTime);
 
 	collisionObjects();
 	return false;
@@ -174,13 +174,11 @@ void Controler::collisionObjects()
 		for (int j = 0; j < m_objectsMove.size(); j++)
 			m_objectsMove[i]->collision(*m_objectsMove[j]);
 
-		m_objectsMove[i]->inWindow(m_window.getSize());
 	}
 
 	for (int i = 0; i < m_objects.size(); i++)
 		Robot::getInstance().collision(*m_objects[i]);
 
-		Robot::getInstance().inWindow(m_window.getSize());
 }
 //======================================
 void Controler::resetObjects()

@@ -10,11 +10,11 @@ public:
 
 	virtual void collision(Object& other)override;
 	virtual void reset() override;
-	virtual void move(const float deltaTime) override;
+	virtual void move(const sf::Vector2u sizeWindow, const float deltaTime) override;
 	virtual void collided(Bomb& bomb) override;
 
 	void update(sf::RenderWindow& window);
-	void moving(const float deltaTime);
+	void moving(const sf::Vector2u sizeWindow,const float deltaTime);
 
 
 private:

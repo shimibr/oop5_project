@@ -40,7 +40,7 @@ void Bomb::reset()
     m_isDead = true;
 }
 //======================================
-void Bomb::move(const float deltaTime)
+void Bomb::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 {
     int soundSum = m_timer;
     m_timer -= deltaTime;
@@ -53,7 +53,7 @@ void Bomb::move(const float deltaTime)
         m_hasExploded = true;     
     }
 
-    moving(deltaTime);
+    moving(sizeWindow,deltaTime);
     m_isDead = m_hasExploded && m_timer <= -1;
 }
 //=======================================
@@ -91,10 +91,10 @@ void Bomb::explosion()
         m_explosion.push_back(Explosion(m_sprite.getPosition(), i));
 }
 //======================================
-void Bomb::moving(const float deltaTime)
+void Bomb::moving(const sf::Vector2u sizeWindow,const float deltaTime)
 {
     for (int i = 0; i < m_explosion.size(); i++)
     {
-        m_explosion[i].move(deltaTime);
+        m_explosion[i].move(sizeWindow,deltaTime);
     }
 }

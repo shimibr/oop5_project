@@ -22,12 +22,12 @@ void Guard::reset()
 	m_sprite.setPosition(m_firstPosition);
 }
 //======================================
-void Guard::move(const float deltaTime)
+void Guard::move(const sf::Vector2u sizeWindow,const float deltaTime)
 {
 	if (firstCheck(deltaTime))
 		return;
 
-	ObjectMove::move(deltaTime);
+	ObjectMove::move(sizeWindow,deltaTime);
 }
 //======================================
 bool Guard::firstCheck(const float deltaTime)

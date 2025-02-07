@@ -34,7 +34,7 @@ void Robot::reset()
 	m_sprite.setPosition(m_firstPosition);
 }
 //======================================
-void Robot::move(const float deltaTime)
+void Robot::move(const sf::Vector2u sizeWindow,const float deltaTime)
 {
 	int soundSum = (int)m_robotClock.asSeconds();
 	m_robotClock -= sf::seconds(deltaTime);
@@ -44,24 +44,24 @@ void Robot::move(const float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		m_direction = 0;
-		ObjectMove::move(deltaTime);
+		ObjectMove::move( sizeWindow,deltaTime);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		m_direction = 1;
-		ObjectMove::move(deltaTime);
+		ObjectMove::move(sizeWindow,deltaTime);
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		m_direction = 2;
-		ObjectMove::move(deltaTime);
+		ObjectMove::move(sizeWindow,deltaTime);
 	}
 
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		m_direction = 3;
-		ObjectMove::move(deltaTime);
+		ObjectMove::move(sizeWindow,deltaTime);
 	}
 }
 //====================================

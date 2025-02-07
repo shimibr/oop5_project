@@ -14,9 +14,9 @@ Explosion::Explosion(sf::Vector2f position,const int direction)
 	m_direction = direction;
 }
 //==========================================
-void Explosion::move(const float deltaTime)
+void Explosion::move(const sf::Vector2u sizeWindow,const float deltaTime)
 {
-	ObjectMove::move(deltaTime);
+	ObjectMove::move(sizeWindow,deltaTime);
 
 }
 //===================================

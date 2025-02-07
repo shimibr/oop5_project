@@ -25,7 +25,7 @@ public:
 	void addTempScore(const int tempScore) { m_tempScore += tempScore; }
 
 	virtual void reset() override;
-	virtual void move(const float deltaTime) override;
+	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
 	
 	void collision(Object& other);
 	void collided(Guard& guard);
