@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Bomb.h"
+#include "io.h"
+#include "dataTexture.h"
 #include <iostream>
 
-Bomb::Bomb()
-{
-}
+#include "Robot.h"
 //======================================
-Bomb::Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture, sf::Vector2f position)
-    : ObjectMove(bombTexture, position, 0), m_explosionTexture(explosionTexture), m_hasExploded(false)
+Bomb::Bomb()
+    : ObjectMove(dataTexture::getInstance().getTexture(Entity::BOMB), Robot::getInstance().getPosition(), 0), m_hasExploded(false)
 {
+    sf::Vector2f position = Robot::getInstance().getPosition();
     initPositionLevel(sf::Vector2f( (int)position.x - int(position.x) % Entity::SIZE_PIXEL ,(int)position.y - (int)position.y % Entity::SIZE_PIXEL ));
     textNumber();
 }
@@ -48,7 +49,7 @@ void Bomb::move(const float deltaTime)
     if (m_timer <= 0 && !m_hasExploded)
     {
         SoundManager::getInstance().playExlosionSound();
-        explosion(m_explosionTexture); 
+        explosion(); 
         m_hasExploded = true;     
     }
 
@@ -82,12 +83,12 @@ void Bomb::textNumber()
     m_text.setFillColor(sf::Color::Red);
 }
 //======================================
-void Bomb::explosion(sf::Texture& texture)
+void Bomb::explosion()
 {
     if (m_hasExploded) return; 
-    std::cout << "!!!!";
+  
     for (int i = 0; i < 4; i++)
-        m_explosion.push_back(Explosion(texture, m_sprite.getPosition(), i));
+        m_explosion.push_back(Explosion(m_sprite.getPosition(), i));
 }
 //======================================
 void Bomb::moving(const float deltaTime)

@@ -6,9 +6,10 @@
 #include "Wall.h"
 #include "Stone.h"
 #include "Door.h"
+#include "dataTexture.h"
 #include <iostream>
-Explosion::Explosion(sf::Texture& texture, sf::Vector2f position,const int direction)
-	: ObjectMove(texture, position, Entity::SIZE_PIXEL-10)
+Explosion::Explosion(sf::Vector2f position,const int direction)
+	: ObjectMove(dataTexture::getInstance().getTexture(Entity::EXLOSION), position, Entity::SIZE_PIXEL-10)
 {
 	m_direction = direction;
 }

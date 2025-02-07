@@ -7,7 +7,6 @@ class Bomb : public ObjectMove
 {
 public:
 	Bomb();
-	Bomb(sf::Texture& bombTexture, sf::Texture& explosionTexture,  sf::Vector2f position);
 
 	virtual void collision(Object& other)override;
 	virtual void reset() override;
@@ -20,12 +19,11 @@ public:
 
 private:
 	void textNumber();
-	void explosion(sf::Texture& texture);
+	void explosion();
 
 	sf::Font m_font;
 	sf::Text m_text;
 	float m_timer = 5;
 	std::vector <Explosion> m_explosion;
-	sf::Texture m_explosionTexture;
 	bool m_hasExploded = false;
 };

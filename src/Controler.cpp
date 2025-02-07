@@ -87,8 +87,7 @@ bool Controler::exceptionManager()
 void Controler::readLevelsGift()
 {
 	for (int i = 0; i < m_dataLevel[1]; i++)
-	{
-		
+	{		
 
 		int type = rand() % (m_dataLevel[2] == 0 ? 3 : 4); //לא מוסיף מתנה של הוספת זמן במידה ואין מגבלת זמן
 
@@ -152,7 +151,7 @@ bool Controler::eventManager()
 			return true;
 		}
 		if (userEvent.type == sf::Event::KeyReleased && userEvent.key.code == sf::Keyboard::B)
-			m_objectsMove.push_back(std::make_unique<Bomb>(dataTexture::getInstance().getTexture(Entity::BOMB), dataTexture::getInstance().getTexture(Entity::EXLOSION), Robot::getInstance().getPosition()));
+			m_objectsMove.push_back(std::make_unique<Bomb>());
 	}
 	for (int i = 0; i < m_objectsMove.size(); i++)
 		m_objectsMove[i]->move(m_deltaTime);

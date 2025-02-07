@@ -6,7 +6,7 @@
 class Explosion : public ObjectMove
 {
 public:
-	Explosion(sf::Texture& texture, sf::Vector2f position, const int direction);
+	Explosion(sf::Vector2f position, const int direction);
 	void move(const float deltaTime);
 	void collision(Object& other);
 	void collided(Guard& guard);
