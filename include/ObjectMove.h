@@ -14,7 +14,6 @@ public:
 	ObjectMove(sf::Texture& texture, sf::Vector2f position, const int speed);
 	virtual ~ObjectMove();
 
-	void fixPosition();
 	void inWindow(sf::Vector2u sizeWindow);
 
 	virtual void reset();
@@ -32,6 +31,6 @@ protected:
 	int m_direction;
 	int m_speed;
 	sf::Vector2f m_firstPosition;
-	sf::Vector2f m_fixPosition;
+	sf::Vector2f m_lastPosition;
 
 };

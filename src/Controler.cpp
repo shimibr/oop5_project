@@ -86,10 +86,9 @@ bool Controler::exceptionManager()
 //======================================
 void Controler::readLevelsGift()
 {
-	//bool giftIsHidden = false;
 	for (int i = 0; i < m_dataLevel[1]; i++)
 	{
-		//sf::Vector2f giftLoc = LoadFile::getInstance().getLegalGiftLoc(giftIsHidden);
+		
 
 		int type = rand() % (m_dataLevel[2] == 0 ? 3 : 4); //לא מוסיף מתנה של הוספת זמן במידה ואין מגבלת זמן
 
@@ -183,11 +182,6 @@ void Controler::collisionObjects()
 		Robot::getInstance().collision(*m_objects[i]);
 
 		Robot::getInstance().inWindow(m_window.getSize());
-
-	for (int i = 0; i < m_objectsMove.size(); i++)	
-		m_objectsMove[i]->fixPosition();
-
-	Robot::getInstance().fixPosition();
 }
 //======================================
 void Controler::resetObjects()
