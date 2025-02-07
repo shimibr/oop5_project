@@ -22,7 +22,6 @@ public:
 	void printRobotData(sf::RenderWindow& window) const;
 
 	bool isWin();
-	void setNotWin() { m_win = false; }
 	bool lostLife();
 	bool timeLeft();
 	

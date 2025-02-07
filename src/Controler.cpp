@@ -64,8 +64,6 @@ bool Controler::exceptionManager()
 		SoundManager::getInstance().playWinSound();
 		m_window.close();
 		m_dataLevel.clear();
-		Robot::getInstance().setNotWin();
-		resetObjects();
 	}
 	if (Robot::getInstance().isDead())
 	{
