@@ -17,14 +17,15 @@ public:
 	static void killOneGuard();
 
 	virtual void collision(Object& other) override;
-	void collided(Robot& robot);
-	void collided(Wall& wall);
-	void collided(Stone& stone);
-	void collided(Explosion& explosion);
-	void collided(Guard& guard);
+	virtual void collided(Robot& robot)override;
+	virtual void collided(Wall& wall)override;
+	virtual void collided(Stone& stone)override;
+	virtual void collided(Explosion& explosion)override;
+	virtual void collided(Guard& guard)override;
 
 
 private:
+	void changeDirection();
 	bool firstCheck(const float deltaTime);
 	static float m_sleep;
 	static bool  m_killOneGuard;

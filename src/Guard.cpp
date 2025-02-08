@@ -30,6 +30,15 @@ void Guard::move(const sf::Vector2u sizeWindow,const float deltaTime)
 	ObjectMove::move(sizeWindow,deltaTime);
 }
 //======================================
+void Guard::changeDirection()
+{
+	int tampDirection = m_direction;
+	do
+	{
+		m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	} while (m_direction == tampDirection);
+}
+//======================================
 bool Guard::firstCheck(const float deltaTime)
 {
 	if (m_killOneGuard)
@@ -56,14 +65,15 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
-	setLastPosition(wall);
-	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	setLastPosition();
+	changeDirection();
+
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
-	setLastPosition(stone);
-	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	setLastPosition();
+	changeDirection();
 }
 //======================================
 void Guard::collided(Explosion& explosion)

@@ -96,12 +96,12 @@ void Robot::collision(Object& other)
 //======================================
 void Robot::collided(Wall& wall)
 {
-	setLastPosition(wall);
+	setLastPosition();
 }
 //======================================
 void Robot::collided(Stone& stone)
 {
-	setLastPosition(stone);
+	setLastPosition();
 }
 //======================================
 void Robot::collided(Explosion& explosion)
