@@ -28,7 +28,7 @@ public:
 private:
 	virtual bool inWindow(const sf::Vector2u sizeWindow)override;
 
-	void changeDirection();
+	virtual void changeDirection();
 	bool firstCheck(const float deltaTime);
 	static float m_sleep;
 	static bool  m_killOneGuard;

@@ -44,15 +44,20 @@ void Controler::readLevels()
 	{
 		if (type == Entity::ROBOT)
 			Robot::getInstance().startLevel();
-		else if (type == Entity::GUARD)
-			m_objectsMove.push_back(std::make_unique<Guard>());
 		else if (type == Entity::WALL_OR_EDGE)
 			m_objects.push_back(std::make_unique<Wall>());
 		else if (type == Entity::STONE)
 			m_objects.push_back(std::make_unique<Stone>());
 		else if (type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>());
-
+		else if (type == Entity::GUARD)
+		{
+			const bool smartGuard = rand() % 3 % 2; // שיהיה הסתברות של 33% להופעת שומר חכם
+			if (smartGuard)
+				m_objectsMove.push_back(std::make_unique<SmartGuard>());
+			else
+				m_objectsMove.push_back(std::make_unique<Guard>());
+		}
 		type = LoadFile::getInstance().getFromFile();
 	}
 	readLevelsGift();

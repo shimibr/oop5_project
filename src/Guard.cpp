@@ -5,7 +5,7 @@
 #include "Wall.h"
 #include "Stone.h"
 #include <iostream>
-#include "dataTexture.h"
+#include "DataTexture.h"
 #include "LoadFile.h"
 
 
@@ -63,6 +63,7 @@ bool Guard::firstCheck(const float deltaTime)
 		m_sleep -= deltaTime / m_countGuards;
 		return true;
 	}
+	return false;
 }
 //======================================
 void Guard::collided(Robot& robot)

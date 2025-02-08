@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 
 #include "Guard.h"
+#include "SmartGuard.h"
 #include "Robot.h"
 #include "LoadFile.h"
 #include "Wall.h"
