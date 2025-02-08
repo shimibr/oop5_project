@@ -49,6 +49,7 @@ void ObjectMove::collision(Object& other)
 //===================================
 void ObjectMove::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 {
+
 	if (m_isDead)
 		return;
 
@@ -85,7 +86,13 @@ void ObjectMove::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 				straightenUpByTop(distanceTop, deltaTime);
 		break;
 	}
+	spriteMove();
 	inWindow(sizeWindow);
+}
+//===================================
+void ObjectMove::spriteMove()
+{
+		m_sprite.setTextureRect(sf::IntRect(0, m_direction * Entity::SIZE_PIXEL, Entity::SIZE_PIXEL, Entity::SIZE_PIXEL));
 }
 //======================================
 void ObjectMove::straightenUpByTop(const float distanceTop, const float deltaTime)

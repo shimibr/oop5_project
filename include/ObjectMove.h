@@ -21,6 +21,7 @@ public:
 
 	virtual bool inWindow(const sf::Vector2u sizeWindow);
 protected:
+	void spriteMove();
 	void straightenUpByTop(const float distanceTop, const float deltaTime);
 	void straightenUpByLeft(const float distanceLeft, const float deltaTime);
 	void initPositionLevel(const sf::Vector2f position);

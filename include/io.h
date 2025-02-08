@@ -25,10 +25,10 @@ namespace Speed
 namespace Direction
 {
 	const int AMOUNT_DIRECTIONS = 4;
-	const int UP = 0;
-	const int DOWN = 1;
-	const int LEFT = 2;
-	const int RIGHT = 3;
+	const int DOWN = 0;
+	const int LEFT = 1;
+	const int RIGHT = 2;
+	const int UP = 3;
 }
 //=====================================
 namespace Score
