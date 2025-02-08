@@ -29,11 +29,11 @@ public:
 
 	//=============================================== התנגשויות
 	virtual void collision(Object& other)override;
-	void collided(Guard& guard);
-	void collided(Door& door);
-	void collided(Wall& wall);
-	void collided(Stone& stone);
-	void collided(Explosion& explosion);
+	virtual void collided(Guard& guard)override;
+	virtual void collided(Door& door)override;
+	virtual void collided(Wall& wall)override;
+	virtual void collided(Stone& stone)override;
+	virtual void collided(Explosion& explosion)override;
 	void collided(GiftAddLife& giftAddLife);
 	void collided(GiftAddTime& giftAddTime);
 
