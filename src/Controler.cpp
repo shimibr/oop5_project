@@ -204,17 +204,17 @@ void Controler::printDataGame()
 
 	dataRectangle.setPosition(0, m_window.getSize().y - (float)2 * Entity::SIZE_PIXEL);
 	dataRectangle.setFillColor(sf::Color::Cyan);
-
 	m_window.draw(dataRectangle);
+
 	for (int i = 0; i < dataType.size(); i++)
 		m_window.draw(TextMaker::getInstance().makeText(dataType[i], 
-			sf::Vector2f(m_window.getSize().x * (i * (float)5)/ (float)26 + Entity::SIZE_PIXEL/2, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+			sf::Vector2f(m_window.getSize().x * i/ 5 + Entity::SIZE_PIXEL/2, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
 
 	m_window.draw(TextMaker::getInstance().makeText(m_dataLevel[0]
-		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - Entity::SIZE_PIXEL)));
+		, sf::Vector2f(Entity::SIZE_PIXEL, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
-	
-	m_window.draw(TextMaker::getInstance().makeText(m_gameClock, { (float)m_window.getSize().x * (float)16 / 26, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
+	m_window.draw(TextMaker::getInstance().makeText(m_gameClock, 
+		sf::Vector2f( (float)m_window.getSize().x * (float)3 / 5 + Entity::SIZE_PIXEL, (float)m_window.getSize().y - Entity::SIZE_PIXEL )));
 
 	Robot::getInstance().printRobotData(m_window);
 }

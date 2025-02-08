@@ -25,11 +25,11 @@ protected:
 	void inWindow(const sf::Vector2u sizeWindow);
 	void initPositionLevel(const sf::Vector2f position);
 	void setLastPosition(Object& object);
-	bool m_isCollided = false;
 	int m_direction;
 	sf::Vector2f m_firstPosition;
 	sf::Vector2f m_lastPosition;
 private:
+	bool m_isCollided = false;
 	int m_speed;
 
 
