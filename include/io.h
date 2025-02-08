@@ -17,7 +17,7 @@ namespace Entity
 //=====================================
 namespace Speed
 {
-	const float GUARD = 50;
+	const float GUARD = 70;
 	const float ROBOT = 150;
 	const float EXPLOSION = 60;
 }

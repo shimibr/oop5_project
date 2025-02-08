@@ -41,22 +41,20 @@ void Explosion::collided(Robot& robot)
 void Explosion::collided(Wall& wall)
 {
 	m_isDead = true;
-	//setLastPosition();
-}
-//===================================
-void Explosion::collided(Stone& stone)
-{
-	
 }
 //====================================
 void Explosion::collided(Door& door)
 {
 	m_isDead = true;
-	//setLastPosition();
 }
 //===================================
-void Explosion::collided(Explosion& explosion)
+bool Explosion::inWindow(const sf::Vector2u sizeWindow)
 {
-	// Do nothing
+	if (!ObjectMove::inWindow(sizeWindow))
+	{
+		m_isDead = true;
+		return false;
+	}
+	return true ;
 }
 

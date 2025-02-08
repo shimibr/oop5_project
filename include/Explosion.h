@@ -10,14 +10,16 @@ public:
 	virtual void move(const sf::Vector2u sizeWindow,const float deltaTime) override;
 	virtual void reset() override {}
 
-	void collision(Object& other);
-	void collided(Guard& guard);
-	void collided(Robot& robot);
-	void collided(Wall& wall);
-	void collided(Stone& stone);
-	void collided(Door& door);
-	void collided(Explosion& explosion);
+	//===================================התנגשויות
+	virtual void collision(Object& other)override;
+	virtual void collided(Guard& guard)override;
+	virtual void collided(Robot& robot)override;
+	virtual void collided(Wall& wall)override;
+	virtual void collided(Stone& stone)override {}
+	virtual void collided(Door& door)override;
+	virtual void collided(Explosion& explosion)override {}
 
 private:
-	
+	virtual bool inWindow(const sf::Vector2u sizeWindow)override;
+
 };

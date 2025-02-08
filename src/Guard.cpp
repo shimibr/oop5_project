@@ -5,7 +5,7 @@
 #include "Wall.h"
 #include "Stone.h"
 #include <iostream>
-#include "dataTexture.h"
+#include "DataTexture.h"
 #include "LoadFile.h"
 
 
@@ -30,6 +30,25 @@ void Guard::move(const sf::Vector2u sizeWindow,const float deltaTime)
 	ObjectMove::move(sizeWindow,deltaTime);
 }
 //======================================
+bool Guard::inWindow(const sf::Vector2u sizeWindow)
+{
+	if (!ObjectMove::inWindow(sizeWindow))
+	{
+		changeDirection();
+		return false;
+	}
+	return true ;
+}
+//======================================
+void Guard::changeDirection()
+{
+	int tampDirection = m_direction;
+	do
+	{
+		m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	} while (m_direction == tampDirection);
+}
+//======================================
 bool Guard::firstCheck(const float deltaTime)
 {
 	if (m_killOneGuard)
@@ -44,6 +63,7 @@ bool Guard::firstCheck(const float deltaTime)
 		m_sleep -= deltaTime / m_countGuards;
 		return true;
 	}
+	return false;
 }
 //======================================
 void Guard::collided(Robot& robot)
@@ -56,14 +76,15 @@ void Guard::collided(Robot& robot)
 //======================================
 void Guard::collided(Wall& wall)
 {
-	setLastPosition(wall);
-	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	setLastPosition();
+	changeDirection();
+
 }
 //======================================
 void Guard::collided(Stone& stone)
 {
-	setLastPosition(stone);
-	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+	setLastPosition();
+	changeDirection();
 }
 //======================================
 void Guard::collided(Explosion& explosion)

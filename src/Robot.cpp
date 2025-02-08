@@ -96,12 +96,12 @@ void Robot::collision(Object& other)
 //======================================
 void Robot::collided(Wall& wall)
 {
-	setLastPosition(wall);
+	setLastPosition();
 }
 //======================================
 void Robot::collided(Stone& stone)
 {
-	setLastPosition(stone);
+	setLastPosition();
 }
 //======================================
 void Robot::collided(Explosion& explosion)
@@ -153,14 +153,14 @@ void Robot::isLimitedTime(const int robotClock)
 //=======================================
 void Robot::printRobotData(sf::RenderWindow& window) const
 {
-	window.draw(TextMaker::getInstance().makeText(m_lives, sf::Vector2f(window.getSize().x * 6 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
-	window.draw(TextMaker::getInstance().makeText(m_score, sf::Vector2f(window.getSize().x * 21 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(TextMaker::getInstance().makeText(m_lives, sf::Vector2f(window.getSize().x * 1 / 5 + Entity::SIZE_PIXEL, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(TextMaker::getInstance().makeText(m_score, sf::Vector2f(window.getSize().x * 4 / 5 + Entity::SIZE_PIXEL, window.getSize().y - Entity::SIZE_PIXEL)));
 	if(!m_unlimitedTime)
 	{
-		window.draw(TextMaker::getInstance().makeText(m_robotClock, sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+		window.draw(TextMaker::getInstance().makeText(m_robotClock, sf::Vector2f(window.getSize().x * 2 / 5 + Entity::SIZE_PIXEL, window.getSize().y - Entity::SIZE_PIXEL)));
 	}
 	else
-		window.draw(TextMaker::getInstance().makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+		window.draw(TextMaker::getInstance().makeText("Unlimited", sf::Vector2f(window.getSize().x * 2 / 5 + Entity::SIZE_PIXEL, window.getSize().y - Entity::SIZE_PIXEL)));
 }
 //======================================
 bool Robot::isWin() 

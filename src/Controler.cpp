@@ -27,6 +27,7 @@ bool Controler::run()
 	
 			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
+				
 				updateWindow();
 				if (eventManager()) return true;
 				if (exceptionManager()) return true;
@@ -43,15 +44,20 @@ void Controler::readLevels()
 	{
 		if (type == Entity::ROBOT)
 			Robot::getInstance().startLevel();
-		else if (type == Entity::GUARD)
-			m_objectsMove.push_back(std::make_unique<Guard>());
 		else if (type == Entity::WALL_OR_EDGE)
 			m_objects.push_back(std::make_unique<Wall>());
 		else if (type == Entity::STONE)
 			m_objects.push_back(std::make_unique<Stone>());
 		else if (type == Entity::DOOR)
 			m_objects.push_back(std::make_unique<Door>());
-
+		else if (type == Entity::GUARD)
+		{
+			const bool smartGuard = rand() % 3 % 2; // שיהיה הסתברות של 33% להופעת שומר חכם
+			if (smartGuard)
+				m_objectsMove.push_back(std::make_unique<SmartGuard>());
+			else
+				m_objectsMove.push_back(std::make_unique<Guard>());
+		}
 		type = LoadFile::getInstance().getFromFile();
 	}
 	readLevelsGift();
@@ -71,7 +77,7 @@ bool Controler::exceptionManager()
 	if (Robot::getInstance().isDead())
 	{
 		DataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
-		std::this_thread::sleep_for(std::chrono::seconds(5));
+		std::this_thread::sleep_for(std::chrono::seconds(2));
 		m_window.close();
 		SoundManager::getInstance().stopAllSounds();
 		return true;
@@ -108,38 +114,27 @@ void Controler::readLevelsGift()
 //====================================
 void Controler::updateWindow()
 {
+	std::erase_if(m_objects, [](const std::unique_ptr<Object>& object) {return object->isDead(); });
+	std::erase_if(m_objectsMove, [](const std::unique_ptr<ObjectMove>& object) {return object->isDead(); });
 	m_window.clear();
 	DataTexture::getInstance().printBackgroundTexture(m_window);
 	printDataGame();
 	for (int i = m_objects.size()-1; i >=0 ; i--)
 	{
-		if(m_objects[i]->isDead())
-		{
-			m_objects.erase(m_objects.begin() + i);
-			i--;
-		}
-		else
 		m_objects[i]->update(m_window);
 	}
 
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
-		if (m_objectsMove[i]->isDead())
-		{
-			m_objectsMove.erase(m_objectsMove.begin() + i);
-			i--;
-		}
-		else
-			m_objectsMove[i]->update(m_window);
+		m_objectsMove[i]->update(m_window);
 	}
 	Robot::getInstance().update(m_window);
 	m_window.display();
-
-	m_deltaTime = m_moveClock.restart().asSeconds();
 }
 //======================================
 bool Controler::eventManager()
 {
+	m_deltaTime = m_moveClock.restart().asSeconds();
 	sf::Event userEvent;
 	while (m_window.pollEvent(userEvent))
 	{
@@ -204,17 +199,17 @@ void Controler::printDataGame()
 
 	dataRectangle.setPosition(0, m_window.getSize().y - (float)2 * Entity::SIZE_PIXEL);
 	dataRectangle.setFillColor(sf::Color::Cyan);
-
 	m_window.draw(dataRectangle);
+
 	for (int i = 0; i < dataType.size(); i++)
 		m_window.draw(TextMaker::getInstance().makeText(dataType[i], 
-			sf::Vector2f(m_window.getSize().x * (i * (float)5)/ (float)26 + Entity::SIZE_PIXEL/2, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+			sf::Vector2f(m_window.getSize().x * i/ 5 + Entity::SIZE_PIXEL/2, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
 
 	m_window.draw(TextMaker::getInstance().makeText(m_dataLevel[0]
-		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - Entity::SIZE_PIXEL)));
+		, sf::Vector2f(Entity::SIZE_PIXEL, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
-	
-	m_window.draw(TextMaker::getInstance().makeText(m_gameClock, { (float)m_window.getSize().x * (float)16 / 26, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
+	m_window.draw(TextMaker::getInstance().makeText(m_gameClock, 
+		sf::Vector2f( (float)m_window.getSize().x * (float)3 / 5 + Entity::SIZE_PIXEL, (float)m_window.getSize().y - Entity::SIZE_PIXEL )));
 
 	Robot::getInstance().printRobotData(m_window);
 }
