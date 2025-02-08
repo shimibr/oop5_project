@@ -45,9 +45,3 @@ struct textureType
 	char type;
 };
 //======================================
-struct Char_Location
-{
-	sf::Vector2f position;
-	char type;
-};
-
