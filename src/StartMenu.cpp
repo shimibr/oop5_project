@@ -138,8 +138,6 @@ void StartMenu::showHelp()
 
 			if (event.type == sf::Event::KeyPressed)
 			{
-				SoundManager::getInstance().playClickSounds();
-
 				if (event.key.code == sf::Keyboard::Up)
 					if (moveSize <= 0) moveSize += moveSpeed;
 

@@ -21,6 +21,7 @@ sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f positio
 //==============================================
 sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position, const sf::Color color)
 {
+	m_text.setCharacterSize(Entity::CHAR_SIZE);
 	m_text.setFillColor(color);
 	return makeText(text, position);
 }

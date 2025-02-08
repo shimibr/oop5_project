@@ -74,6 +74,7 @@ bool Controler::exceptionManager()
 		dataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		m_window.close();
+		SoundManager::getInstance().stopAllSounds();
 		return true;
 	}
 	if (Robot::getInstance().lostLife())
