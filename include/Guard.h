@@ -16,6 +16,7 @@ public:
 	static void dontMove(float sleepFor) { m_sleep = sleepFor; }
 	static void killOneGuard();
 
+
 	virtual void collision(Object& other) override;
 	virtual void collided(Robot& robot)override;
 	virtual void collided(Wall& wall)override;
@@ -25,6 +26,8 @@ public:
 
 
 private:
+	virtual bool inWindow(const sf::Vector2u sizeWindow)override;
+
 	void changeDirection();
 	bool firstCheck(const float deltaTime);
 	static float m_sleep;

@@ -30,6 +30,16 @@ void Guard::move(const sf::Vector2u sizeWindow,const float deltaTime)
 	ObjectMove::move(sizeWindow,deltaTime);
 }
 //======================================
+bool Guard::inWindow(const sf::Vector2u sizeWindow)
+{
+	if (!ObjectMove::inWindow(sizeWindow))
+	{
+		changeDirection();
+		return false;
+	}
+	return true ;
+}
+//======================================
 void Guard::changeDirection()
 {
 	int tampDirection = m_direction;

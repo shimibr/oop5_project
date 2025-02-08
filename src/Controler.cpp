@@ -27,6 +27,7 @@ bool Controler::run()
 	
 			while (!Robot::getInstance().timeLeft() && m_window.isOpen())
 			{
+				
 				updateWindow();
 				if (eventManager()) return true;
 				if (exceptionManager()) return true;
@@ -71,7 +72,7 @@ bool Controler::exceptionManager()
 	if (Robot::getInstance().isDead())
 	{
 		DataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
-		std::this_thread::sleep_for(std::chrono::seconds(5));
+		std::this_thread::sleep_for(std::chrono::seconds(2));
 		m_window.close();
 		SoundManager::getInstance().stopAllSounds();
 		return true;
@@ -108,38 +109,27 @@ void Controler::readLevelsGift()
 //====================================
 void Controler::updateWindow()
 {
+	std::erase_if(m_objects, [](const std::unique_ptr<Object>& object) {return object->isDead(); });
+	std::erase_if(m_objectsMove, [](const std::unique_ptr<ObjectMove>& object) {return object->isDead(); });
 	m_window.clear();
 	DataTexture::getInstance().printBackgroundTexture(m_window);
 	printDataGame();
 	for (int i = m_objects.size()-1; i >=0 ; i--)
 	{
-		if(m_objects[i]->isDead())
-		{
-			m_objects.erase(m_objects.begin() + i);
-			i--;
-		}
-		else
 		m_objects[i]->update(m_window);
 	}
 
 	for (int i = 0; i < m_objectsMove.size(); i++)
 	{
-		if (m_objectsMove[i]->isDead())
-		{
-			m_objectsMove.erase(m_objectsMove.begin() + i);
-			i--;
-		}
-		else
-			m_objectsMove[i]->update(m_window);
+		m_objectsMove[i]->update(m_window);
 	}
 	Robot::getInstance().update(m_window);
 	m_window.display();
-
-	m_deltaTime = m_moveClock.restart().asSeconds();
 }
 //======================================
 bool Controler::eventManager()
 {
+	m_deltaTime = m_moveClock.restart().asSeconds();
 	sf::Event userEvent;
 	while (m_window.pollEvent(userEvent))
 	{

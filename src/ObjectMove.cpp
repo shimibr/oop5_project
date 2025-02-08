@@ -29,15 +29,16 @@ void ObjectMove::initPositionLevel(const sf::Vector2f position)
 	m_sprite.setPosition(position);
 }
 //===================================
-void ObjectMove::inWindow(const sf::Vector2u sizeWindow)
+bool ObjectMove::inWindow(const sf::Vector2u sizeWindow)
 {
 	if (getGlobalLoc().left < 0 || getGlobalLoc().top < 0
 		|| getGlobalLoc().left + getGlobalLoc().width > sizeWindow.x
 		|| getGlobalLoc().top + getGlobalLoc().height > sizeWindow.y - Entity::SIZE_PIXEL * 2)
 	{
 		m_sprite.setPosition(m_lastPosition);
-		m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
+		return false;
 	}
+	return true;
 }
 //==================================
 void ObjectMove::reset()
