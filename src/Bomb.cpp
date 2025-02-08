@@ -8,7 +8,7 @@
 #include "Robot.h"
 //======================================
 Bomb::Bomb()
-    : ObjectMove(dataTexture::getInstance().getTexture(Entity::BOMB), Robot::getInstance().getPosition(), 0), m_hasExploded(false)
+    : ObjectMove(DataTexture::getInstance().getTexture(Entity::BOMB), Robot::getInstance().getPosition(), 0), m_hasExploded(false)
 {
     sf::Vector2f position = Robot::getInstance().getPosition();
     initPositionLevel(sf::Vector2f( (int)position.x - int(position.x) % Entity::SIZE_PIXEL ,(int)position.y - (int)position.y % Entity::SIZE_PIXEL ));

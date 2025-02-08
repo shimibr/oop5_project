@@ -6,7 +6,7 @@
 
 //=================================
 Gift::Gift(bool isHidden)
-	:Object(dataTexture::getInstance().getTexture(Entity::GIFT), LoadFile::getInstance().getLegalGiftLoc(isHidden)) , m_hidden(isHidden) { }
+	:Object(DataTexture::getInstance().getTexture(Entity::GIFT), LoadFile::getInstance().getLegalGiftLoc(isHidden)) , m_hidden(isHidden) { }
 //=================================
 void Gift::collided(Explosion& explosion)
 {

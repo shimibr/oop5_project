@@ -8,7 +8,7 @@
 #include "LoadFile.h"
 
 Wall::Wall()
-	: Object(dataTexture::getInstance().getTexture(Entity::WALL_OR_EDGE), LoadFile::getInstance().getPosition())
+	: Object(DataTexture::getInstance().getTexture(Entity::WALL_OR_EDGE), LoadFile::getInstance().getPosition())
 {
 }
 //===================================

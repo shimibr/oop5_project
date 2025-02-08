@@ -2,17 +2,17 @@
 
 #include "dataTexture.h"
 
-dataTexture& dataTexture::getInstance() {
-	static dataTexture instance;
+DataTexture& DataTexture::getInstance() {
+	static DataTexture instance;
 	return instance;
 }
 //============================
-dataTexture::dataTexture() 
+DataTexture::DataTexture() 
 {
 	loadTexture();
 }
 //==============================
-void dataTexture::printEventTexture(sf::RenderWindow& window, std::string fileName)
+void DataTexture::printEventTexture(sf::RenderWindow& window, std::string fileName)
 {
 	window.clear(sf::Color::Yellow);
 	sf::Texture texture;
@@ -24,7 +24,7 @@ void dataTexture::printEventTexture(sf::RenderWindow& window, std::string fileNa
 	window.display();
 }
 //=============================
-sf::Texture& dataTexture::getTexture(const char ch)
+sf::Texture& DataTexture::getTexture(const char ch)
 { 
 	for (int i = 0; i < m_textures.size(); i++)
 	{
@@ -34,14 +34,14 @@ sf::Texture& dataTexture::getTexture(const char ch)
 	return m_textures[0].texture;
 }
 //==============================
-void dataTexture::poshTexture(std::string fileName, char type)
+void DataTexture::poshTexture(std::string fileName, char type)
 {
 	sf::Texture texture;
 	texture.loadFromFile(fileName);
 	m_textures.push_back(textureType(texture, type));
 }
 //============================
-void dataTexture::loadTexture()
+void DataTexture::loadTexture()
 {
 	poshTexture("guard.png", Entity::GUARD);
 	poshTexture("robot.png", Entity::ROBOT);

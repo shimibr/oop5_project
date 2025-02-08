@@ -19,7 +19,7 @@ Robot& Robot::getInstance() {
 }
 //======================================
 Robot::Robot()
-	: ObjectMove(dataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Speed::ROBOT)
+	: ObjectMove(DataTexture::getInstance().getTexture(Entity::ROBOT), LoadFile::getInstance().getPosition(), Speed::ROBOT)
 {
 }
 //======================================

@@ -10,7 +10,7 @@
 
 
 Guard::Guard()
-	: ObjectMove(dataTexture::getInstance().getTexture(Entity::GUARD), LoadFile::getInstance().getPosition(), Speed::GUARD)
+	: ObjectMove(DataTexture::getInstance().getTexture(Entity::GUARD), LoadFile::getInstance().getPosition(), Speed::GUARD)
 {
 	m_direction = rand() % Direction::AMOUNT_DIRECTIONS;
 	m_countGuards++;

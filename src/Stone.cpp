@@ -7,7 +7,7 @@
 #include "LoadFile.h"
 
 Stone::Stone()
-	: Object(dataTexture::getInstance().getTexture(Entity::STONE), LoadFile::getInstance().getPosition())
+	: Object(DataTexture::getInstance().getTexture(Entity::STONE), LoadFile::getInstance().getPosition())
 {
 }
 //=================================

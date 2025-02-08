@@ -7,7 +7,7 @@
 
 //======================================
 Door::Door()
-	: Object(dataTexture::getInstance().getTexture(Entity::DOOR), LoadFile::getInstance().getPosition())
+	: Object(DataTexture::getInstance().getTexture(Entity::DOOR), LoadFile::getInstance().getPosition())
 {
 }
 //=================================

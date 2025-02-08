@@ -61,7 +61,7 @@ bool Controler::exceptionManager()
 {
 	if (Robot::getInstance().isWin())
 	{
-		dataTexture::getInstance().printEventTexture(m_window, "levelUp.png");
+		DataTexture::getInstance().printEventTexture(m_window, "levelUp.png");
 		SoundManager::getInstance().playWinSound();
 		std::this_thread::sleep_for(std::chrono::seconds(2));
 		m_window.close();
@@ -70,8 +70,7 @@ bool Controler::exceptionManager()
 	}
 	if (Robot::getInstance().isDead())
 	{
-		SoundManager::getInstance().playLoseSound();
-		dataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
+		DataTexture::getInstance().printEventTexture(m_window, "gameOver.png");
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		m_window.close();
 		SoundManager::getInstance().stopAllSounds();
