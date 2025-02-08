@@ -19,8 +19,6 @@ public:
 	virtual void collision(Object& other) = 0;
 	virtual void move(const sf::Vector2u sizeWindow, const float deltaTime) = 0;
 
-
-
 protected:
 	void straightenUpByTop(const float distanceTop, const float deltaTime);
 	void straightenUpByLeft(const float distanceLeft, const float deltaTime);
@@ -29,8 +27,10 @@ protected:
 	void setLastPosition(Object& object);
 	bool m_isCollided = false;
 	int m_direction;
-	int m_speed;
 	sf::Vector2f m_firstPosition;
 	sf::Vector2f m_lastPosition;
+private:
+	int m_speed;
+
 
 };

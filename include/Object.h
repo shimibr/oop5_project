@@ -11,7 +11,7 @@ class Door;
 class Gift;
 class GiftStopGuards;
 class Bomb;
-
+class Stone;
 class Object
 {
 public:
@@ -28,6 +28,7 @@ public:
 	virtual void collided(Door& door) {}
 	virtual void collided(Bomb& bomb) {}
 	virtual void collided(Explosion& explosion) {}
+	virtual void collided(Stone& stone) {}
 
 protected:
 	sf::Sprite m_sprite;
