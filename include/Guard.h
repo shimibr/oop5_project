@@ -33,5 +33,6 @@ private:
 	static float m_sleep;
 	static bool  m_killOneGuard;
 	static int  m_countGuards;
-
+	float m_time = 0;
+	int m_timeToChangeDirection = rand() % 6;
 };

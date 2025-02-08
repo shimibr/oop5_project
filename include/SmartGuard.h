@@ -8,6 +8,6 @@ class SmartGuard : public Guard
 public:
 	SmartGuard();
 private:
-	virtual void move(const sf::Vector2u sizeWindow, const float deltaTime) override;
 	virtual void changeDirection() override;
+	bool Check(const float DistanceToRobot,const int direction1 , const int direction2);
 };
