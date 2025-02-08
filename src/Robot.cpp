@@ -10,8 +10,6 @@
 #include "LoadFile.h"
 #include "dataTexture.h"
 
-TextMaker m_textMaker;
-
 //==================================
 Robot& Robot::getInstance() {
 	static Robot instance;
@@ -155,14 +153,14 @@ void Robot::isLimitedTime(const int robotClock)
 //=======================================
 void Robot::printRobotData(sf::RenderWindow& window) const
 {
-	window.draw(m_textMaker.makeText(m_lives, sf::Vector2f(window.getSize().x * 6 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
-	window.draw(m_textMaker.makeText(m_score, sf::Vector2f(window.getSize().x * 21 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(TextMaker::getInstance().makeText(m_lives, sf::Vector2f(window.getSize().x * 6 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+	window.draw(TextMaker::getInstance().makeText(m_score, sf::Vector2f(window.getSize().x * 21 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 	if(!m_unlimitedTime)
 	{
-		window.draw(m_textMaker.makeText(m_robotClock, sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+		window.draw(TextMaker::getInstance().makeText(m_robotClock, sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 	}
 	else
-		window.draw(m_textMaker.makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
+		window.draw(TextMaker::getInstance().makeText("Unlimited!!", sf::Vector2f(window.getSize().x * 11 / 26, window.getSize().y - Entity::SIZE_PIXEL)));
 }
 //======================================
 bool Robot::isWin() 

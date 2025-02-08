@@ -21,7 +21,6 @@ private:
 	std::string loadHelpText();
 
 	const int MENU_BUTTONS = 3;
-	TextMaker m_textMaker;
 	Controler m_controler;
 
 	sf::RenderWindow m_window;

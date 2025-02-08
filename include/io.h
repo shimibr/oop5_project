@@ -38,6 +38,7 @@ namespace Score
 	const int  GUARD_EXISTS = 3;
 
 }
+//====================================
 //=====================================
 struct textureType
 {

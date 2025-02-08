@@ -87,7 +87,7 @@ void StartMenu::fillText()
 	for (int i = 0; i < MENU_BUTTONS; i++)
 	{
 		sf::FloatRect rectBounds = m_rectangles[i].getGlobalBounds();
-		m_texts.push_back(m_textMaker.makeText(tempTexsts[i], { rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE/ 4 ,
+		m_texts.push_back(TextMaker::getInstance().makeText(tempTexsts[i], {rectBounds.getPosition().x + rectBounds.getSize().x / 2 - tempTexsts[i].size() * Entity::CHAR_SIZE / 4 ,
 																rectBounds.getPosition().y + rectBounds.getSize().y / 2 - Entity::CHAR_SIZE / 2 }, 35));
 	}
 }
@@ -113,7 +113,7 @@ std::string StartMenu::loadHelpText()
 //======================================
 void StartMenu::showHelp()
 {
-	sf::Text helpText = m_textMaker.makeText(loadHelpText(), {20,20}, sf::Color::White);
+	sf::Text helpText = TextMaker::getInstance().makeText(loadHelpText(), {20,20}, sf::Color::White);
 
 	float moveSize = 0.0f;
 	const float moveSpeed = 10.0f;
@@ -172,5 +172,5 @@ void StartMenu::createBackBotton(sf::RectangleShape &backButton, sf::Text &backT
 	backButton.setFillColor(sf::Color(200, 200, 200));
 	backButton.setPosition(m_window.getSize().x - Entity::SIZE_PIXEL, 0);
 
-	backText = m_textMaker.makeText("Back", backButton.getPosition());
+	backText = TextMaker::getInstance().makeText("Back", backButton.getPosition());
 }

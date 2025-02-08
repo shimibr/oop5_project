@@ -4,7 +4,8 @@
 class TextMaker 
 {
 public:
-    TextMaker();
+
+	static TextMaker& getInstance();
 
     sf::Text makeText(const std::string& text, const sf::Vector2f position);
 
@@ -20,6 +21,8 @@ public:
  
 
 private:
+    TextMaker();
+
     std::string formatTime(const sf::Time& time);
 
     sf::Font m_font;

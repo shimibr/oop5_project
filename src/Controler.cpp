@@ -197,27 +197,23 @@ void Controler::clearObjectsGame()
 //======================================
 void Controler::printDataGame()
 {
+	std::vector <std::string> dataType = { "Level number:" ,"Life left:","Time passed:","Time Left:","Your Score:" };
+
 	sf::RectangleShape dataRectangle(sf::Vector2f(m_window.getSize().x * Entity::SIZE_PIXEL, (float)2 * Entity::SIZE_PIXEL));
+
 	dataRectangle.setPosition(0, m_window.getSize().y - (float)2 * Entity::SIZE_PIXEL);
 	dataRectangle.setFillColor(sf::Color::Cyan);
-	TextMaker m_textMaker;
-	m_window.draw(dataRectangle);
 
-	m_window.draw(m_textMaker.makeText("Level number:"
-		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText(m_dataLevel[0]
+	m_window.draw(dataRectangle);
+	for (int i = 0; i < dataType.size(); i++)
+		m_window.draw(TextMaker::getInstance().makeText(dataType[i], 
+			sf::Vector2f(m_window.getSize().x * (i * (float)5)/ (float)26 + Entity::SIZE_PIXEL/2, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+
+	m_window.draw(TextMaker::getInstance().makeText(m_dataLevel[0]
 		, sf::Vector2f(m_window.getSize().x / (float)26, m_window.getSize().y - Entity::SIZE_PIXEL)));
 
-	m_window.draw(m_textMaker.makeText("Life left:"
-		, sf::Vector2f(m_window.getSize().x * (float) 6 / 26  , m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText("Time passed:"
-		, sf::Vector2f(m_window.getSize().x * (float) 11 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText("Time Left:"
-		, sf::Vector2f(m_window.getSize().x * (float) 16 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
-	m_window.draw(m_textMaker.makeText(m_gameClock, { (float)m_window.getSize().x * (float)16 / 26, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
-
-	m_window.draw(m_textMaker.makeText("Your Score:"
-		, sf::Vector2f(m_window.getSize().x * (float) 21 / 26, m_window.getSize().y - (float)1.5 * Entity::SIZE_PIXEL)));
+	
+	m_window.draw(TextMaker::getInstance().makeText(m_gameClock, { (float)m_window.getSize().x * (float)16 / 26, (float)m_window.getSize().y - Entity::SIZE_PIXEL }));
 
 	Robot::getInstance().printRobotData(m_window);
 }

@@ -12,24 +12,33 @@ TextMaker::TextMaker()
 	m_text.setFillColor(sf::Color::Red);
 }
 //==============================================
+TextMaker& TextMaker::getInstance()
+{
+	static TextMaker instance;
+	return instance;
+}
+//==============================================
 sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position)
 {
-   m_text.setString(text);
-   m_text.setPosition(position);
-   return m_text;
+	m_text.setFillColor(sf::Color::Red);
+	m_text.setCharacterSize(Entity::CHAR_SIZE);
+	m_text.setString(text);
+	m_text.setPosition(position);
+	return m_text;
 }
 //==============================================
 sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position, const sf::Color color)
 {
-	m_text.setCharacterSize(Entity::CHAR_SIZE);
+	makeText(text, position);
 	m_text.setFillColor(color);
-	return makeText(text, position);
+	return m_text;
 }
 //==============================================
 sf::Text TextMaker::makeText(const std::string& text, const sf::Vector2f position, const int charSize)
 {
+	makeText(text, position);
 	m_text.setCharacterSize(charSize);
-	return makeText(text, position);
+	return m_text;
 }
 //=============================================
 sf::Text TextMaker::makeText(const sf::Clock& clock, const sf::Vector2f position)
