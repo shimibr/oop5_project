@@ -8,6 +8,7 @@ configure_file ("exlosion.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gift.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("gameOver.png" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("levelUp.png" ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file ("backgroundGame.png" ${CMAKE_BINARY_DIR} COPYONLY)
 
 configure_file ("font.ttf" ${CMAKE_BINARY_DIR} COPYONLY)
 configure_file ("Levels.txt" ${CMAKE_BINARY_DIR} COPYONLY)

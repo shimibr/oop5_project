@@ -108,7 +108,8 @@ void Controler::readLevelsGift()
 //====================================
 void Controler::updateWindow()
 {
-	m_window.clear(sf::Color::Red);
+	m_window.clear();
+	DataTexture::getInstance().printBackgroundTexture(m_window);
 	printDataGame();
 	for (int i = m_objects.size()-1; i >=0 ; i--)
 	{

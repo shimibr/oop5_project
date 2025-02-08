@@ -23,6 +23,31 @@ void DataTexture::printEventTexture(sf::RenderWindow& window, std::string fileNa
 	window.draw(sprite);
 	window.display();
 }
+//===============================
+void DataTexture::printBackgroundTexture(sf::RenderWindow& window)
+{
+	static sf::Texture texture;
+	static sf::Sprite sprite;
+
+	if (texture.getSize().x == 0)
+	{
+		if (!texture.loadFromFile("backgroundGame.png")) {
+			return;
+		}
+		sprite.setTexture(texture);
+	}
+
+	sf::Vector2u windowSize = window.getSize();
+	sf::Vector2u textureSize = texture.getSize();
+
+	float scaleX = static_cast<float>(windowSize.x) / textureSize.x;
+	float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
+
+	sprite.setScale(scaleX, scaleY);
+
+	window.draw(sprite);
+}
+
 //=============================
 sf::Texture& DataTexture::getTexture(const char ch)
 { 

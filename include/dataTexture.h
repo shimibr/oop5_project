@@ -12,6 +12,7 @@ public:
 	DataTexture(DataTexture& other) = delete;
 
 	void printEventTexture(sf::RenderWindow& window, std::string fileName);
+	void printBackgroundTexture(sf::RenderWindow& window);
 	sf::Texture& getTexture(const char ch); 
 
 private:
