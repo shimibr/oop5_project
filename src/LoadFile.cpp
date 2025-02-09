@@ -102,7 +102,7 @@ char LoadFile::getFromFile()
     return ' ';
 }
 //===================================
-sf::Vector2f LoadFile::getPosition()
+sf::Vector2f LoadFile::getPosition() const
 {
     return sf::Vector2f(((m_col - 1) * Entity::SIZE_PIXEL), m_row * Entity::SIZE_PIXEL);
 }

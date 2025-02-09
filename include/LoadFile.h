@@ -18,7 +18,7 @@ public:
     bool isEndOfFile()const { return m_endOfFile; }
 
     std::vector<int>& getLevelInfo()  { return m_levelInfo; }
-    sf::Vector2f getPosition();
+    sf::Vector2f getPosition() const;
     sf::Vector2f getSize() const;
     sf::Vector2f getLegalGiftLoc(bool& isHidden);
 
