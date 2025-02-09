@@ -24,15 +24,15 @@ public:
 	virtual void collided(Explosion& explosion)override;
 	virtual void collided(Guard& guard)override;
 
-
+protected:
+	virtual void changeDirection();
+	int m_timeToChangeDirection = rand() % 4;
 private:
 	virtual bool inWindow(const sf::Vector2u sizeWindow)override;
 
-	virtual void changeDirection();
 	bool firstCheck(const float deltaTime);
 	static float m_sleep;
 	static bool  m_killOneGuard;
 	static int  m_countGuards;
 	float m_time = 0;
-	int m_timeToChangeDirection = rand() % 6;
 };

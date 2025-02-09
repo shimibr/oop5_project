@@ -157,9 +157,11 @@ bool Controler::eventManager()
 //======================================
 void Controler::collisionObjects()
 {
+	for (int i = 0; i < m_objects.size(); i++)
+		Robot::getInstance().collision(*m_objects[i]);
+
 	for (int i = m_objectsMove.size() -1; i >=0 ; i--)
 	{
-		m_objectsMove[i]->collision(Robot::getInstance());
 
 		for (int j = 0; j < m_objects.size(); j++)
 			m_objectsMove[i]->collision(*m_objects[j]);
@@ -167,10 +169,8 @@ void Controler::collisionObjects()
 		for (int j = 0; j < m_objectsMove.size(); j++)
 			m_objectsMove[i]->collision(*m_objectsMove[j]);
 
+		m_objectsMove[i]->collision(Robot::getInstance());
 	}
-
-	for (int i = 0; i < m_objects.size(); i++)
-		Robot::getInstance().collision(*m_objects[i]);
 
 }
 //======================================

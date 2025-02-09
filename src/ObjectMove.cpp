@@ -93,7 +93,7 @@ void ObjectMove::move(const sf::Vector2u sizeWindow ,const float deltaTime)
 void ObjectMove::spriteMove()
 {
 	const int sizeInPixel = std::max((int)m_sprite.getPosition().x % Entity::SIZE_PIXEL, (int)m_sprite.getPosition().y % Entity::SIZE_PIXEL);
-	m_sprite.setTextureRect(sf::IntRect(int(sizeInPixel / 23) % 3 * 48 + 13, m_direction * 64 + 20, 23.333333333333, 46.66666666666666));
+	m_sprite.setTextureRect(sf::IntRect(int(sizeInPixel / 23) % 3 * 48 + 13, m_direction * 64 + 20, 22, 45));
 
 
 	m_sprite.setScale(3, 1.5);
