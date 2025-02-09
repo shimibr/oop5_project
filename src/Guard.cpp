@@ -31,8 +31,8 @@ void Guard::move(const sf::Vector2u sizeWindow,const float deltaTime)
 	if (m_time > m_timeToChangeDirection)
 	{
 		m_time -= m_timeToChangeDirection;
-		m_timeToChangeDirection = rand() % 6;
-		m_direction = 5; // to change direction
+		m_timeToChangeDirection = rand() % 4;
+		m_direction = Direction::STOP; // to change direction
 		changeDirection();
 	}
 

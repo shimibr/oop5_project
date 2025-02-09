@@ -75,6 +75,11 @@ void Bomb::update(sf::RenderWindow& window)
     }
 }
 //======================================
+void Bomb::spriteMove()
+{
+	m_sprite.setTextureRect(sf::IntRect(0, 0, Entity::SIZE_PIXEL, Entity::SIZE_PIXEL));
+}
+//======================================
 void Bomb::textNumber()
 {
     m_font.loadFromFile("font.ttf");
