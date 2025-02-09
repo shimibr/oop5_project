@@ -20,6 +20,7 @@ public:
 	virtual void collided(Explosion& explosion)override {}
 
 private:
+	virtual void spriteMove() override;
 	virtual bool inWindow(const sf::Vector2u sizeWindow)override;
 
 };

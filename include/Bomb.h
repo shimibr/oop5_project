@@ -18,6 +18,7 @@ public:
 
 
 private:
+	virtual void spriteMove() override;
 	void textNumber();
 	void explosion();
 

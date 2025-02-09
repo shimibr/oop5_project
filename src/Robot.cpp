@@ -62,6 +62,10 @@ void Robot::move(const sf::Vector2u sizeWindow,const float deltaTime)
 		m_direction = Direction::RIGHT;
 		ObjectMove::move(sizeWindow,deltaTime);
 	}
+	else
+	{
+		ObjectMove::move(sizeWindow,0);
+	}
 }
 //====================================
 const sf::Vector2f Robot::getPosition() const

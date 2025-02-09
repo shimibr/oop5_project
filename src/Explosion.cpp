@@ -48,6 +48,11 @@ void Explosion::collided(Door& door)
 	m_isDead = true;
 }
 //===================================
+void Explosion::spriteMove()
+{
+	m_sprite.setTextureRect(sf::IntRect(0, 0, Entity::SIZE_PIXEL, Entity::SIZE_PIXEL));
+}
+//===================================
 bool Explosion::inWindow(const sf::Vector2u sizeWindow)
 {
 	if (!ObjectMove::inWindow(sizeWindow))

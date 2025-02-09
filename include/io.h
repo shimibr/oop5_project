@@ -29,6 +29,7 @@ namespace Direction
 	const int LEFT = 1;
 	const int RIGHT = 2;
 	const int UP = 3;
+	const int STOP = 4;
 }
 //=====================================
 namespace Score
